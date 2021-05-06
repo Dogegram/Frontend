@@ -1,0 +1,84 @@
+.text-center {
+  text-align: center !important;
+}
+
+.mb-sm {
+  margin-bottom: 0.5rem !important;
+}
+
+.mb-md {
+  margin-bottom: 1rem !important;
+}
+
+.mb-lg {
+  margin-bottom: 2rem !important;
+}
+
+.mr-lg {
+  margin-right: 2rem !important;
+}
+
+.ml-sm {
+  margin-left: 0.5rem !important;
+}
+
+.mt-lg {
+  margin-top: 2rem !important;
+}
+
+.font-thin {
+  font-weight: 300 !important;
+}
+
+.font-medium {
+  font-weight: 400 !important;
+}
+
+.font-bold {
+  font-weight: 600 !important;
+}
+
+.uppercase {
+  text-transform: uppercase !important;
+}
+
+.color-white {
+  color: $color-white !important;
+}
+
+.color-blue {
+  color: $color-secondary !important;
+}
+
+.color-blue-2 {
+  color: $color-secondary-dark !important;
+}
+
+.color-grey {
+  color: $color-grey-1 !important;
+}
+
+.color-grey-2 {
+  color: $color-grey-2 !important;
+}
+
+.color-light {
+  color: $color-grey-1 !important;
+}
+
+.color-red {
+  color: $color-red !important;
+}
+
+.border-grey-2 {
+  border: 1px solid $color-grey-2;
+}
+
+.pulse {
+  animation: pulse 300ms;
+}
+
+.link {
+  color: $color-secondary-dark;
+  text-decoration: none;
+}

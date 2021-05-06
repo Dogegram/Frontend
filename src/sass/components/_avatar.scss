@@ -1,0 +1,21 @@
+.avatar {
+  width: $icon-huge-size;
+  height: $icon-huge-size;
+  border-radius: 100px;
+  border: 1px solid $color-grey-2;
+
+  &--large {
+    width: 8rem;
+    height: 8rem;
+  }
+
+  &--medium {
+    width: $icon-larger-size;
+    height: $icon-larger-size;
+  }
+
+  &--small {
+    width: $icon-large-size;
+    height: $icon-large-size;
+  }
+}

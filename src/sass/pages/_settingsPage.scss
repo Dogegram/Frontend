@@ -1,0 +1,59 @@
+.settings-page {
+  min-height: 100vh;
+
+  &__content {
+    padding: 4rem 5rem;
+  }
+
+  @include respond(phone) {
+    min-height: 100%;
+    &__content {
+      padding: 2rem;
+    }
+  }
+}
+
+.settings-card {
+  grid-column: center-start / center-end;
+  display: grid;
+  grid-template-columns: 25rem 1fr;
+
+  &__sidebar {
+    border-right: 1px solid $color-grey-2;
+    list-style-type: none;
+  }
+
+  @include respond(phone) {
+    grid-column: full-start / full-end;
+    grid-template-columns: 1fr;
+
+    &__sidebar {
+      display: none;
+    }
+  }
+}
+
+.sidebar-link {
+  text-decoration: none;
+  color: $color-black;
+  font-size: 1.6rem;
+  display: block;
+  border-left: 2px solid transparent;
+
+  &__text {
+    padding: 1.5rem 2.5rem;
+  }
+
+  &:hover {
+    background-color: $color-grey-3;
+    border-color: $color-grey-2;
+  }
+
+  &--active {
+    border-left: 2px solid $color-black;
+    &:hover {
+      background-color: $color-white;
+      border-color: $color-black;
+    }
+  }
+}

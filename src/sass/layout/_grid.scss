@@ -1,0 +1,17 @@
+.grid {
+  display: grid;
+  padding-top: 12rem;
+  padding-bottom: $footer-height;
+  grid-template-columns:
+    [full-start] 1fr [center-start] repeat(
+      8,
+      [col-start] minmax(min-content, 12rem) [col-end]
+    )
+    [center-end] 1fr [full-end];
+  justify-content: center;
+
+  @include respond(phone) {
+    padding-top: $mobile-header-height;
+    padding-bottom: 0;
+  }
+}

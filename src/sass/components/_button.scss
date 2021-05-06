@@ -1,0 +1,24 @@
+.button {
+  outline: none;
+  background-color: $color-secondary;
+  border: none;
+  color: $color-white;
+  padding: 0.5rem 2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+
+  &--inverted {
+    border: 1px solid $color-grey-2;
+    color: $color-black;
+    background-color: $color-grey-3;
+  }
+
+  &--disabled {
+    background-color: rgba($color-secondary, 0.5);
+    cursor: not-allowed;
+  }
+}

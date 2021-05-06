@@ -1,0 +1,125 @@
+.header {
+  height: 7.5rem;
+  background-color: $color-white;
+  border-bottom: 1px solid $color-grey-2;
+
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  width: 100%;
+  z-index: 10;
+  transition: height 300ms ease;
+
+  @include respond(phone) {
+    display: none;
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr 20rem 1fr;
+    justify-items: center;
+    align-items: center;
+    width: 130rem;
+  }
+
+  &__logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    h3 {
+      opacity: 1;
+      transition: opacity 200ms;
+    }
+
+    cursor: pointer;
+    text-decoration: none;
+
+    &-image {
+      svg {
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+
+      &::after {
+        content: '';
+        height: 3rem;
+        transform: translateY(3px);
+        width: 1px;
+        background-color: $color-black;
+        display: inline-block;
+        margin: 0 1.5rem;
+
+        opacity: 1;
+        transition: opacity 200ms;
+      }
+    }
+
+    &-header {
+      h3 {
+        font-size: 2.5rem;
+      }
+    }
+
+    &:active {
+      color: $color-grey-3;
+    }
+  }
+
+  &__icons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+
+    & > * {
+      cursor: pointer;
+    }
+
+    & > :not(:last-child) {
+      margin-right: 2.5rem;
+    }
+  }
+
+  &--small {
+    height: 5rem;
+    .header__logo {
+      h3 {
+        opacity: 0;
+      }
+      &-image {
+        &::after {
+          opacity: 0;
+        }
+      }
+    }
+  }
+
+  &--mobile {
+    background-color: $color-white;
+    padding: 0 2rem;
+    border-bottom: 1px solid $color-grey-2;
+    display: none;
+    z-index: 10;
+    width: 100%;
+    height: $mobile-header-height;
+    top: 0;
+
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    justify-items: center;
+
+    & :first-child {
+      justify-self: start;
+    }
+
+    & :last-child {
+      justify-self: end;
+    }
+
+    @include respond(phone) {
+      position: fixed;
+      display: grid;
+    }
+  }
+}

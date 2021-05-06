@@ -1,0 +1,10 @@
+.app {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  @include respond(phone) {
+    padding-bottom: $mobile-header-height;
+  }
+}

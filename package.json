@@ -1,0 +1,62 @@
+{
+  "name": "dogegram-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": "12.14.1",
+    "npm": "6.13.7"
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.4.0",
+    "@testing-library/user-event": "^7.2.1",
+    "axios": "^0.21.1",
+    "classnames": "^2.2.6",
+    "date-fns": "^2.11.0",
+    "formik": "^2.1.4",
+    "linkifyjs": "^2.1.9",
+    "lodash": "^4.17.21",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-image-crop": "^8.6.2",
+    "react-redux": "^7.1.3",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "^4.0.3",
+    "react-spring": "^8.0.27",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
+    "reselect": "^4.0.0",
+    "socket.io-client": "^2.3.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@welldone-software/why-did-you-render": "^4.0.4",
+    "check-prop-types": "^1.1.2",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "jest-enzyme": "^7.1.2",
+    "moxios": "^0.4.0",
+    "node-sass": "^4.14.1",
+    "redux-logger": "^3.0.6"
+  }
+}

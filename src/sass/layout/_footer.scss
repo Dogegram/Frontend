@@ -1,0 +1,42 @@
+.footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: $footer-height;
+  padding: 0 25%;
+
+  &__left {
+    & > :not(:last-child) {
+      margin-right: 1.5rem;
+    }
+  }
+
+  &--small {
+    &__links > a {
+      color: $color-grey-2;
+      text-decoration: none;
+      font-size: 1.2rem;
+
+      &:not(:last-child)::after {
+        content: '\00B7';
+        margin: 0 3px;
+      }
+    }
+
+    &__copyright {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  @include respond(tab-port) {
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  @include respond(phone) {
+    display: none;
+  }
+}

@@ -1,0 +1,23 @@
+.explore-users {
+  grid-column: full-start / full-end;
+  padding: 2rem 0;
+}
+
+.hashtag-posts {
+  &__title {
+    grid-column: 1 / -1;
+    justify-self: center;
+    margin-bottom: 5rem;
+    text-align: center;
+
+    @include respond(phone) {
+      display: none;
+    }
+  }
+
+  &__empty {
+    grid-column: 1 / -1;
+    justify-self: center;
+    text-align: center;
+  }
+}

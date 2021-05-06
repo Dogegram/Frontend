@@ -1,0 +1,21 @@
+#modal-root {
+  position: relative;
+  z-index: 9999;
+}
+
+.modal {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+
+  background-color: rgba($color-black, 0.7);
+
+  & > * {
+    max-width: 80vw;
+  }
+}

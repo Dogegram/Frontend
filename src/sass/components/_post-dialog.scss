@@ -1,0 +1,120 @@
+.post-dialog {
+  grid-column: center-start / center-end;
+  display: grid;
+  grid-template-rows: 6rem 55rem;
+  grid-template-columns: minmax(25vw, 100%) 35rem;
+  max-width: 100vw;
+
+  &--simple {
+    @include simplePostDialog(postDialog);
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    grid-row: 1 / -1;
+    grid-column: 1 / span 1;
+    background-color: #000000;
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+
+    &--simple {
+      @include simplePostDialog(image);
+    }
+  }
+
+  &__content {
+    grid-row: 2 / -1;
+    background-color: $color-white;
+    display: grid;
+    grid-template-rows: 1fr repeat(2, min-content);
+
+    &--simple {
+      @include simplePostDialog(content);
+    }
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1rem;
+    background-color: $color-white;
+
+    *:not(:last-child) {
+      margin-right: 1.5rem;
+    }
+
+    &--simple {
+      @include simplePostDialog(header);
+    }
+  }
+
+  &__more {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+  }
+
+  &__stats {
+    padding: 1rem;
+    border-bottom: 1px solid #efefef;
+
+    &--simple {
+      @include simplePostDialog(stats);
+    }
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-start;
+    *:not(:last-child) {
+      margin-right: 1rem;
+    }
+    *:last-child {
+      margin-left: auto;
+    }
+  }
+
+  &__add-comment {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    position: relative;
+
+    input {
+      width: 100%;
+      border: none;
+      background-color: white;
+      font-family: inherit;
+      outline: none;
+    }
+
+    input:placeholder-shown + button {
+      opacity: 0.5;
+    }
+  }
+
+  @include respond(phone) {
+    @include simplePostDialog(postDialog);
+    grid-template-rows: min-content 50rem min-content;
+    border: none;
+    &__image {
+      @include simplePostDialog(image);
+    }
+    &__content {
+      @include simplePostDialog(content);
+    }
+    &__header {
+      @include simplePostDialog(header);
+    }
+    &__stats {
+      @include simplePostDialog(stats);
+      padding: 1rem 1.5rem;
+    }
+  }
+}
