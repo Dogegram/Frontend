@@ -49,9 +49,9 @@ export const confirmUser = async (authToken, confirmationToken) => {
  */
 export const changeAvatar = async (image, authToken) => {
   const formData = new FormData();
-  formData.append('image', image);
+  formData.append('myFile', image);
   try {
-    const response = await axios.put(process.env.REACT_APP_BACKEND_URL + '/api/user/avatar', formData, {
+    const response = await axios.post(process.env.REACT_APP_BACKEND_URL + '/api/user/avatar', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
         authorization: authToken,
