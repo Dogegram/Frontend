@@ -49,7 +49,7 @@ export const confirmUser = async (authToken, confirmationToken) => {
  */
 export const changeAvatar = async (image, authToken) => {
   const formData = new FormData();
-  formData.append('myFile', image);
+  formData.append('image', image);
   try {
     const response = await axios.post(process.env.REACT_APP_BACKEND_URL + '/api/user/avatar', formData, {
       headers: {
