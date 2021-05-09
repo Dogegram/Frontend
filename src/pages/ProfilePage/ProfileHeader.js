@@ -106,8 +106,7 @@ const ProfileHeader = ({
 
       <div className="profile-header__info">
         <div className="profile-buttons">
-          <h1 className="heading-1 font-thin">{username}{data.user.verified ? (<VerifiedIcon/>) : (null
-            )}</h1>
+          <h1 className="heading-1 font-thin">{username}{data.user.verified ? (<VerifiedIcon/>) : (null)}</h1>
           {renderButton()}
         </div>
 

@@ -64,6 +64,7 @@ const SearchBox = ({ style, setResult, onClick }) => {
                 <UserCard
                   avatar={user.avatar}
                   username={user.username}
+                  verified={user.verified}
                   subText={user.fullName}
                   style={{ padding: '1.5rem 1.5rem' }}
                   onClick={() => {

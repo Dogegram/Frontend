@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
+import {VerifiedIcon} from '../Icons/Icons';
 
 import { hideModal } from '../../redux/modal/modalActions';
 import { formatDateDistance } from '../../utils/timeUtils';
@@ -14,6 +15,7 @@ const UserCard = ({
   subText,
   subTextDark,
   date,
+  verified,
   style,
   hideModal,
   onClick,
@@ -49,7 +51,7 @@ const UserCard = ({
             style={{ cursor: 'pointer' }}
             className="heading-4 font-bold"
           >
-            {username}
+            {username}{verified ? (<VerifiedIcon width="12" height="12" style={{marginLeft: '1px',  position: 'relative',  top: '1px'}}/>):(null)}
           </p>
         ) : (
           <Link
@@ -57,7 +59,7 @@ const UserCard = ({
             style={{ textDecoration: 'none' }}
             to={`/${username}`}
           >
-            <p className="heading-4 font-bold">{username}</p>
+            <p className="heading-4 font-bold">{username}{verified ? (<VerifiedIcon width="12" height="12" style={{marginLeft: '1px',  position: 'relative',  top: '1px'}}/>):(null)}</p>
           </Link>
         )}
         {subText && (

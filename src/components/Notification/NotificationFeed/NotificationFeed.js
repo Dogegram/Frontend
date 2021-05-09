@@ -53,12 +53,16 @@ const NotificationFeed = ({
     token,
   ]);
 
+
   return (
     <Fragment>
       {notificationState.fetching ? (
         <UsersListSkeleton style={{ height: '7rem' }} />
       ) : notifications.length > 0 ? (
         notifications.map((notification, idx) => {
+
+          console.log(notification.sender)
+
           const userCardProps = {
             username: notification.sender.username,
             avatar: notification.sender.avatar,

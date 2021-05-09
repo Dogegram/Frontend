@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import classNames from 'classnames';
 import { Link, useHistory } from 'react-router-dom';
+import {VerifiedIcon} from '../Icons/Icons';
 
 import { selectToken, selectCurrentUser } from '../../redux/user/userSelectors';
 
@@ -166,7 +167,7 @@ const PostDialog = ({
               to={`/${state.data.author.username}`}
             >
               <p className="heading-4 heading-4--bold">
-                <b>{state.data.author.username}</b>
+                <b>{state.data.author.username}{state.data.author.verified ? (<VerifiedIcon width="15" height="15" style={{marginLeft: '3px', top: '3px', position: 'relative'}}/>) : (null)}</b>
               </p>
             </Link>
           )}

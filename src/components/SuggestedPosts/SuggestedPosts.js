@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import useScrollPositionThrottled from '../../hooks/useScrollPositionThrottled';
 import { getSuggestedPosts } from '../../services/postService';
+import {VerifiedIcon} from '../Icons/Icons';
 
 import MobileHeader from '../../components/Header/MobileHeader/MobileHeader';
 import SearchBox from '../../components/SearchBox/SearchBox';
@@ -101,8 +102,9 @@ const SuggestedPosts = ({ token, showModal, showAlert }) => {
         <div className="explore-users">
           {result.map((user) => (
             <UserCard
-              avatar={user.avatar}
-              username={user.username}
+            avatar={user.avatar}
+            verified={user.verified}
+            username={user.username}
               subText={user.fullName}
             />
           ))}
