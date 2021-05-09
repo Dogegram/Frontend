@@ -24,25 +24,7 @@ export const login = async (usernameOrEmail, password, authToken) => {
   }
 };
 
-/**
- * Logs the user in or signs them up with their github account
- * @function githubLogin
- * @param {number} code Code provided by github to exchange for an access code
- * @returns {object} User object
 
-
-export const githubAuthentication = async (code) => {
-  try {
-    const response = await axios.post(process.env.REACT_APP_BACKEND_URL + '/api/auth/login/github', {
-      code,
-      state: sessionStorage.getItem('authState'),
-    });
-    return response.data;
-  } catch (err) {
-    throw new Error(err.response.data.error);
-  }
-};
-*/
 
 /**
  * Registers a user with the provided credentials
