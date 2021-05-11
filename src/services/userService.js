@@ -20,7 +20,7 @@ export const searchUsers = async (username, offset = 0) => {
  * Verifies a user's email
  * @function verifyUser
  * @param {string} authToken A user's auth token
- * @param {string} confirmationToken The token to verify an emailk
+ * @param {string} confirmationToken The token to verify an email
  */
 export const confirmUser = async (authToken, confirmationToken) => {
   try {
@@ -28,11 +28,6 @@ export const confirmUser = async (authToken, confirmationToken) => {
       process.env.REACT_APP_BACKEND_URL + '/api/user/confirm',
       {
         token: confirmationToken,
-      },
-      {
-        headers: {
-          authorization: authToken,
-        },
       }
     );
   } catch (err) {

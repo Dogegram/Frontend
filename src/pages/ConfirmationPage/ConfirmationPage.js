@@ -10,20 +10,17 @@ import { confirmUser } from '../../services/userService';
 
 import Loader from '../../components/Loader/Loader';
 
-const VerificationPage = ({ authToken, showModal }) => {
+const VerificationPage = ({ showModal }) => {
   const history = useHistory();
   const { token } = useParams();
   useEffect(() => {
-    if (!authToken) {
-      return history.push('/');
-    }
     (async function () {
       let children = null;
       try {
-        await confirmUser(authToken, token);
+        await confirmUser(token);
         children = (
           <h3 style={{ padding: '2rem' }} className="heading-3">
-            Successfully confirmed your email.
+            Successfully confirmed your email. Now you can login. 
           </h3>
         );
       } catch (err) {
@@ -44,7 +41,7 @@ const VerificationPage = ({ authToken, showModal }) => {
       );
       return history.push('/');
     })();
-  }, [authToken, history, showModal, token]);
+  }, [ history, showModal, token]);
 
   return (
     <main className="verification-page">
