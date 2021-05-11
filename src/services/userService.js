@@ -19,12 +19,11 @@ export const searchUsers = async (username, offset = 0) => {
 /**
  * Verifies a user's email
  * @function verifyUser
- * @param {string} authToken A user's auth token
  * @param {string} confirmationToken The token to verify an email
  */
-export const confirmUser = async (authToken, confirmationToken) => {
+export const confirmUser = async (confirmationToken) => {
   try {
-    await axios.put(
+    await axios.post(
       process.env.REACT_APP_BACKEND_URL + '/api/user/confirm',
       {
         token: confirmationToken,
