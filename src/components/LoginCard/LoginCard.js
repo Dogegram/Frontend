@@ -73,9 +73,11 @@ const LoginCard = ({
             {error}
           </p>
         )}
-        <TextButton style={{ marginTop: '1.5rem' }} darkBlue small>
-          Forgot password?
-        </TextButton>
+        <Link to="/passwordreset" style={{ marginTop: '1.5rem' }} onClick={() => onClick && onClick()}>
+            <TextButton style={{ marginTop: '1.5rem' }} medium blue bold small>
+              Forget Password?
+            </TextButton>
+          </Link>
       </Card>
       <Card>
         <section

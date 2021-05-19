@@ -35,6 +35,8 @@ export const validatePassword = (password) => {
     return 'Enter a valid password.';
   } else if (password.length < 6) {
     return 'For security purposes we require a password to be at least 6 characters.';
+  } else if (password.length > 50) {
+    return 'For abuse protection we require a password less than 50 characters.';
   } else if (
     !password.match(/^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{6,}$/)
   ) {
@@ -43,9 +45,11 @@ export const validatePassword = (password) => {
   return false;
 };
 
+
+
 export const validateBio = (bio) => {
-  if (bio.length > 130) {
-    return 'Your bio has to be 120 characters or less.';
+  if (bio.length >= 130) {
+    return 'Your bio has to be 130 characters or less.';
   }
   return false;
 };

@@ -4,7 +4,8 @@ import { disconnectSocket } from '../socket/socketActions';
 import { bookmarkPost as bookmark } from '../../services/postService';
 import {
   registerUser,
-  login
+  login,
+  forgetPassword
 } from '../../services/authenticationServices';
 import {
   changeAvatar,
@@ -44,26 +45,24 @@ export const signInStart = (usernameOrEmail, password, authToken) => async (
   }
 };
 
-/*
-export const githubSignInStart = (code) => async (dispatch) => {
-  try {
-    dispatch({ type: userTypes.GITHUB_SIGN_IN_START });
-    const response = await githubAuthentication(code);
-    localStorage.setItem('token', response.token);
-    dispatch({ type: userTypes.GITHUB_SIGN_IN_SUCCESS, payload: response });
-  } catch (err) {
-    dispatch({ type: userTypes.GITHUB_SIGN_IN_FAILURE, payload: err.message });
-  }
-};
-*/
 
-export const signUpStart = (email, fullName, username, password) => async (
+export const signUpStart = (email, fullName, birthday, username, password) => async (
   dispatch
 ) => {
   try {
     dispatch({ type: userTypes.SIGN_IN_START });
-    const response = await registerUser(email, fullName, username, password);
+    const response = await registerUser(email, fullName, birthday, username, password);
     dispatch(signInStart(null, null, response.token));
+  } catch (err) {
+    dispatch({ type: userTypes.SIGN_UP_FAILURE, payload: err.message });
+  }
+};
+
+export const passwordResetStart = (email) => async (
+  dispatch
+) => {
+  try {
+   await forgetPassword(email);
   } catch (err) {
     dispatch({ type: userTypes.SIGN_UP_FAILURE, payload: err.message });
   }
