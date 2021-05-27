@@ -30,6 +30,13 @@ const SettingsPage = () => (
           >
             <li className="sidebar-link__text">Change Password</li>
           </NavLink>
+          <NavLink
+            className="sidebar-link"
+            to="/settings/birthday"
+            activeClassName="font-bold sidebar-link--active"
+          >
+            <li className="sidebar-link__text">Update Birthday</li>
+          </NavLink>
         </ul>
         <article className="settings-page__content">
           <Switch>
@@ -37,6 +44,9 @@ const SettingsPage = () => (
               <EditProfileForm />
             </ProtectedRoute>
             <ProtectedRoute path="/settings/password">
+              <ChangePasswordForm />
+            </ProtectedRoute>
+            <ProtectedRoute path="/settings/birthday">
               <ChangePasswordForm />
             </ProtectedRoute>
           </Switch>

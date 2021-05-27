@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { showModal, hideModal } from '../../../redux/modal/modalActions';
 
-import Icon from '../../Icon/Icon';
+import {PhotoIcon} from '../../Icons/Icons';
 
 const NewPostButton = ({ showModal, hideModal, plusIcon, children, style }) => {
   const [file, setFile] = useState(undefined);
@@ -30,13 +30,12 @@ const NewPostButton = ({ showModal, hideModal, plusIcon, children, style }) => {
     <Fragment>
       <label
         style={{ cursor: 'pointer', ...style }}
-        className="icon"
         htmlFor="file-upload"
       >
         {children ? (
           children
         ) : (
-          <Icon icon={plusIcon ? 'add-circle-outline' : 'camera-outline'} />
+          <PhotoIcon/>
         )}
       </label>
       <input

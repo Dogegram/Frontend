@@ -8,7 +8,7 @@ import {
   selectNotificationState,
 } from '../../../redux/notification/notificationSelectors';
 
-import Icon from '../../Icon/Icon';
+import {NotificationIcon, ActiveNotificationIcon} from '../../Icons/Icons';
 import NotificationPopup from './NotificationPopup/NotificationPopup';
 import PopupCard from '../../PopupCard/PopupCard';
 import NotificationFeed from '../NotificationFeed/NotificationFeed';
@@ -72,14 +72,15 @@ const NotificationButton = ({
   return (
     <div style={{ position: 'relative', height: '100%' }}>
       <button className="notification-button">
-        <Icon
-          icon={icon ? icon : showNotifications ? 'heart' : 'heart-outline'}
-          className={notificationState.unreadCount > 0 ? 'icon--unread' : ''}
+      {icon ? icon : showNotifications ? <ActiveNotificationIcon  className={notificationState.unreadCount > 0 ? 'icon--unread' : ''}
           onClick={() =>
             !mobile && setShowNotifications((previous) => !previous)
           }
-          style={{ cursor: 'pointer' }}
-        />
+          style={{ cursor: 'pointer' }}/> : <NotificationIcon  className={notificationState.unreadCount > 0 ? 'icon--unread' : ''}
+          onClick={() =>
+            !mobile && setShowNotifications((previous) => !previous)
+          }
+          style={{ cursor: 'pointer' }}/>}
         {transitions.map(
           ({ item, key, props }) =>
             item && (

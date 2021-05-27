@@ -94,6 +94,8 @@ const NotificationFeed = ({
                     src={notification.notificationData.image}
                     style={{
                       display: 'flex',
+                      width:'50px',
+                      height:'50px',
                       filter: notification.notificationData.filter,
                     }}
                     onClick={() =>

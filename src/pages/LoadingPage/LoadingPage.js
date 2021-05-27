@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { ReactComponent as Logo } from '../../assets/svg/logo-camera.svg';
+import { LogoIcon } from '../../components/Icons/Icons';
 
 const LoadingPage = () => (
   <main className="loading-page">
-    <Logo />
+    <LogoIcon  />
   </main>
 );
 

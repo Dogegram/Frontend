@@ -15,8 +15,6 @@
   @if $component == postDialog {
     grid-template-columns: 100%;
     grid-template-rows: min-content 65rem min-content;
-    border: 1px solid $color-grey-2;
-    border-radius: 5px;
     overflow: hidden;
   }
   @if $component == image {

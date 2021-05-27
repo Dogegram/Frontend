@@ -7,7 +7,7 @@ import UsersList from '../../components/UsersList/UsersList';
 import UnfollowPrompt from '../../components/UnfollowPrompt/UnfollowPrompt';
 import Button from '../../components/Button/Button';
 import SettingsButton from '../../components/SettingsButton/SettingsButton';
-import {VerifiedIcon} from '../../components/Icons/Icons';
+import {VerifiedIcon, YoutuberIcon} from '../../components/Icons/Icons';
 
 const ProfileHeader = ({ 
   currentUser,
@@ -19,6 +19,8 @@ const ProfileHeader = ({
 }) => {
   const { avatar, username, bio, website, fullName } = data.user;
   const { following, followers, postCount } = data;
+
+  console.log(bio)
 
   const showUsersModal = (followers, following) => {
     token &&
@@ -106,7 +108,9 @@ const ProfileHeader = ({
 
       <div className="profile-header__info">
         <div className="profile-buttons">
-          <h1 className="heading-1 font-thin">{username}{data.user.verified ? (<VerifiedIcon/>) : (null)}</h1>
+          <h1 className="heading-1 font-thin" style={{'display': 'flex','align-items': 'center','align-content':'center','flex-wrap': 'nowrap'}}>
+            @{username}{data.user.verified ? (<VerifiedIcon/>) : (null)}{data.user.youtuber ? (<YoutuberIcon style={{marginLeft:"5px"}}/>) : (null)}
+            </h1>
           {renderButton()}
         </div>
 
@@ -137,9 +141,9 @@ const ProfileHeader = ({
               <b>{fullName}</b>
             </h3>
           )}
-          <p className="heading-3" style={{ whiteSpace: 'pre-wrap' }}>
-            {bio}
-          </p>
+          <div className="heading-3" style={{ whiteSpace: 'pre-wrap' }}>
+{          <span dangerouslySetInnerHTML={{__html: bio}} />
+}          </div>
           {website && (
             <a
               href={website}

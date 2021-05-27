@@ -9,12 +9,12 @@ import { selectCurrentUser } from '../../redux/user/userSelectors';
 
 import useScrollPositionThrottled from '../../hooks/useScrollPositionThrottled';
 
-import { ReactComponent as LogoCamera } from '../../assets/svg/logo-camera.svg';
+import { ReactComponent as LogoCamera } from '../../assets/svg/logo-transparent.svg';
 import SearchBox from '../SearchBox/SearchBox';
 import NewPostButton from '../NewPost/NewPostButton/NewPostButton';
 import NotificationButton from '../Notification/NotificationButton/NotificationButton';
 import Button from '../Button/Button';
-import Icon from '../Icon/Icon';
+import {ExploreIcon, NotificationIcon, UserIcon, PhotoIcon} from '../Icons/Icons';
 
 const Header = memo(({ currentUser }) => {
   const [shouldMinimizeHeader, setShouldMinimizeHeader] = useState(false);
@@ -50,21 +50,13 @@ const Header = memo(({ currentUser }) => {
           {currentUser ? (
             <Fragment>
               <Link to="/explore">
-                <Icon
-                  icon={pathname === '/explore' ? 'compass' : 'compass-outline'}
-                />
+                <ExploreIcon/>
               </Link>
               <NotificationButton />
-              <Link to={'/' + currentUser.username}>
-                <Icon
-                  icon={
-                    pathname === '/' + currentUser.username
-                      ? 'person-circle'
-                      : 'person-circle-outline'
-                  }
-                />
-              </Link>
               <NewPostButton />
+              <Link to={'/' + currentUser.username}>
+                <UserIcon/>
+              </Link>
             </Fragment>
           ) : (
             <Fragment>

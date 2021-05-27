@@ -36,7 +36,6 @@ const SuggestedUsers = ({ token, showAlert, card, style, max }) => {
             username={user.username}
             verified={user.verified}
             subText={user.fullName}
-            style={card ? { padding: '1.5rem' } : { padding: '1rem 0' }}
             key={idx}
           >
             <FollowButton
