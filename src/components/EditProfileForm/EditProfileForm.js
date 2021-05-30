@@ -59,7 +59,7 @@ const EditProfileForm = ({
       email: currentUser.email,
       fullName: currentUser.fullName,
       username: currentUser.username,
-      bio: currentUser.bio || '',
+      bio: currentUser.rawBio || '',
       website: currentUser.website || '',
     },
     validate,

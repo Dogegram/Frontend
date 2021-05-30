@@ -7,7 +7,7 @@ import UsersList from '../../components/UsersList/UsersList';
 import UnfollowPrompt from '../../components/UnfollowPrompt/UnfollowPrompt';
 import Button from '../../components/Button/Button';
 import SettingsButton from '../../components/SettingsButton/SettingsButton';
-import {VerifiedIcon, YoutuberIcon} from '../../components/Icons/Icons';
+import {VerifiedIcon, YoutuberIcon, WebIcon, BioIcon, NameIcon} from '../../components/Icons/Icons';
 
 const ProfileHeader = ({ 
   currentUser,
@@ -108,7 +108,7 @@ const ProfileHeader = ({
 
       <div className="profile-header__info">
         <div className="profile-buttons">
-          <h1 className="heading-1 font-thin" style={{'display': 'flex','align-items': 'center','align-content':'center','flex-wrap': 'nowrap'}}>
+          <h1 className="heading-1 font-thin" style={{'display': 'flex','align-items': 'center', alignContent:'center','flex-wrap': 'nowrap'}}>
             @{username}{data.user.verified ? (<VerifiedIcon/>) : (null)}{data.user.youtuber ? (<YoutuberIcon style={{marginLeft:"5px"}}/>) : (null)}
             </h1>
           {renderButton()}
@@ -135,15 +135,18 @@ const ProfileHeader = ({
           </p>
         </div>
 
-        <div>
+        <div style={{display: 'flex', flexWrap: 'wrap', flexDirection: 'column', alignItems: 'flex-start'}}>
           {fullName && (
-            <h3 className="heading-3">
-              <b>{fullName}</b>
+            <h3 className="heading-3" style={{ display: 'flex', alignItems: 'center'}}>
+              <NameIcon width="18px" height="18px"  style={{fill: '#9e9e9e', margin: '5px'}}/><b>{fullName}</b>
             </h3>
           )}
-          <div className="heading-3" style={{ whiteSpace: 'pre-wrap' }}>
+          <div className="heading-3" style={{ whiteSpace: 'pre-wrap', display: 'flex', alignItems: 'center'}}>
+            { bio ? (<BioIcon style={{fill: '#9e9e9e', height: '18px', width: '26px', margin: '5px'}}/>) : (null)}
 {          <span dangerouslySetInnerHTML={{__html: bio}} />
 }          </div>
+          <div style={{ display: 'flex', alignItems: 'center'}}>
+          {website ? (<WebIcon style={{fill: '#9e9e9e', height: '18px', width: '18px', margin: '5px'}}/>) : (null)}
           {website && (
             <a
               href={website}
@@ -154,6 +157,7 @@ const ProfileHeader = ({
               {website}
             </a>
           )}
+          </div>
         </div>
       </div>
 
