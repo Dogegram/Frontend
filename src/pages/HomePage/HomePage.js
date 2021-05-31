@@ -54,7 +54,6 @@ const HomePage = ({
         <h3 style={{ fontSize: '2.5rem' }} className="heading-logo">
           Dogegram
         </h3>
-        <Icon icon="paper-plane-outline" />
       </MobileHeader>
       <main data-test="page-home" className="home-page grid">
         {!fetching && feedPosts.length === 0 ? (
