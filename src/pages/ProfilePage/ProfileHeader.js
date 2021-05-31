@@ -106,7 +106,7 @@ const ProfileHeader = ({
 
       <div className="profile-header__info">
         <div className="profile-buttons">
-          <h1 className="heading-1 font-thin" style={{'display': 'flex','align-items': 'center', alignContent:'center','flex-wrap': 'nowrap'}}>
+          <h1 className="heading-1 font-thin" style={{display: 'flex', alignItems: 'center', alignContent:'center', flexWrap: 'nowrap'}}>
             @{username}{data.user.verified ? (<VerifiedIcon/>) : (null)}{data.user.youtuber ? (<YoutuberIcon style={{marginLeft:"5px"}}/>) : (null)}
             </h1>
           {renderButton()}
@@ -140,7 +140,7 @@ const ProfileHeader = ({
             </h3>
           )}
           <div className="heading-3" style={{ whiteSpace: 'pre-wrap', display: 'flex', alignItems: 'center'}}>
-            { bio ? (<BioIcon className="profile-header__desktop-info__bio-icon" style={{fill: '#9e9e9e', height: '18px', width: '26px', margin: '5px'}}/>) : (null)}
+            { bio ? (<BioIcon className="profile-header__desktop-info__bio-icon" style={{fill: '#9e9e9e', height: '18px', width: '18px', margin: '5px'}}/>) : (null)}
 {          <span dangerouslySetInnerHTML={{__html: bio}} />
 }          </div>
           <div style={{ display: 'flex', alignItems: 'center'}}>
