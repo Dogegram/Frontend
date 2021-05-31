@@ -44,7 +44,6 @@ const ProfileHeader = ({
   };
 
   const renderButton = () => {
-    console.log(currentUser)
     if (currentUser) {
       if (currentUser.username === username) {
         return (
@@ -135,14 +134,14 @@ const ProfileHeader = ({
           </p>
         </div>
 
-        <div style={{display: 'flex', flexWrap: 'wrap', flexDirection: 'column', alignItems: 'flex-start'}}>
+        <div className="profile-header__desktop-info" style={{display: 'flex', flexWrap: 'wrap', flexDirection: 'column', alignItems: 'flex-start'}}>
           {fullName && (
             <h3 className="heading-3" style={{ display: 'flex', alignItems: 'center'}}>
               <NameIcon width="18px" height="18px"  style={{fill: '#9e9e9e', margin: '5px'}}/><b>{fullName}</b>
             </h3>
           )}
           <div className="heading-3" style={{ whiteSpace: 'pre-wrap', display: 'flex', alignItems: 'center'}}>
-            { bio ? (<BioIcon style={{fill: '#9e9e9e', height: '18px', width: '26px', margin: '5px'}}/>) : (null)}
+            { bio ? (<BioIcon className="profile-header__desktop-info__bio-icon" style={{fill: '#9e9e9e', height: '18px', width: '26px', margin: '5px'}}/>) : (null)}
 {          <span dangerouslySetInnerHTML={{__html: bio}} />
 }          </div>
           <div style={{ display: 'flex', alignItems: 'center'}}>
@@ -172,8 +171,9 @@ const ProfileHeader = ({
             className="heading-3 font-medium"
             style={{ whiteSpace: 'pre-wrap' }}
           >
-            {bio}
+            {<span dangerouslySetInnerHTML={{__html: bio}}/>}
           </h3>
+          <h3>
           {website && (
             <a
               href={website}
@@ -183,7 +183,7 @@ const ProfileHeader = ({
             >
               {website}
             </a>
-          )}
+          )}</h3>
         </div>
 
         <div className="profile-stats">

@@ -22,6 +22,11 @@
     display: none;
   }
 
+  &__desktop-info {
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+  }
+
   @include respond(tab-port) {
     padding: 0px 2rem;
     grid-column: full-start / full-end;
@@ -36,6 +41,12 @@
       height: 10rem;
     }
 
+    &__desktop-info {
+      &__bio-icon {
+      width: 18px !important;
+      }
+    }
+
     &__info {
       flex-grow: 1;
       margin-left: 3rem;
@@ -45,7 +56,24 @@
     }
 
     &__mobile-user-details {
-      display: block;
+      display: none !important;
+    }
+  }
+
+  @include respond(phone) {
+    margin-top: 2rem;
+
+    &__avatar {
+      width: 7rem;
+      height: 7rem;
+    }
+
+    &__desktop-info {
+        display: none !important;
+    }
+
+    &__mobile-user-details {
+      display: block !important;
       flex-basis: 100%;
 
       & > :nth-child(1) {
@@ -74,19 +102,11 @@
       }
     }
   }
-
-  @include respond(phone) {
-    margin-top: 2rem;
-
-    &__avatar {
-      width: 7rem;
-      height: 7rem;
-    }
-  }
 }
 
 .profile-buttons {
   display: flex;
+  flex-direction: row;
   align-items: center;
   width: 100%;
 
@@ -97,13 +117,28 @@
   }
 
   @include respond(tab-port) {
-    flex-direction: column;
-    width: 100%;
-    align-items: flex-start;
 
     & > .icon {
       display: none;
     }
+
+    & > .button {
+      width: fit-content;
+    }
+
+    & > a {
+      width: 100%;
+      & > .button {
+        width: fit-content;
+      }
+    }
+  }
+
+  @include respond(phone) {
+    display: flex;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    width: 100%;
 
     & > .button {
       width: 100%;
@@ -115,7 +150,9 @@
         width: 100%;
       }
     }
+
   }
+
 }
 
 .profile-stats {
