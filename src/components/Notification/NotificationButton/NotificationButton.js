@@ -72,7 +72,7 @@ const NotificationButton = ({
   return (
     <div style={{ position: 'relative', height: '100%' }}>
       <button className="notification-button">
-      {icon ? icon : showNotifications ? <ActiveNotificationIcon  className={notificationState.unreadCount > 0 ? 'icon--unread' : ''}
+      { showNotifications ? <NotificationIcon  className={notificationState.unreadCount > 0 ? 'icon--unread' : ''}
           onClick={() =>
             !mobile && setShowNotifications((previous) => !previous)
           }

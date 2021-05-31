@@ -9,7 +9,7 @@ import { selectCurrentUser } from '../../redux/user/userSelectors';
 
 import useScrollPositionThrottled from '../../hooks/useScrollPositionThrottled';
 
-import { ReactComponent as LogoCamera } from '../../assets/svg/logo-transparent.svg';
+import { ReactComponent as LogoDoge } from '../../assets/svg/logo-transparent.svg';
 import SearchBox from '../SearchBox/SearchBox';
 import NewPostButton from '../NewPost/NewPostButton/NewPostButton';
 import NotificationButton from '../Notification/NotificationButton/NotificationButton';
@@ -39,7 +39,7 @@ const Header = memo(({ currentUser }) => {
       <div className="header__content">
         <Link to="/" className="header__logo">
           <div className="header__logo-image">
-            <LogoCamera />
+            <LogoDoge />
           </div>
           <div className="header__logo-header">
             <h3 className="heading-logo">Dogegram</h3>

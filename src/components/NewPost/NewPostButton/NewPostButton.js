@@ -35,7 +35,7 @@ const NewPostButton = ({ showModal, hideModal, plusIcon, children, style }) => {
         {children ? (
           children
         ) : (
-          <PhotoIcon/>
+          <PhotoIcon width={plusIcon ? '30px' : '24px'}/>
         )}
       </label>
       <input

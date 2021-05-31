@@ -4,6 +4,9 @@ import { Link, useHistory } from 'react-router-dom';
 import Icon from '../Icon/Icon';
 import NotificationButton from '../Notification/NotificationButton/NotificationButton';
 import NewPostButton from '../NewPost/NewPostButton/NewPostButton';
+import Avatar from '../Avatar/Avatar';
+import {ExploreIcon, HomeIcon} from '../Icons/Icons';
+
 
 const MobileNav = ({ currentUser }) => {
   const {
@@ -15,35 +18,28 @@ const MobileNav = ({ currentUser }) => {
       <ul className="mobile-nav__list">
         <li>
           <Link to="/">
-            <Icon icon={pathname === '/' ? 'home' : 'home-outline'} />
+            <HomeIcon/>
           </Link>
         </li>
         <li>
           <Link to="/explore">
-            <Icon
-              icon={pathname === '/explore' ? 'search' : 'search-outline'}
-            />
+          <ExploreIcon width="30px"/>
           </Link>
         </li>
         <li>
-          <NewPostButton plusIcon />
+          <NewPostButton plusIcon={true} />
         </li>
         <li>
           <Link to="/activity">
-            <NotificationButton
-              mobile
-              icon={pathname === '/activity' ? 'heart' : 'heart-outline'}
-            />
+          <NotificationButton />
           </Link>
         </li>
         <li>
           <Link to={`/${currentUser.username}`}>
-            <Icon
-              icon={
-                pathname === `/${currentUser.username}`
-                  ? 'person-circle'
-                  : 'person-circle-outline'
-              }
+            <Avatar
+              imageSrc={currentUser.avatar}
+              style={{width:'30px', height:'30px'}}
+
             />
           </Link>
         </li>

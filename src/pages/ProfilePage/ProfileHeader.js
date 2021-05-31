@@ -20,7 +20,6 @@ const ProfileHeader = ({
   const { avatar, username, bio, website, fullName } = data.user;
   const { following, followers, postCount } = data;
 
-  console.log(bio)
 
   const showUsersModal = (followers, following) => {
     token &&

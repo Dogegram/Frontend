@@ -7,6 +7,9 @@ const Avatar = ({
   className,
   onClick,
   style,
+  width,
+  height,
+  props
 }) => {
   const avatarClasses = classNames({
     avatar: true,
@@ -15,6 +18,9 @@ const Avatar = ({
 
   return (
     <img
+        {...props}
+      width={width}
+      height={height}
       className={avatarClasses}
       onClick={onClick}
       style={style}
