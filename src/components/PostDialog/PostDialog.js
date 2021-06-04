@@ -122,6 +122,7 @@ const PostDialog = ({
             'post-dialog__image': true,
             'post-dialog__image--simple': simple,
           })}
+          style={{ filter: state.data.filter, backgroundImage: state.data.image, }}
         >
           {fetching ? (
             <SkeletonLoader animated />

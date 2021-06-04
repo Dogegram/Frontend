@@ -5,7 +5,9 @@ import ProtectedRoute from '../../components/ProtectedRoute/ProtectedRoute';
 import Card from '../../components/Card/Card';
 import ChangePasswordForm from '../../components/ChangePasswordForm/ChangePasswordForm';
 import EditProfileForm from '../../components/EditProfileForm/EditProfileForm';
+import EditAuthForm from '../../components/EditAuthForm/EditAuthForm';
 import MobileHeader from '../../components/Header/MobileHeader/MobileHeader';
+import BirthdayUpdateCard from '../../components/BirthdayUpdateCard/BirthdayUpdateCard'
 
 const SettingsPage = () => (
   <Fragment>
@@ -37,6 +39,13 @@ const SettingsPage = () => (
           >
             <li className="sidebar-link__text">Update Birthday</li>
           </NavLink>
+          <NavLink
+            className="sidebar-link"
+            to="/settings/auth"
+            activeClassName="font-bold sidebar-link--active"
+          >
+            <li className="sidebar-link__text">Auth (Social Sign In)</li>
+          </NavLink>
         </ul>
         <article className="settings-page__content">
           <Switch>
@@ -47,7 +56,10 @@ const SettingsPage = () => (
               <ChangePasswordForm />
             </ProtectedRoute>
             <ProtectedRoute path="/settings/birthday">
-              <ChangePasswordForm />
+              <BirthdayUpdateCard />
+            </ProtectedRoute>
+            <ProtectedRoute path="/settings/auth">
+              <EditAuthForm />
             </ProtectedRoute>
           </Switch>
         </article>

@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
+import {
+  selectCurrentUser,
+} from '../../redux/user/userSelectors';
  
 import { forgetPassword } from '../../services/authenticationServices';
 
@@ -19,93 +22,31 @@ import Divider from '../Divider/Divider';
 import Card from '../Card/Card';
 import FormInput from '../FormInput/FormInput';
 
-const PasswordResetCard = ({ signUpStart, error, fetching }) => {
-  const validate = (values) => {
-    const errors = {};
-    const emailError = validateEmail(values.email);
-    if (emailError) errors.email = emailError;
+const BirthdayUpdateCard = ({ signUpStart, error, fetching,  currentUser
+}) => {
 
-    return errors;
-  };
-
-  const formik = useFormik({
-    initialValues: {
-      email: '',
-    },
-    validate,
-    onSubmit: (values) =>
-    forgetPassword(
-        values.email
-      ),
-  });
-
+  const parseDate = ()=>{
+    let date = currentUser.birthday;
+    date = date.replace("T00:00:00.000Z", "")
+    console.log(date);
+    return date;
+    }
   return (
     <Fragment>
-      <Card className="form-card">
-        <h1 className="heading-logo text-center">Dogegram</h1>
-        <h2
-          style={{ fontSize: '1.7rem' }}
-          className="heading-2 color-grey text-center"
-        >
-          Password Reset
-        </h2> 
-        {Object.keys(formik.errors).map((field) => {
-          if (formik.touched[field]) {
-            return (
-              <p
-                className="error"
-                key={formik.errors[field]}
-                style={{ marginTop: '0' }}
-              >
-                {formik.errors[field]}
-              </p>
-            );
-          }
-        })}
-        <form className="form-card__form" onSubmit={formik.handleSubmit}>
-          <FormInput
-            name="email"
-            fieldProps={formik.getFieldProps('email')}
-            valid={formik.touched.email && !formik.errors.email}
-            placeholder="Email address"
-          />
-          <Button
-            loading={fetching}
-            disabled={
-              Object.keys(formik.touched).length === 0 ? true : !formik.isValid
-            }
+      <Card className="form-card" style={{display: 'flex', alignItems: 'center', width: '100%', height: '100%', flexDirection: 'column', justifyContent: 'center'}}>
+      <h3 className="heading-3 color-grey font-bold">
+            We don't think living beings need to change birthdays.
+          </h3>
+          <p
+            style={{ fontSize: '1.3rem', lineHeight: '1.6rem' }}
+            className="color-grey"
           >
-            Reset Password
-          </Button>
-          <p></p>
-        </form>
-        <p className="error">
-          {error
-            ? error
-            : formik.submitCount > 0 && Object.values(formik.errors)[0]}
-        </p>
-        <p className="heading-5 color-grey">
-          We would send you a password reset email with a link to reset your password, please follow it and reset your password. It would be valid for 5 hrs after sending.
-        </p>
-      </Card>
-      <Card>
-        <section
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            padding: '2rem',
-          }}
-        >
-          <h4 style={{ marginRight: '5px' }} className="heading-4 font-thin">
-            Remember your password?
-          </h4>
-          <Link to="/login">
-            <TextButton medium blue bold>
-              Log in
-            </TextButton>
-          </Link>
-        </section>
+            Are you a special being? Does your birthday change? <br/> If it does then email us at <a className="heading-5 link" href="mailto:birthday@dogegram.xyz">birthday@dogegram.xyz</a> with Reason and updated birthday. 
+           </p>
+           <h3 className="heading-3 color-grey font-bold">
+            Your Current Birthday: {parseDate()}
+          </h3>
+
       </Card>
     </Fragment>
   );
@@ -117,8 +58,9 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
   error: selectError,
   fetching: selectFetching,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PasswordResetCard);
+export default connect(mapStateToProps, mapDispatchToProps)(BirthdayUpdateCard);

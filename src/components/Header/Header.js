@@ -49,7 +49,7 @@ const Header = memo(({ currentUser }) => {
         <div className="header__icons">
           {currentUser ? (
             <Fragment>
-              <Link to="/explore">
+              <Link to="/explore" style={{marginTop:'3px'}}>
                 <ExploreIcon/>
               </Link>
               <NotificationButton />
