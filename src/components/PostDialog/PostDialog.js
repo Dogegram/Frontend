@@ -122,17 +122,12 @@ const PostDialog = ({
             'post-dialog__image': true,
             'post-dialog__image--simple': simple,
           })}
-          style={{ filter: state.data.filter, backgroundImage: state.data.image, }}
+          style={{ filter: state.data.filter, backgroundImage: `url(${state.data.image})`, backgroundPosition: 'center',  backgroundSize: 'contain', backgroundRepeat:'no-repeat'}}
         >
           {fetching ? (
             <SkeletonLoader animated />
-          ) : (
-            <img
-              src={state.data.image}
-              alt="Post"
-              style={{ filter: state.data.filter }}
-            />
-          )}
+          ) : (null)
+          }
         </div>
         <header
           className={classNames({
@@ -187,7 +182,7 @@ const PostDialog = ({
                     text: 'Copy link',
                     onClick: () => {
                       navigator.clipboard
-                        .writeText(document.URL)
+                        .writeText(`${document.URL}/post/${postId}`)
                         .then(() => showAlert('Link copied to clipboard.'))
                         .catch(() =>
                           showAlert('Could not copy link to clipboard.')

@@ -15,6 +15,7 @@ import NewPostButton from '../NewPost/NewPostButton/NewPostButton';
 import NotificationButton from '../Notification/NotificationButton/NotificationButton';
 import Button from '../Button/Button';
 import {ExploreIcon, NotificationIcon, UserIcon, PhotoIcon} from '../Icons/Icons';
+import Avatar from '../Avatar/Avatar';
 
 const Header = memo(({ currentUser }) => {
   const [shouldMinimizeHeader, setShouldMinimizeHeader] = useState(false);
@@ -55,7 +56,7 @@ const Header = memo(({ currentUser }) => {
               <NotificationButton />
               <NewPostButton />
               <Link to={'/' + currentUser.username}>
-                <UserIcon/>
+                <Avatar imageSrc={currentUser.avatar} style={{width:'27px', height:'27px'}}/>
               </Link>
             </Fragment>
           ) : (

@@ -107,7 +107,7 @@ const ProfileHeader = ({
       <div className="profile-header__info">
         <div className="profile-buttons">
           <h1 className="heading-1 font-thin" style={{display: 'flex', alignItems: 'center', alignContent:'center', flexWrap: 'nowrap'}}>
-            @{username}{data.user.verified ? (<VerifiedIcon/>) : (null)}{data.user.youtuber ? (<YoutuberIcon style={{marginLeft:"5px"}}/>) : (null)}
+            @{username}{data.user.verified ? (<VerifiedIcon/>) : (null)}{data.user.youtuber ? (<a style={{display: 'flex'}} target="_blank" ping="http://localhost:5000/api/user/track" rel="noreferrer" href={data.user.ytlink ? data.user.ytlink : null}><YoutuberIcon style={{marginLeft:"5px"}}/></a>) : (null)}
             </h1>
           {renderButton()}
         </div>
