@@ -7,6 +7,8 @@
     "npm": "6.13.7"
   },
   "dependencies": {
+    "@sentry/react": "^6.8.0",
+    "@sentry/tracing": "^6.8.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
