@@ -6,6 +6,9 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
+import store from './redux/store';
+
+import './sass/main.scss';
 
 Sentry.init({
   dsn: "https://ba75614424c4415ca0acc2a5748e7133@o679108.ingest.sentry.io/5844726",
@@ -16,10 +19,6 @@ Sentry.init({
   // We recommend adjusting this value in production
   tracesSampleRate: 1.0,
 });
-
-import store from './redux/store';
-
-import './sass/main.scss';
 
 if (process.env.NODE_ENV === 'development') {
   const whyDidYouRender = require('@welldone-software/why-did-you-render');
