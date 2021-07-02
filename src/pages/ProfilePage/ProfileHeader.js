@@ -7,7 +7,7 @@ import UsersList from '../../components/UsersList/UsersList';
 import UnfollowPrompt from '../../components/UnfollowPrompt/UnfollowPrompt';
 import Button from '../../components/Button/Button';
 import SettingsButton from '../../components/SettingsButton/SettingsButton';
-import {VerifiedIcon, YoutuberIcon, WebIcon, BioIcon, NameIcon} from '../../components/Icons/Icons';
+import { VerifiedIcon, YoutuberIcon, WebIcon, BioIcon, NameIcon } from '../../components/Icons/Icons';
 
 const ProfileHeader = ({ 
   currentUser,
@@ -140,7 +140,7 @@ const ProfileHeader = ({
             </h3>
           )}
           <div className="heading-3" style={{ whiteSpace: 'pre-wrap', display: 'flex', alignItems: 'center'}}>
-            { bio ? (<BioIcon className="profile-header__desktop-info__bio-icon" style={{fill: '#9e9e9e', height: '18px', width: '26px', margin: '5px'}}/>) : (null)}
+            { bio ? (<BioIcon className="profile-header__desktop-info__bio-icon" style={{fill: '#9e9e9e', margin: '5px'}}/>) : (null)}
 {          <span dangerouslySetInnerHTML={{__html: bio}} />
 }          </div>
           <div style={{ display: 'flex', alignItems: 'center'}}>

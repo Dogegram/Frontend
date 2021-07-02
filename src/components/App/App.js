@@ -12,6 +12,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Header from '../Header/Header';
 import Modal from '../../components/Modal/Modal';
 import Alert from '../../components/Alert/Alert';
+import Footer from '../../components/Footer/Footer';
 import MobileNav from '../../components/MobileNav/MobileNav';
 
 import LoadingPage from '../../pages/LoadingPage/LoadingPage';
@@ -27,7 +28,6 @@ const ActivityPage = lazy(() =>
   import('../../pages/ActivityPage/ActivityPage')
 );
 const LoginPage = lazy(() => import('../../pages/LoginPage/LoginPage'));
-const PasswordResetPage = lazy(() => import('../../pages/PasswordReset/PasswordReset'));
 const SignUpPage = lazy(() => import('../../pages/SignUpPage/SignUpPage'));
 const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
 const NewPostPage = lazy(() => import('../../pages/NewPostPage/NewPostPage'));
@@ -105,7 +105,6 @@ export function UnconnectedApp({
         <Switch>
           <Route path="/login" component={LoginPage} />
           <Route path="/signup" component={SignUpPage} />
-          <Route path="/passwordReset" component={PasswordResetPage} />
           <ProtectedRoute exact path="/" component={HomePage} />
           <ProtectedRoute path="/settings" component={SettingsPage} />
           <ProtectedRoute path="/activity" component={ActivityPage} />
@@ -116,6 +115,7 @@ export function UnconnectedApp({
           <Route path="/confirm/:token" component={ConfirmationPage} />
           <Route component={NotFoundPage} />
         </Switch>
+        {pathname !== '/' && <Footer />}
         {pathname !== '/login' &&
           pathname !== '/signup' &&
           pathname !== '/new' &&
