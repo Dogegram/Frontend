@@ -3,8 +3,8 @@
 ## Current Release - vBeta5.3
 
 ## Local Development :-
-- `git clone https://github.com/DogeGram/new-Backend.git`
-- `cd new-Backend`
+- `git clone https://github.com/DogeGram/new-frontend.git`
+- `cd new-frontend`
 - `npm install`
-- `npm run dev`
-Your backend server should start at port `5000`
+- `npm start`
+Your frontend server should start at port `3000`
