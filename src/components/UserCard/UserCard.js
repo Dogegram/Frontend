@@ -51,7 +51,7 @@ const UserCard = ({
             style={{ cursor: 'pointer' }}
             className="heading-4 font-bold"
           >
-            {username}{verified ? (<VerifiedIcon width="12" height="12" style={{marginLeft: '1px',  position: 'relative',  top: '1px'}}/>):(null)}
+            {username}{verified ? (<VerifiedIcon width="12" height="12" style={{marginLeft: '1px',  position: 'relative',  top: '2px'}}/>):(null)}
           </p>
         ) : (
           <Link

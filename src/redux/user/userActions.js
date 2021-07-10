@@ -40,7 +40,17 @@ export const signInStart = (usernameOrEmail, password, authToken) => async (
     const response = await login(usernameOrEmail, password, authToken);
     dispatch(signInSuccess(response));
   } catch (err) {
-    if (authToken) dispatch(signOut);
+    console.log(err)
+    if(err.message === 'Not authorized.'){
+      dispatch(signOut())
+      window.location.reload();
+
+     /* console.log("this?")
+      localStorage.removeItem('token');
+      dispatch({ type: userTypes.SIGN_OUT });
+*/
+    }
+    if (authToken) dispatch(signOut());
     dispatch(signInFailure(err.message));
   }
 };

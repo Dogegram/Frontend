@@ -121,6 +121,8 @@ const NotificationFeed = ({
                     src={notification.notificationData.image}
                     style={{
                       display: 'flex',
+                      width:'50px',
+                      height:'50px',
                       filter: notification.notificationData.filter,
                     }}
                     onClick={() =>
@@ -147,7 +149,7 @@ const NotificationFeed = ({
           <Icon className="icon--larger" icon="heart-circle-outline" />
           <h2 className="heading-2 font-medium">Activity On Your Posts</h2>
           <h4 className="heading-4 font-medium">
-            When someone likes or comments on your posts, you'll see them here.
+            When someone likes or comments on your posts, you'll see them here. It stays here for 1 week and then its time to say bye.
           </h4>
         </div>
       )}

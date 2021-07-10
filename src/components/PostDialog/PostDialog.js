@@ -141,7 +141,7 @@ const PostDialog = ({
             />
           ) : (
             <Link
-              to={`/${state.data.author.username}`}
+              to={`/${state.data.author.username ? state.data.author.username : 'dogegram'}`}
               style={{ display: 'flex' }}
             >
               <Avatar
