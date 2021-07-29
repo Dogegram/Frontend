@@ -31,7 +31,7 @@ const FormInput = ({
         {...additionalProps}
       />
       <span className="form-group__placeholder">{placeholder}</span>
-      <div className="input-icons">
+      <div className="input-icons" style={{right: type === "date" ? '40px' : ('5px')}}>
         {typeof valid === 'boolean' ? (
           valid ? (
             <Icon className="color-grey" icon="checkmark-circle-outline" />

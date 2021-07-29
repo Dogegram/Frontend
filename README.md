@@ -1,6 +1,6 @@
 # Dogegram Backend
 
-## Current Release - vBeta5.3
+## Current Release - vBeta5.4
 
 ## Local Development :-
 - `git clone https://github.com/DogeGram/new-frontend.git`

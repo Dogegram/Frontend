@@ -19,7 +19,7 @@ import Divider from '../Divider/Divider';
 import Card from '../Card/Card';
 import FormInput from '../FormInput/FormInput';
 
-const PasswordResetCard = ({ signUpStart, error, fetching }) => {
+const PasswordResetCard = ({ passwordResetStart, error, fetching }) => {
   const validate = (values) => {
     const errors = {};
     const emailError = validateEmail(values.email);
@@ -28,15 +28,21 @@ const PasswordResetCard = ({ signUpStart, error, fetching }) => {
     return errors;
   };
 
+  var done = false;
+
   const formik = useFormik({
     initialValues: {
       email: '',
     },
     validate,
-    onSubmit: (values) =>
+    onSubmit: (values) => {
+     
     forgetPassword(
         values.email
-      ),
+      ).catch((err) => {
+        alert(err.message)
+      })
+    }
   });
 
   return (
@@ -80,9 +86,7 @@ const PasswordResetCard = ({ signUpStart, error, fetching }) => {
           <p></p>
         </form>
         <p className="error">
-          {error
-            ? error
-            : formik.submitCount > 0 && Object.values(formik.errors)[0]}
+          
         </p>
         <p className="heading-5 color-grey">
           We would send you a password reset email with a link to reset your password, please follow it and reset your password. It would be valid for 5 hrs after sending.

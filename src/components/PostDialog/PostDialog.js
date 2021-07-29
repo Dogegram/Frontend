@@ -11,7 +11,7 @@ import { selectToken, selectCurrentUser } from '../../redux/user/userSelectors';
 import { showModal, hideModal } from '../../redux/modal/modalActions';
 import { showAlert } from '../../redux/alert/alertActions';
 
-import { getPost, deletePost } from '../../services/postService';
+import { getPost, deletePost, reportPost } from '../../services/postService';
 import { getComments } from '../../services/commentService';
 
 import Avatar from '../Avatar/Avatar';
@@ -106,6 +106,16 @@ const PostDialog = ({
     }
   };
 
+  const handleReportPost = async () => {
+    try {
+      await reportPost(postId, token);
+      hideModal('PostDialog/PostDialog');
+    } catch (err) {
+      console.log(err);
+      showAlert('Unable to report post.', () => handleReportPost());
+    }
+  };
+
   return (
     <div
       className={classNames({
@@ -189,6 +199,14 @@ const PostDialog = ({
                         );
                     },
                   },
+                  {
+                    text: 'Report Post',
+                    warning: true,
+                    onClick: () => {
+                      handleReportPost();
+                      showAlert('Post Reported. would be checked soon. For urgent checking please tweet/email us.')
+                    },
+                  },
                 ];
                 showModal(
                   {
@@ -202,7 +220,9 @@ const PostDialog = ({
                               warning: true,
                               onClick: () => {
                                 handleDeletePost();
-                                history.push('/' + currentUser.username);
+                                history.push('/');
+                                showAlert('Post Deleted.')
+
                               },
                             },
                           ]

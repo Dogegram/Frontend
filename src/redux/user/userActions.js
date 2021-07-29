@@ -56,12 +56,14 @@ export const signInStart = (usernameOrEmail, password, authToken) => async (
 };
 
 
-export const signUpStart = (email, fullName, birthday, username, password) => async (
+export const signUpStart = (userdata) => async (
   dispatch
 ) => {
+ const {email, fullName, pronoun, birthday, username, password} = userdata;
   try {
-    dispatch({ type: userTypes.SIGN_IN_START });
-    const response = await registerUser(email, fullName, birthday, username, password);
+    console.log(password);
+    dispatch({ type: userTypes.SIGN_UP_START });
+    const response = await registerUser(email, fullName,pronoun, birthday, username, password);
     dispatch(signInStart(null, null, response.token));
   } catch (err) {
     dispatch({ type: userTypes.SIGN_UP_FAILURE, payload: err.message });

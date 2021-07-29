@@ -73,9 +73,27 @@ export const createPost = async (formData, authToken) => {
  * @param {string} postId The id of the post to delete
  * @param {string} authToken A user's auth token
  */
-export const deletePost = async (postId, authToken) => {
+ export const deletePost = async (postId, authToken) => {
   try {
     await axios.delete(process.env.REACT_APP_BACKEND_URL + `/api/post/${postId}`, {
+      headers: {
+        authorization: authToken,
+      },
+    });
+  } catch (err) {
+    throw new Error(err.response.data.error);
+  }
+};
+
+/**
+ * Reports a post
+ * @function deletePost
+ * @param {string} postId The id of the post to delete
+ * @param {string} authToken A user's auth token
+ */
+ export const reportPost = async (postId, authToken) => {
+  try {
+    await axios.post(process.env.REACT_APP_BACKEND_URL + `/api/post/report/${postId}`, {
       headers: {
         authorization: authToken,
       },

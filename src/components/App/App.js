@@ -28,6 +28,7 @@ const ActivityPage = lazy(() =>
   import('../../pages/ActivityPage/ActivityPage')
 );
 const LoginPage = lazy(() => import('../../pages/LoginPage/LoginPage'));
+const PasswordResetPage = lazy(() => import('../../pages/PasswordReset/PasswordReset'));
 const SignUpPage = lazy(() => import('../../pages/SignUpPage/SignUpPage'));
 const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
 const NewPostPage = lazy(() => import('../../pages/NewPostPage/NewPostPage'));
@@ -105,6 +106,7 @@ export function UnconnectedApp({
         <Switch>
           <Route path="/login" component={LoginPage} />
           <Route path="/signup" component={SignUpPage} />
+          <Route path="/passwordreset" component={PasswordResetPage} />
           <ProtectedRoute exact path="/" component={HomePage} />
           <ProtectedRoute path="/settings" component={SettingsPage} />
           <ProtectedRoute path="/activity" component={ActivityPage} />

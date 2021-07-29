@@ -1,3 +1,11 @@
+export const validatePronoun = (pronoun) => {
+  if (pronoun === "He"||pronoun === "She"||pronoun === "It"){
+      return false;
+  } else {
+    return 'Enter a valid Pronoun from (He/She/It)';
+  }
+};
+
 export const validateEmail = (email) => {
   if (
     !email ||
@@ -66,3 +74,24 @@ export const validateWebsite = (website) => {
   }
   return false;
 };
+
+export const validateBirthday = (dob) => {
+  const getAge = (birthDateString) => {
+    var today = new Date();
+    var birthDate = new Date(birthDateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    return age;
+  }
+  
+  if(getAge(dob) >= 13) {
+   return false;
+  } else {
+    return true;  
+  }
+  
+  
+  };

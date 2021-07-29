@@ -35,12 +35,13 @@ export const login = async (usernameOrEmail, password, authToken) => {
  * @param {string} password A user's password
  * @returns {object} The user object
  */
-export const registerUser = async (email, fullName, birthday, username, password) => {
+export const registerUser = async (email, fullName, pronoun, birthday, username, password) => {
   console.log(password)
   try {
     const response = await axios.post(process.env.REACT_APP_BACKEND_URL + '/api/auth/register', {
       email,
       fullName,
+      pronoun,
       birthday,
       username,
       password
@@ -84,12 +85,13 @@ export const registerUser = async (email, fullName, birthday, username, password
  */
  export const forgetPassword = async (email) => {
   try {
-    await axios.post(
+    const response = await axios.post(
       process.env.REACT_APP_BACKEND_URL + '/api/auth/forgetpassword',
       {
         email: email
       }
     );
+    return response.data
   } catch (err) {
     throw new Error(err.response.data.error);
   }

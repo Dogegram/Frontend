@@ -12,6 +12,8 @@ import {
   validateFullName,
   validateUsername,
   validatePassword,
+  validatePronoun,
+  validateBirthday
 } from '../../utils/validation';
 
 import Button from '../Button/Button';
@@ -29,6 +31,12 @@ const SignUpCard = ({ signUpStart, error, fetching }) => {
     const fullNameError = validateFullName(values.fullName);
     if (fullNameError) errors.fullName = fullNameError;
 
+    const proNounError = validatePronoun(values.pronoun);
+    if (proNounError) errors.pronoun = proNounError;
+
+    const birthdayError = validateBirthday(values.birthday);
+    if (birthdayError) errors.birthday = birthdayError;
+
     const usernameError = validateUsername(values.username);
     if (usernameError) errors.username = usernameError;
 
@@ -41,19 +49,25 @@ const SignUpCard = ({ signUpStart, error, fetching }) => {
     initialValues: {
       email: '',
       fullName: '',
+      pronoun:'',
       username: '',
+      birthday: '',
       password: '',
-      birthday: ''
     },
     validate,
-    onSubmit: (values) =>
+    onSubmit: (values) =>{
+      console.log(values.password)
+      let userdata = {
+        email: values.email,
+        fullName: values.fullName,
+        pronoun: values.pronoun,
+        birthday: values.birthday,
+        username: values.username,
+        password: values.password,
+      }
       signUpStart(
-        values.email,
-        values.fullName,
-        values.birthday,
-        values.username,
-        values.password,
-      ),
+        userdata
+      )}
   });
 
   return (
@@ -92,10 +106,17 @@ const SignUpCard = ({ signUpStart, error, fetching }) => {
             valid={formik.touched.fullName && !formik.errors.fullName}
             placeholder="Full Name"
           />
+          <FormInput
+            name="pronoun"
+            fieldProps={formik.getFieldProps('pronoun')}
+            valid={formik.touched.pronoun && !formik.errors.pronoun}
+            placeholder="Pronoun (He/She/It) Don't go on the last two, xD"
+          />
           <FormInput 
           type="date" 
           name="birthday" 
           placeholder="Your Birthday"
+          valid={formik.touched.birthday && !formik.errors.birthday}
           fieldProps={formik.getFieldProps('birthday')}
           />
           <FormInput
