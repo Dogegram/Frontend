@@ -1,5 +1,5 @@
 .feed {
-  grid-column: center-start / 7;
+  grid-column: 7/center-end;
 
   & > :not(:last-child) {
     margin-bottom: 5rem;
