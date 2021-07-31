@@ -60,8 +60,7 @@ const HomePage = ({
           <SuggestedUsers card />
         ) : (
           <Fragment>
-            <Feed />
-            <aside className="sidebar">
+          <aside className="sidebar">
               <div className="sidebar__content">
                 <UserCard
                   avatar={currentUser.avatar}
@@ -74,6 +73,7 @@ const HomePage = ({
                 <SmallFooter />
               </div>
             </aside>
+            <Feed />
           </Fragment>
         )}
       </main>
