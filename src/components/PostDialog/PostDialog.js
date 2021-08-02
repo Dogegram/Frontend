@@ -106,15 +106,6 @@ const PostDialog = ({
     }
   };
 
-  const handleReportPost = async () => {
-    try {
-      await reportPost(postId, token);
-      hideModal('PostDialog/PostDialog');
-    } catch (err) {
-      console.log(err);
-      showAlert('Unable to report post.', () => handleReportPost());
-    }
-  };
 
   return (
     <div
@@ -192,7 +183,7 @@ const PostDialog = ({
                     text: 'Copy link',
                     onClick: () => {
                       navigator.clipboard
-                        .writeText(`${document.URL}/post/${postId}`)
+                        .writeText(`${document.URL}post/${postId}`)
                         .then(() => showAlert('Link copied to clipboard.'))
                         .catch(() =>
                           showAlert('Could not copy link to clipboard.')
@@ -203,8 +194,7 @@ const PostDialog = ({
                     text: 'Report Post',
                     warning: true,
                     onClick: () => {
-                      handleReportPost();
-                      showAlert('Post Reported. would be checked soon. For urgent checking please tweet/email us.')
+                      window.open(`https://docs.google.com/forms/d/e/1FAIpQLSeWkHVM-K4MSJ9k5GprLfWYCS3Vpv3R-qQHmDTCqJz0wbasUw/viewform?usp=pp_url&entry.409953134=${currentUser.username}&entry.1625726682=${postId}&entry.597646170=${state.data.caption}&entry.2107609917=${token}`)
                     },
                   },
                 ];
@@ -220,8 +210,8 @@ const PostDialog = ({
                               warning: true,
                               onClick: () => {
                                 handleDeletePost();
-                                history.push('/');
                                 showAlert('Post Deleted.')
+                                window.location.reload();
 
                               },
                             },
