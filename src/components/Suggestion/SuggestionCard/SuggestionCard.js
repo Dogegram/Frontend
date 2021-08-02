@@ -20,7 +20,7 @@ const SuggestionCard = ({ avatar, username, fullName, posts, children }) => {
           posts.map((post, idx) => (
             <figure className="suggestion-card__image-container" key={idx}>
               <img
-                src={post.thumbnail}
+                src={post.image}
                 alt="User post"
                 style={{ filter: post.filter }}
               />

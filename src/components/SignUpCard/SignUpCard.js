@@ -78,7 +78,7 @@ const SignUpCard = ({ signUpStart, error, fetching }) => {
           style={{ fontSize: '1.7rem' }}
           className="heading-2 color-grey text-center"
         >
-          Sign up to see photos and videos from your friends.
+          Join us, make more friends and stay happy!
         </h2> 
         {Object.keys(formik.errors).map((field) => {
           if (formik.touched[field]) {
@@ -148,9 +148,7 @@ const SignUpCard = ({ signUpStart, error, fetching }) => {
             : formik.submitCount > 0 && Object.values(formik.errors)[0]}
         </p>
         <p className="heading-5 color-grey">
-          By signing up, you agree to our Terms . Learn how we collect, use and
-          share your data in our Data Policy and how we use cookies and similar
-          technology in our Cookies Policy .
+          By signing up, you agree to our <a herf="https://dogegram.xyz/terms"> Terms & conditions </a> and Privacy Policy which are pretty simple anyway you need to make a look there.
         </p>
       </Card>
       <Card>

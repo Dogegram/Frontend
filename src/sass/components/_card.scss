@@ -1,7 +1,7 @@
 .card {
   background-color: $color-white;
-  border: 1px solid $color-grey-2;
-  border-radius: 3px;
+  border: 1px solid $color-secondary;
+  border-radius: 35px;
 
   @include respond(phone) {
     border: none;

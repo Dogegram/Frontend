@@ -55,7 +55,7 @@ const HomePage = ({
           Dogegram
         </h3>
       </MobileHeader>
-      <main data-test="page-home" className="home-page grid">
+      <main data-test="page-home" className="home-page grid" style={{gridTemplateColumns: window.innerWidth <= 760 ? null :"[full-start] 355px [center-start] repeat(30,[col-start] minmax(min-content,20rem) [col-end]) [center-end] 100px [full-end]"}}>
         {!fetching && feedPosts.length === 0 ? (
           <SuggestedUsers card />
         ) : (

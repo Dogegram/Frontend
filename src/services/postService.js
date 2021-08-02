@@ -2,7 +2,7 @@ import axios from 'axios';
 
 /**
  * Fetches a complete post with comments and the fully
- * sized image instead of a thumbnail image
+ * sized image instead of a image
  * @function getPost
  * @param {string} postId Id of the post to fetch
  * @returns {object} The post requested
