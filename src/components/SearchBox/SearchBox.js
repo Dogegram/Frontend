@@ -66,7 +66,7 @@ const SearchBox = ({ style, setResult, onClick }) => {
                   username={user.username}
                   verified={user.verified}
                   subText={user.fullName}
-                  style={{ padding: '1.5rem 1.5rem' }}
+                  style={{ padding: '1.5rem 1.5rem', Border: 'none'}}
                   onClick={() => {
                     history.push(`/${user.username}`);
                     setQuery('');

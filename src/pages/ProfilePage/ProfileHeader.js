@@ -8,6 +8,7 @@ import UnfollowPrompt from '../../components/UnfollowPrompt/UnfollowPrompt';
 import Button from '../../components/Button/Button';
 import SettingsButton from '../../components/SettingsButton/SettingsButton';
 import { VerifiedIcon, YoutuberIcon, WebIcon, BioIcon, NameIcon } from '../../components/Icons/Icons';
+import nFormatter from '../../components/NFormatter/Nformatter'
 
 const ProfileHeader = ({ 
   currentUser,
@@ -50,7 +51,7 @@ const ProfileHeader = ({
             <Link to="/settings/edit">
               <Button inverted>Edit Profile</Button>
             </Link>
-            <SettingsButton />
+            { window.innerWidth <= 760 ? (null) : (<SettingsButton />) }
           </Fragment>
         );
       } else if (data.isFollowing) {
@@ -91,6 +92,8 @@ const ProfileHeader = ({
     );
   };
 
+
+
   return (
     <header className="profile-header">
       {currentUser && currentUser.username === username ? (
@@ -121,7 +124,7 @@ const ProfileHeader = ({
             style={{ cursor: 'pointer' }}
             className="heading-3"
           >
-            <b>{followers}</b>{' '}
+            <b>{nFormatter(followers, 2)}</b>{' '}
             {followers > 1 || followers === 0 ? 'followers' : 'follower'}
           </p>
           <p
@@ -129,7 +132,7 @@ const ProfileHeader = ({
             style={{ cursor: 'pointer' }}
             className="heading-3"
           >
-            <b>{following}</b> following
+            <b>{nFormatter(following, 3)}</b> following
           </p>
         </div>
 
@@ -187,7 +190,7 @@ const ProfileHeader = ({
 
         <div className="profile-stats">
           <h3 className="heading-3">
-            <b>{postCount}</b>
+            <b>{nFormatter(postCount)}</b>
             <span className="font-medium color-grey">
               {postCount === 1 ? 'post' : 'posts'}
             </span>
@@ -197,7 +200,7 @@ const ProfileHeader = ({
             style={{ cursor: 'pointer' }}
             className="heading-3"
           >
-            <b>{followers}</b>{' '}
+            <b>{nFormatter(followers)}</b>{' '}
             <span className="font-medium color-grey">
               {followers > 1 || followers === 0 ? 'followers' : 'follower'}
             </span>
@@ -207,7 +210,7 @@ const ProfileHeader = ({
             style={{ cursor: 'pointer' }}
             className="heading-3"
           >
-            <b>{following}</b>
+            <b>{nFormatter(following)}</b>
             <span className="font-medium color-grey">following</span>
           </h3>
         </div>

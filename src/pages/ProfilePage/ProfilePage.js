@@ -23,6 +23,8 @@ import LoginCard from '../../components/LoginCard/LoginCard';
 import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
 import ProfileHeader from './ProfileHeader';
 import EmptyProfile from './EmptyProfile';
+import nFormatter from '../../components/NFormatter/Nformatter'
+
 
 const ProfilePage = ({ currentUser, token, showModal, hideModal }) => {
   const { username } = useParams();
@@ -104,6 +106,7 @@ const ProfilePage = ({ currentUser, token, showModal, hideModal }) => {
     }
   };
 
+  
   const renderProfile = () => {
     if (state.fetching) {
       return <Loader />;
@@ -127,7 +130,7 @@ const ProfilePage = ({ currentUser, token, showModal, hideModal }) => {
                   <PreviewImage
                     onClick={() => handleClick(post._id)}
                     image={post.image}
-                    likes={post.postVotes}
+                    likes={nFormatter(post.postVotes)}
                     comments={post.comments}
                     filter={post.filter}
                     key={idx}

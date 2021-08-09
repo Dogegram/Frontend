@@ -225,7 +225,7 @@ const Comment = ({
               style={{ textDecoration: 'none' }}
               to={`/post/${post._id}`}
             >
-              View all {post.commentData.commentCount} comments
+             { post.commentData.commentCount === 0 ? `No Comments, if you still want to click then do`:  `View all ${post.commentData.commentCount} comments`}
             </Link>
           ) : null}
           {dialogDispatch && !caption && comment.commentReplies > 0 ? (

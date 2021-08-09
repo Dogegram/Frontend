@@ -37,7 +37,7 @@ const ChangePasswordForm = ({ currentUser, token, showAlert }) => {
       setFetching(true);
       await changePassword(oldPassword, newPassword, token);
       showAlert(
-        "Your password has been changed, you'll have to log in with the new one next time."
+        "Your password has been changed, you'll have to log in with the new one now."
       );
       setFetching(false);
     } catch (err) {

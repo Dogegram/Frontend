@@ -11,9 +11,9 @@ const FeedBottom = () => (
         className="feed__bottom-icon icon--larger"
       />
     </Divider>
-    <h2 className="heading-2">You're All Caught Up</h2>
+    <h2 className="heading-2">You made it this way, WoW!</h2>
     <h3 className="heading-3 color-grey">
-      Follow more people to see more posts.
+      {`You are wild man, really, anyway, you can take a screenshot and upload it to Dogegram now!`}
     </h3>
   </div>
 );
