@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
+import {CopyLinkIcon} from '../../Icons/Icons';
 
 import { bookmarkPost } from '../../../redux/user/userActions';
 import { showAlert } from '../../../redux/alert/alertActions';
@@ -100,19 +101,17 @@ const PostDialogStats = ({
           className="icon--button"
           icon="chatbubble-outline"
         />
-        <Icon
+        <CopyLinkIcon
           className="icon--button"
-          onClick={() => bookmarkPost(post._id, token)}
-          icon={
-            currentUser && currentUser.bookmarks
-              ? !!currentUser.bookmarks.find(
-                  (bookmark) => bookmark.post === post._id
-                )
-                ? 'bookmark'
-                : 'bookmark-outline'
-              : 'bookmark-outline'
-          }
-        />
+        onClick={()=>{
+          console.log("something?")
+          navigator.clipboard
+                        .writeText(`${document.URL}post/${post._id}`)
+                        .then(() => showAlert('Link copied to clipboard.'))
+                        .catch(() =>
+                          showAlert('Could not copy link to clipboard.')
+                        );
+        }}/>
       </div>
       <p className="heading-4">
         {post.postVotes.length === 0 ? (

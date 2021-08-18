@@ -101,6 +101,32 @@ export const updateProfile = async (authToken, updates) => {
 };
 
 /**
+ * Updates the specified fields on the user
+ * @function updateProfile
+ * @param {string} authToken A user's auth token
+ * @param  {object} atoken The accessToken from google
+ * @returns {object} API response
+ */
+ export const applyCreatorConnect = async (authToken, atoken) => {
+  try {
+    const response = await axios.post(
+      process.env.REACT_APP_BACKEND_URL + '/api/user/joinCreatorConnect',
+      {
+        atoken:atoken,
+      },
+      {
+        headers: {
+          authorization: authToken,
+        },
+      }
+    );
+    return response.data;
+  } catch (err) {
+    return err.response.data
+  }
+};
+
+/**
  * Gets random suggested users for the user to follow
  * @function getSuggestedUsers
  * @param {string} authToken A user's auth token

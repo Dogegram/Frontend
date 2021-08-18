@@ -8,6 +8,8 @@ import EditProfileForm from '../../components/EditProfileForm/EditProfileForm';
 import EditAuthForm from '../../components/EditAuthForm/EditAuthForm';
 import MobileHeader from '../../components/Header/MobileHeader/MobileHeader';
 import BirthdayUpdateCard from '../../components/BirthdayUpdateCard/BirthdayUpdateCard'
+import YoutubeConnectCard from '../../components/YoutubeConnect/YoutubeConnectCard'
+import { YoutuberIcon } from '../../components/Icons/Icons';
 
 const SettingsPage = () => (
   <Fragment>
@@ -46,6 +48,13 @@ const SettingsPage = () => (
           >
             <li className="sidebar-link__text">Auth (Social Sign In)</li>
           </NavLink>
+          <NavLink
+            className="sidebar-link"
+            to="/settings/creators"
+            activeClassName="font-bold sidebar-link--active"
+          >
+            <li className="sidebar-link__text">Creator Connect <YoutuberIcon style={{paddingTop:"5px"}}/></li>
+          </NavLink>
         </ul>
         <article className="settings-page__content">
           <Switch>
@@ -57,9 +66,12 @@ const SettingsPage = () => (
             </ProtectedRoute>
             <ProtectedRoute path="/settings/birthday">
               <BirthdayUpdateCard />
-            </ProtectedRoute>
+              </ProtectedRoute>
             <ProtectedRoute path="/settings/auth">
               <EditAuthForm />
+            </ProtectedRoute>
+            <ProtectedRoute path="/settings/creators">
+              <YoutubeConnectCard />
             </ProtectedRoute>
           </Switch>
         </article>

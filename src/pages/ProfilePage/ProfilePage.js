@@ -122,7 +122,6 @@ const ProfilePage = ({ currentUser, token, showModal, hideModal }) => {
             follow={follow}
             loading={state.following}
           />
-          <ProfileCategory category="POSTS" icon="apps-outline" />
           {state.data.posts.length > 0 ? (
             <div className="profile-images">
               {state.data.posts.map((post, idx) => {

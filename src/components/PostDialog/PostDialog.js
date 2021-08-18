@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import classNames from 'classnames';
 import { Link, useHistory } from 'react-router-dom';
-import {VerifiedIcon} from '../Icons/Icons';
+import {VerifiedIcon,CopyLinkIcon} from '../Icons/Icons';
 
 import { selectToken, selectCurrentUser } from '../../redux/user/userSelectors';
 
