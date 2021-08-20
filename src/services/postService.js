@@ -63,7 +63,7 @@ export const createPost = async (formData, authToken) => {
     });
     return post.data;
   } catch (err) {
-    throw new Error(err.response.data.error);
+    throw new Error(err.response.data.message || err.response.data.error || err.response.data);
   }
 };
 

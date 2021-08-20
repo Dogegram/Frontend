@@ -52,7 +52,8 @@ const NewPostForm = ({
       }
     } catch (err) {
       setLoading(false);
-      showAlert(err.message || 'Could not share post.', () =>
+      console.log(err)
+      showAlert(err.message || err.error ||'Could not share post.', () =>
         handleClick(event)
       );
     }
