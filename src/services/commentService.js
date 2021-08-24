@@ -21,7 +21,7 @@ export const createComment = async (message, postId, authToken) => {
     );
     return response.data;
   } catch (err) {
-    throw new Error(err);
+    throw new Error(err.response.data.message || err.response.data.error || err.response.data || err);
   }
 };
 
@@ -39,7 +39,7 @@ export const deleteComment = async (commentId, authToken) => {
       },
     });
   } catch (err) {
-    throw new Error(err);
+    throw new Error(err.response.data.message || err.response.data.error || err.response.data || err);
   }
 };
 
@@ -55,7 +55,7 @@ export const voteComment = async (commentId, authToken) => {
       headers: { authorization: authToken },
     });
   } catch (err) {
-    throw new Error(err);
+    throw new Error(err.response.data.message || err.response.data.error || err.response.data || err);
   }
 };
 
@@ -84,7 +84,7 @@ export const createCommentReply = async (
     );
     return response.data;
   } catch (err) {
-    throw new Error(err);
+    throw new Error(err.response.data.message || err.response.data.error || err.response.data || err);
   }
 };
 
@@ -102,7 +102,7 @@ export const deleteCommentReply = async (commentReplyId, authToken) => {
       },
     });
   } catch (err) {
-    throw new Error(err);
+    throw new Error(err.response.data.message || err.response.data.error || err.response.data || err);
   }
 };
 
@@ -118,7 +118,7 @@ export const voteCommentReply = async (commentReplyId, authToken) => {
       headers: { authorization: authToken },
     });
   } catch (err) {
-    throw new Error(err);
+    throw new Error(err.response.data.message || err.response.data.error || err.response.data || err);
   }
 };
 
@@ -136,7 +136,7 @@ export const getCommentReplies = async (parentCommentId, offset = 0) => {
     );
     return response.data;
   } catch (err) {
-    throw new Error(err);
+    throw new Error(err.response.data.message || err.response.data.error || err.response.data);
   }
 };
 
@@ -155,6 +155,6 @@ export const getComments = async (postId, offset, exclude = 0) => {
     );
     return response.data;
   } catch (err) {
-    throw new Error(err);
+    throw new Error(err.response.data.message || err.response.data.error || err.response.data);
   }
 };

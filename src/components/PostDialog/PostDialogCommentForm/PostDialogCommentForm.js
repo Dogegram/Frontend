@@ -5,8 +5,13 @@ import React, {
   useRef,
   useState,
 } from 'react';
+import { connect } from 'react-redux';
+
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import "emoji-mart/css/emoji-mart.css";
+import { Picker, Emoji } from "emoji-mart";
+import { showAlert } from '../../../redux/alert/alertActions';
 
 import {
   createComment,
@@ -31,12 +36,17 @@ const PostDialogCommentForm = ({
   profileDispatch,
   replying,
   currentUser,
+  showAlert
 }) => {
   const [state, dispatch] = useReducer(
     postDialogCommentFormReducer,
     INITIAL_STATE
   );
   const [mention, setMention] = useState(null);
+  const [willshowEmojis, setShowEmojis] = useState(false);
+  const [commentText, setcommentText] = useState('');
+
+
 
   let {
     handleSearchDebouncedRef,
@@ -57,7 +67,7 @@ const PostDialogCommentForm = ({
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (state.comment.length === 0) {
+    if (commentText.length === 0) {
       return dispatch({
         type: 'POST_COMMENT_FAILURE',
         payload: 'You cannot post an empty comment.',
@@ -69,7 +79,7 @@ const PostDialogCommentForm = ({
       dispatch({ type: 'POST_COMMENT_START' });
       if (!replying) {
         // The user is not replying to a comment
-        const comment = await createComment(state.comment, postId, token);
+        const comment = await createComment(commentText, postId, token);
         dispatch({
           type: 'POST_COMMENT_SUCCESS',
           payload: { comment, dispatch: dialogDispatch, postId },
@@ -79,7 +89,7 @@ const PostDialogCommentForm = ({
       } else {
         // The user is replying to a comment
         const comment = await createCommentReply(
-          state.comment,
+          commentText,
           replying.commentId,
           token
         );
@@ -99,10 +109,24 @@ const PostDialogCommentForm = ({
           type: 'INCREMENT_POST_COMMENTS_COUNT',
           payload: postId,
         });
+        setcommentText('')
+        setShowEmojis(false)
     } catch (err) {
+      showAlert(err.message)
       dispatch({ type: 'POST_COMMENT_FAILURE', payload: err });
     }
   };
+
+    const handleSelectEmoji = (e) => {
+      console.log(e)
+      console.log(commentText)
+      setcommentText(commentText + e.native)
+      
+    };
+
+    const showEmojis = ()=>{
+      setShowEmojis(willshowEmojis ? false : true) 
+    }
 
   return (
     <form
@@ -119,6 +143,7 @@ const PostDialogCommentForm = ({
               type="text"
               placeholder="Add a comment..."
               onChange={(event) => {
+                setcommentText(event.target.value)
                 // Removed the `@username` from the input so the user is no longer looking to reply
                 if (replying && !event.target.value) {
                   dialogDispatch({ type: 'SET_REPLYING' });
@@ -141,10 +166,36 @@ const PostDialogCommentForm = ({
                   setResult(null);
                 }
               }}
-              value={state.comment}
+              value={commentText}
               ref={commentInputRef}
               data-test="component-add-comment-input"
             />
+            {willshowEmojis ? (
+          <span style={{
+            position: "absolute",
+            bottom: 50,
+            right: 0,
+            cssFloat: "right",
+          }}>
+            <Picker
+              onSelect={handleSelectEmoji}
+              set='twitter'
+              emojiTooltip={true}
+              title="The Dogemoji store"
+            />
+          </span>
+        ) : (
+          null
+        )}
+        <p style={{
+            cssFloat: "right",
+            border: "none",
+            margin: 0,
+            cursor: "pointer",  
+            paddingRight: 20
+          }} onClick={showEmojis}>
+            <Emoji emoji='wink' set='twitter' size={20} />
+          </p>
             <button
               type="submit"
               className="heading-3 heading--button font-bold color-blue"
@@ -183,7 +234,7 @@ const PostDialogCommentForm = ({
         />
       )}
     </form>
-  );
+      );
 };
 
 PostDialogCommentForm.propTypes = {
@@ -195,4 +246,8 @@ PostDialogCommentForm.propTypes = {
   replying: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).isRequired,
 };
 
-export default PostDialogCommentForm;
+const mapDispatchToProps = (dispatch) => ({
+  showAlert: (text, onClick) => dispatch(showAlert(text, onClick)),
+});
+
+export default connect(null, mapDispatchToProps)(PostDialogCommentForm);
