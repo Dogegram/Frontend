@@ -110,7 +110,7 @@ const SignUpCard = ({ signUpStart, error, fetching }) => {
             name="pronoun"
             fieldProps={formik.getFieldProps('pronoun')}
             valid={formik.touched.pronoun && !formik.errors.pronoun}
-            placeholder="Pronoun (He/She/It) Don't go on the last two, xD"
+            placeholder="Pronoun (What you would like people to call you)"
           />
           <FormInput 
           type="date" 
@@ -148,7 +148,7 @@ const SignUpCard = ({ signUpStart, error, fetching }) => {
             : formik.submitCount > 0 && Object.values(formik.errors)[0]}
         </p>
         <p className="heading-5 color-grey">
-          By signing up, you agree to our <a herf="https://dogegram.xyz/terms"> Terms & conditions </a> and Privacy Policy which are pretty simple anyway you need to make a look there.
+          By signing up, you agree to our <a herf="https://dogegram.xyz/terms"> Terms & conditions </a> and Privacy Policy which are pretty simple anyway you just need to make a look there.
         </p>
       </Card>
       <Card>
