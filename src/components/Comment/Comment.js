@@ -219,13 +219,13 @@ const Comment = ({
               </Fragment>
             )}
           </div>
-          {caption && post.commentData ? (
+          {caption && post.commentData && !post.isAd ? (
             <Link
               className="heading-4 color-grey font-medium"
               style={{ textDecoration: 'none' }}
               to={`/post/${post._id}`}
             >
-             { post.commentData.commentCount != 0 || post.commentData.commentCount !=  undefined ||  post.commentData.commentCount !=  0 ? `View all ${post.commentData.commentCount} comments`: `No Comments, if you still want to click then...`  }
+             { post.commentData.commentCount != 0 && post.commentData.commentCount  ? `View all ${post.commentData.commentCount} comments`: `No Comments, if you still want to click then...`  }
             </Link>
           ) : null}
           {dialogDispatch && !caption && comment.commentReplies > 0 ? (

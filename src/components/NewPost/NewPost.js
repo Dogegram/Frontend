@@ -4,6 +4,7 @@ import { getPostFilters } from '../../services/postService';
 
 import NewPostForm from './NewPostForm/NewPostForm';
 import NewPostFilter from './NewPostFilter/NewPostFilter';
+import NewPostEdit from './NewPostEdit/NewPostEdit';
 import MobileHeader from '../Header/MobileHeader/MobileHeader';
 import TextButton from '../Button/TextButton/TextButton';
 import Icon from '../Icon/Icon';
@@ -63,20 +64,22 @@ const NewPost = ({ file, hide }) => {
         );
       }
       default: {
-        // return (
-        //   <NewPostEdit
-        //     previewImage={previewImage}
-        //     setPreviewImage={setPreviewImage}
-        //     file={file}
-        //   />
-        // );
-        return (
+         return (
+           <NewPostEdit
+             previewImage={previewImage}
+             setPreviewImage={setPreviewImage}
+             file={file}
+             filters={filters}
+
+           />
+         );
+        /* return (
           <NewPostFilter
             previewImage={previewImage}
             setPreviewImage={setPreviewImage}
             filters={filters}
           />
-        );
+        );*/
       }
     }
   };
@@ -112,7 +115,7 @@ const NewPost = ({ file, hide }) => {
               onClick={() => setActiveSection('filter')}
               style={{ width: '100%' }}
             >
-              <h4 className="heading-4">Filter</h4>
+              <h4 className="heading-4">Crop and add some filter</h4>
             </li>
             {/* <li
               className={`new-post__nav-item ${

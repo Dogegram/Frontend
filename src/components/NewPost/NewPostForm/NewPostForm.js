@@ -11,6 +11,8 @@ import { showAlert } from '../../../redux/alert/alertActions';
 import { addPost } from '../../../redux/feed/feedActions';
 
 import { createPost } from '../../../services/postService';
+import "emoji-mart/css/emoji-mart.css";
+import { Picker, Emoji } from "emoji-mart";
 
 import Avatar from '../../Avatar/Avatar';
 import MobileHeader from '../../Header/MobileHeader/MobileHeader';
@@ -29,7 +31,9 @@ const NewPostForm = ({
   addPost,
 }) => {
   const [caption, setCaption] = useState('');
+  const [postText, setpostText] = useState('');
   const [loading, setLoading] = useState(false);
+  const [willshowEmojis, setShowEmojis] = useState(false);
 
   const history = useHistory();
 
@@ -38,6 +42,7 @@ const NewPostForm = ({
     const formData = new FormData();
     formData.append('image', file);
     formData.set('caption', caption);
+    formData.set('postText', postText);
     formData.set('crop', JSON.stringify(previewImage.crop));
     previewImage.filterName && formData.set('filter', previewImage.filterName);
     try {
@@ -58,6 +63,15 @@ const NewPostForm = ({
       );
     }
   };
+
+  const handleSelectEmoji = (e) => {
+    setCaption(caption + e.native)    
+  };
+
+  const showEmojis = ()=>{
+    setShowEmojis(willshowEmojis ? false : true) 
+  }
+
 
   return (
     <Fragment>
@@ -99,7 +113,38 @@ const NewPostForm = ({
               className="post-form__textarea"
               placeholder="Write a caption..."
               onChange={(event) => setCaption(event.target.value)}
+              value={caption}
             />
+          <p style={{
+            display:'flex',
+            background:'#fff',
+            cssFloat: "bottom-right",
+            border: "none",
+            margin: 0,
+            cursor: "pointer",   
+            alignItems: 'flex-end',
+            paddingBottom: '10px',
+          }} onClick={showEmojis}>
+            <Emoji emoji='wink' set='twitter' size={20} />
+          </p>
+          {willshowEmojis ? (
+          <span 
+          style={{
+            position: "absolute",
+            bottom: 50,
+            right: 0,
+            cssFloat: "right",
+          }}>
+            <Picker
+              onSelect={handleSelectEmoji}
+              set='twitter'
+              emojiTooltip={true}
+              title="The Dogemoji store"
+            />
+          </span>
+        ) : (
+          null
+        )}
             <div className="post-form__preview">
               <img
                 src={previewImage.src}
@@ -109,6 +154,16 @@ const NewPostForm = ({
             </div>
           </div>
         </Fragment>
+        <Fragment>
+        <textarea
+              className="post-form__subtextarea post-form__textarea"
+              placeholder="Write a post header text..."
+              onChange={(event) => setpostText(event.target.value)}
+        />
+        </Fragment>
+        <div className="post-form__legalnotice">
+        <h5 style={{ fontSize: '1rem' }}>By Posting content to our platform, you agree to abide by our community rules, terms of service and privacy policy.</h5>
+        </div>
       </form>
     </Fragment>
   );

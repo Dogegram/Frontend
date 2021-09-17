@@ -125,7 +125,8 @@ const EditProfileForm = ({
           >
             Provide your personal information, even if the account is used for a
             business, a pet or something else. This won't be a part of your
-            public profile.
+            public profile. Note: You cannot change your email address after 
+            you sign up, however, you may contact support to help if very important.
           </p>
         </div>
       </SettingsFormGroup>

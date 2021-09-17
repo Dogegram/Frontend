@@ -166,6 +166,9 @@ const PostDialog = ({
               <p className="heading-4 heading-4--bold">
                 <b>{state.data.author.username}{state.data.author.verified ? (<VerifiedIcon width="15" height="15" style={{marginLeft: '3px', top: '3px', position: 'relative'}}/>) : (null)}</b>
               </p>
+              <p className="heading-6">
+                {state.data.isAd ? (state.data.author.username === currentUser.username ? "You are seeing your own ad, (this won't show anywhere else btw)" : "Sponsered") : (state.data.postText ? state.data.postText : null) }
+              </p>
             </Link>
           )}
           {!fetching && (
@@ -260,6 +263,7 @@ const PostDialog = ({
             {!fetching &&
               state.data.comments.map((comment, idx) => (
                 <Comment
+                  style={{marginTop: 100 }}
                   comment={comment}
                   currentUser={currentUser}
                   token={token}

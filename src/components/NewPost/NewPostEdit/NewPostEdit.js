@@ -1,12 +1,13 @@
 import React, { useState, Fragment, useRef } from 'react';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
+import FilterSelector from '../../FilterSelector/FilterSelector';
 
 import Icon from '../../Icon/Icon';
 
-const NewPostEdit = ({ previewImage, setPreviewImage, file }) => {
+const NewPostEdit = ({ previewImage, setPreviewImage, file, filters }) => {
   const [imageState, setImageState] = useState({
-    crop: { unit: '%', aspect: 16 / 9 },
+    crop: { unit: '%', aspect: 4 / 5 },
     isCropping: false,
   });
   const imageRef = useRef();
@@ -101,6 +102,13 @@ const NewPostEdit = ({ previewImage, setPreviewImage, file }) => {
           />
         </div>
       </div>
+      <FilterSelector
+        setFilter={(filter, filterName) =>
+          setPreviewImage((previous) => ({ ...previous, filter, filterName }))
+        }
+        previewImage={previewImage.src}
+        filters={filters}
+      />
     </Fragment>
   );
 };

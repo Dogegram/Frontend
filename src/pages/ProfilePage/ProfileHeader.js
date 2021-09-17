@@ -139,7 +139,7 @@ const ProfileHeader = ({
         <div className="profile-header__desktop-info" style={{display: 'flex', flexWrap: 'wrap', flexDirection: 'column', alignItems: 'flex-start'}}>
           {fullName && (
             <h3 className="heading-3" style={{ display: 'flex', alignItems: 'center'}}>
-              <NameIcon width="18px" height="18px"  style={{fill: '#9e9e9e', margin: '5px'}}/><b>{fullName}</b>
+              <NameIcon width="18px" height="18px"  style={{fill: '#9e9e9e', margin: '5px'}}/><b>{fullName} {data.user.pronoun ? `or ${data.user.pronoun}` : null}</b>
             </h3>
           )}
           <div className="heading-3" style={{ whiteSpace: 'pre-wrap', display: 'flex', alignItems: 'center'}}>

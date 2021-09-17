@@ -24,6 +24,13 @@ const userReducer = (state = INITIAL_STATE, action) => {
         token: action.payload.token,
       };
     }
+    case userTypes.SIGN_UP_SUCCESS:{
+      return {
+        ...state,
+        fetching: false,
+        error:false
+      }
+    }
     case userTypes.SIGN_UP_FAILURE:
     case userTypes.SIGN_IN_FAILURE: {
       return {

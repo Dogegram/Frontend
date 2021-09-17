@@ -70,7 +70,7 @@ const EditAuthForm = ({
   });
 
   useEffect(() => {
-    document.title = 'Edit Profile • Dogegram';
+    document.title = 'Auth Settings • Dogegram';
   }, []);
 
   return (

@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 import {CopyLinkIcon} from '../../Icons/Icons';
 
-import { bookmarkPost } from '../../../redux/user/userActions';
 import { showAlert } from '../../../redux/alert/alertActions';
 import { showModal, hideModal } from '../../../redux/modal/modalActions';
 
@@ -21,7 +20,6 @@ const PostDialogStats = ({
   token,
   dispatch,
   profileDispatch,
-  bookmarkPost,
   showAlert,
   showModal,
   hideModal,
@@ -148,12 +146,9 @@ PostDialogStats.propTypes = {
   token: PropTypes.string,
   dispatch: PropTypes.func.isRequired,
   profileDispatch: PropTypes.func,
-  bookmarkPost: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  bookmarkPost: (postId, authToken) =>
-    dispatch(bookmarkPost(postId, authToken)),
   showAlert: (text, onClick) => dispatch(showAlert(text, onClick)),
   showModal: (props, component) => dispatch(showModal(props, component)),
   hideModal: (component) => dispatch(hideModal(component)),

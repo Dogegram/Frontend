@@ -117,7 +117,7 @@
     resize: none;
     background-color: $color-white;
     border: none;
-    font-family: inherit;
+    font-family: emoji, Lato, sans-serif;
     font-size: 1.5rem;
     padding: 2rem 1rem;
     width: 100%;
@@ -126,6 +126,20 @@
     &::placeholder {
       color: $color-grey-1;
     }
+  }
+
+  &__subtextarea {
+    margin: 0px;
+    padding: 10px;
+    align-items: center;
+    height: 40px;
+    border: 1px solid #dbdbdb;
+    align-content: center;
+  }
+
+  &__legalnotice {
+    color: $color-grey-1;
+    text-align: center;
   }
 
   &__avatar {

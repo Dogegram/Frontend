@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { Link } from 'react-router-dom';
@@ -23,6 +23,11 @@ import Card from '../Card/Card';
 import FormInput from '../FormInput/FormInput';
 
 const SignUpCard = ({ signUpStart, error, fetching }) => {
+
+  const [done, setDone] = useState({check:false,message:"none"});
+
+  //{check:false,message:null}
+
   const validate = (values) => {
     const errors = {};
     const emailError = validateEmail(values.email);
@@ -55,8 +60,7 @@ const SignUpCard = ({ signUpStart, error, fetching }) => {
       password: '',
     },
     validate,
-    onSubmit: (values) =>{
-      console.log(values.password)
+    onSubmit: async (values) =>{
       let userdata = {
         email: values.email,
         fullName: values.fullName,
@@ -65,9 +69,26 @@ const SignUpCard = ({ signUpStart, error, fetching }) => {
         username: values.username,
         password: values.password,
       }
-      signUpStart(
-        userdata
-      )}
+
+      try{
+      const request = await signUpStart(userdata)
+      setTimeout(()=>{
+        console.log(request)
+        if(request){
+          setDone({
+            check:true,
+            message:request.message
+          })
+        }
+      },200)
+ 
+    }catch(err){
+      console.error(err)
+    }
+    
+    
+    }
+      
   });
 
   return (
@@ -142,6 +163,11 @@ const SignUpCard = ({ signUpStart, error, fetching }) => {
           </Button>
           <p></p>
         </form>
+        <p className="done">
+          {done.check
+            ? done.message
+            : null}
+        </p>
         <p className="error">
           {error
             ? error
