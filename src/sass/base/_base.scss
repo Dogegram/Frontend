@@ -23,6 +23,10 @@ html {
   }
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   box-sizing: border-box;
   background-color: $color-grey-3;

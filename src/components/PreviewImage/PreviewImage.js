@@ -26,7 +26,7 @@ const PreviewImage = ({ onClick, image, likes, comments, filter }) => (
 PreviewImage.propTypes = {
   onClick: PropTypes.func,
   image: PropTypes.string.isRequired,
-  likes: PropTypes.number.isRequired,
+  likes: PropTypes.string.isRequired,
 };
 
 export default PreviewImage;

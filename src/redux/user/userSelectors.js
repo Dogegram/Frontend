@@ -16,6 +16,11 @@ export const selectFetching = createSelector(
   (user) => user.fetching
 );
 
+export const selectDone = createSelector(
+  [selectUser],
+  (user) => user.done
+);
+
 export const selectFetchingAvatar = createSelector(
   [selectUser],
   (user) => user.fetchingAvatar

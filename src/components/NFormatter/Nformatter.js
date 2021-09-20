@@ -1,6 +1,9 @@
 import react from 'react'
 
-const nFormatter = (num, digits) => {
+const nFormatter = (num, digits, string) => {
+    if(num === undefined || num === null || num === 0 ){
+      return string ? '0' : 0
+    }
     const lookup = [
         { value: 1, symbol: "" },
         { value: 1e3, symbol: "k" },

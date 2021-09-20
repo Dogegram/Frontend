@@ -11,7 +11,7 @@ import { showAlert } from '../../../redux/alert/alertActions';
 import { addPost } from '../../../redux/feed/feedActions';
 
 import { createPost } from '../../../services/postService';
-import "emoji-mart/css/emoji-mart.css";
+import "emoji-mart/css/emoji-mart.css"; 
 import { Picker, Emoji } from "emoji-mart";
 
 import Avatar from '../../Avatar/Avatar';

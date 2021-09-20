@@ -129,7 +129,7 @@ const ProfilePage = ({ currentUser, token, showModal, hideModal }) => {
                   <PreviewImage
                     onClick={() => handleClick(post._id)}
                     image={post.image}
-                    likes={nFormatter(post.postVotes)}
+                    likes={nFormatter(post.postVotes, 3 , true)}
                     comments={post.comments}
                     filter={post.filter}
                     key={idx}

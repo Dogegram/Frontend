@@ -47,7 +47,7 @@ export const validatePassword = (password) => {
   } else if (password.length > 50) {
     return 'For abuse protection we require a password less than 50 characters.';
   } else if (
-    !password.match(/^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{6,}$/)
+    !password.match(/^(?=.*[A-Z])(?=.*[!@#$&%(){}^,`\-|//\\';:"<>?₹+=_*])(?=.*[0-9])(?=.*[a-z]).{6,}$/)
   ) {
     return 'A password needs to have at least one uppercase letter, one lowercase letter, one special character and one number.';
   }
@@ -88,10 +88,10 @@ export const validateBirthday = (dob) => {
     return age;
   }
   
-  if(getAge(dob) >= 13) {
+  if(getAge(dob) >= 13 && getAge(dob) <= 120) {
    return false;
   } else {
-    return true;  
+    return 'You need to be more than 13 years old';  
   }
   
   

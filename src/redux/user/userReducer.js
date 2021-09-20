@@ -28,7 +28,10 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         fetching: false,
-        error:false
+        error:false,
+        done:{
+          message:action.payload.message
+        }
       }
     }
     case userTypes.SIGN_UP_FAILURE:

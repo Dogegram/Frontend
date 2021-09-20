@@ -219,4 +219,26 @@ const ProfileHeader = ({
   );
 };
 
+/*
+    <h5 style={{
+    display: 'flex',
+    marginLeft: '-25px',
+    position: 'absolute',
+    bottom: 0,
+    left: '100%',
+    zIndex: 2,
+    width: '40px',
+    height: '40px',
+    borderRadius: '2em',
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    border: '1px solid #dbdbdb',
+    }}>😎</h5>
+
+      </div>
+
+*/
+
+
 export default ProfileHeader;

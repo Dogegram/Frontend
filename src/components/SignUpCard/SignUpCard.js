@@ -5,7 +5,10 @@ import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 
 import { signUpStart } from '../../redux/user/userActions';
-import { selectError, selectFetching } from '../../redux/user/userSelectors';
+import { selectError, selectFetching, selectDone } from '../../redux/user/userSelectors';
+import Confetti from 'react-confetti'
+//import useWindowSize from 'react-use/lib/useWindowSize'
+
 
 import {
   validateEmail,
@@ -22,11 +25,10 @@ import Divider from '../Divider/Divider';
 import Card from '../Card/Card';
 import FormInput from '../FormInput/FormInput';
 
-const SignUpCard = ({ signUpStart, error, fetching }) => {
+const SignUpCard = ({ signUpStart, error, fetching, done }) => {
 
-  const [done, setDone] = useState({check:false,message:"none"});
+   // const { width, height } = useWindowSize()
 
-  //{check:false,message:null}
 
   const validate = (values) => {
     const errors = {};
@@ -69,30 +71,14 @@ const SignUpCard = ({ signUpStart, error, fetching }) => {
         username: values.username,
         password: values.password,
       }
-
-      try{
-      const request = await signUpStart(userdata)
-      setTimeout(()=>{
-        console.log(request)
-        if(request){
-          setDone({
-            check:true,
-            message:request.message
-          })
-        }
-      },200)
- 
-    }catch(err){
-      console.error(err)
-    }
-    
-    
+      signUpStart(userdata)
     }
       
   });
 
   return (
     <Fragment>
+     { done ? <Confetti width={window.innerWidth} height={window.innerHeight}/> : null }
       <Card className="form-card">
         <h1 className="heading-logo text-center">Dogegram</h1>
         <h2
@@ -155,18 +141,20 @@ const SignUpCard = ({ signUpStart, error, fetching }) => {
           />
           <Button
             loading={fetching}
+            style={{backgroundColor: done ? '#4caf50' : undefined}}
             disabled={
-              Object.keys(formik.touched).length === 0 ? true : !formik.isValid
+              done ? true : (Object.keys(formik.touched).length === 0 ? true : !formik.isValid)
             }
           >
-            Sign Up
+            {done ? "Done ✔ (ProTip: scroll down and click login to let your browser save the password)" : "Sign Up" }
           </Button>
           <p></p>
         </form>
         <p className="done">
-          {done.check
+          {done
             ? done.message
-            : null}
+            : null
+            }
         </p>
         <p className="error">
           {error
@@ -175,6 +163,9 @@ const SignUpCard = ({ signUpStart, error, fetching }) => {
         </p>
         <p className="heading-5 color-grey">
           By signing up, you agree to our <a herf="https://dogegram.xyz/terms"> Terms & conditions </a> and Privacy Policy which are pretty simple anyway you just need to make a look there.
+        </p>
+        <p className="color-grey" style={{fontSize:'1rem'}}>
+        Problems? hit up for support at signup@dogegram.xyz
         </p>
       </Card>
       <Card>
@@ -208,6 +199,7 @@ const mapDispatchToProps = (dispatch) => ({
 const mapStateToProps = createStructuredSelector({
   error: selectError,
   fetching: selectFetching,
+  done: selectDone,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUpCard);

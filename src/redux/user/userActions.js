@@ -64,8 +64,7 @@ export const signUpStart = (userdata) => async (
     console.log(password);
     dispatch({ type: userTypes.SIGN_UP_START });
     const response = await registerUser(email, fullName,pronoun, birthday, username, password);
-    dispatch({ type: userTypes.SIGN_UP_SUCCESS });
-    return response.message;
+    dispatch({ type: userTypes.SIGN_UP_SUCCESS, payload:response });
   } catch (err) {
     dispatch({ type: userTypes.SIGN_UP_FAILURE, payload: err.message });
   }
