@@ -1,7 +1,6 @@
 import userTypes from './userTypes';
 
 import { disconnectSocket } from '../socket/socketActions';
-import { bookmarkPost as bookmark } from '../../services/postService';
 import {
   registerUser,
   login,
@@ -77,18 +76,6 @@ export const passwordResetStart = (email) => async (
    await forgetPassword(email);
   } catch (err) {
     dispatch({ type: userTypes.SIGN_UP_FAILURE, payload: err.message });
-  }
-};
-
-export const bookmarkPost = (postId, authToken) => async (dispatch) => {
-  try {
-    const response = await bookmark(postId, authToken);
-    dispatch({
-      type: userTypes.BOOKMARK_POST,
-      payload: { ...response, postId },
-    });
-  } catch (err) {
-    return err;
   }
 };
 

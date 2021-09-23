@@ -1,14 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { createStructuredSelector } from 'reselect';
+
 
 import Icon from '../../Icon/Icon';
 
+
 const SmallFooter = () => {
+  let token = localStorage.getItem('token')
   const links = [
-    {url:"https://verify.dogegram.xyz", name:"Verification Request"},
-    {url:"https://about.dogegram.xyz", name:"About"},
-    {url:"https://support.dogegram.xyz", name:"Support"},
-    {url:"https://abuse.dogegram.xyz", name:"Abuse Report"}
+    {url:`https://docs.google.com/forms/d/e/1FAIpQLSefOI8JLmnBiZZZap4Ex_gmJxXDAZTtfOKbm8MjvWLbcC_DWg/viewform?usp=pp_url&entry.1285915497=${token}`, name:"Verification Request"},
+    {url:"mailto:ad.partner@dogegram.xyz", name:"Advertise on Dogegram"},
+    {url:"mailto:support@dogegram.xyz", name:"Support"},
+    {url:`https://docs.google.com/forms/d/e/1FAIpQLSeJMJ_QShaKHy1egP_eGEvvp5M0kbW_WLeMRE347eyan3pzXw/viewform?usp=pp_url&entry.2107609917=${token}`, name:"Abuse Report"}
   ];
   return (
     <footer className="footer--small color-grey-2 font-bold">
@@ -34,5 +38,7 @@ const SmallFooter = () => {
     </footer>
   );
 };
+
+
 
 export default SmallFooter;
