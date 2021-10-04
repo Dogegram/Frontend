@@ -11,6 +11,7 @@ import {
   removeAvatar,
   updateProfile,
 } from '../../services/userService';
+import { Twemoji } from 'react-emoji-render';
 
 export const signOut = () => (dispatch) => {
   localStorage.removeItem('token');
@@ -31,12 +32,14 @@ export const signInFailure = (err) => ({
   payload: err,
 });
 
-export const signInStart = (usernameOrEmail, password, authToken) => async (
+export const signInStart = (usernameOrEmail, password, authToken, twofactorCode) => async (
   dispatch
 ) => {
   try {
     dispatch({ type: userTypes.SIGN_IN_START });
-    const response = await login(usernameOrEmail, password, authToken);
+    console.log(authToken)
+    console.log(twofactorCode)
+    const response = await login(usernameOrEmail, password, authToken, twofactorCode);
     dispatch(signInSuccess(response));
   } catch (err) {
     console.log(err)

@@ -8,11 +8,11 @@ import axios from 'axios';
  * @param {string} authToken A token to be used instead of a username/email or password
  * @returns {object} The user object
  */
-export const login = async (usernameOrEmail, password, authToken) => {
+export const login = async (usernameOrEmail, password, authToken, twofactorCode) => {
   try {
     const request =
       usernameOrEmail && password
-        ? { data: { usernameOrEmail, password } }
+        ? { data: { usernameOrEmail, password, twofactorCode } }
         : { headers: { authorization: authToken } };
     const response = await axios(process.env.REACT_APP_BACKEND_URL + '/api/auth/login', {
       method: 'POST',

@@ -12,6 +12,7 @@ import {
   selectCurrentUser,
 } from '../../redux/user/userSelectors';
 
+import OtpInput from 'react-otp-input';
 import Button from '../Button/Button';
 import FormInput from '../FormInput/FormInput';
 import Divider from '../Divider/Divider';
@@ -28,12 +29,23 @@ const LoginCard = ({
 }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [otp, setOtp] = useState('');
+  const [is2FA, setIs2FA] = useState(false);
+  const [invoke, setInvoke] = useState(false);
   const handleSubmit = (event) => {
     event.preventDefault();
-    signInStart(email, password);
+    signInStart(email, password, otp);
   };
 
   currentUser && onClick();
+
+
+  if(error === '2FA' && invoke === false){
+    setInvoke(true)
+    setIs2FA(true)
+  }
+
+  console.log(error)
 
   return (
     <div
@@ -48,7 +60,36 @@ const LoginCard = ({
     >
       <Card className="form-card">
         <h1 className="heading-logo text-center">Dogegram</h1>
-        <form
+        {is2FA ? (
+          
+          <form
+          onSubmit={(event) => handleSubmit(event)}
+          className="form-card__form"
+        >            
+        <h2>Open your 2FA app and put here the code</h2>
+       <OtpInput
+        value={otp}
+        onChange={(code)=>{
+          console.log(otp)
+          setOtp(code)
+        }}
+        numInputs={6}
+        separator={<span>-</span>}
+        placeholder="PLEASE"
+        containerStyle={{margin:'20px'}}
+        inputStyle={{
+          width: '30px ',
+          height: '30px',
+          margin: '0 1rem',
+          borderRadius: '4px',
+          border:' 1px solid rgba(0, 0, 0, 0.3)',}}
+      />
+          <Button disabled={fetching} loading={fetching}>
+            Login!
+          </Button>
+          </form>
+        ) : (
+          <form
           onSubmit={(event) => handleSubmit(event)}
           className="form-card__form"
         >
@@ -68,9 +109,10 @@ const LoginCard = ({
             Log In
           </Button>
         </form>
+)        }
         {error && (
           <p style={{ padding: '1rem 0' }} className="error">
-            {error}
+            { error === '2FA' ? '' : error }
           </p>
         )}
         <Link to="/passwordreset" style={{ marginTop: '1.5rem' }} onClick={() => onClick && onClick()}>
@@ -107,7 +149,7 @@ LoginCard.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  signInStart: (email, password) => dispatch(signInStart(email, password)),
+  signInStart: (email, password, otp) => dispatch(signInStart(email, password, null, otp)),
 });
 
 const mapStateToProps = createStructuredSelector({

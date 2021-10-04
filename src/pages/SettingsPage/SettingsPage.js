@@ -5,7 +5,7 @@ import ProtectedRoute from '../../components/ProtectedRoute/ProtectedRoute';
 import Card from '../../components/Card/Card';
 import ChangePasswordForm from '../../components/ChangePasswordForm/ChangePasswordForm';
 import EditProfileForm from '../../components/EditProfileForm/EditProfileForm';
-import EditAuthForm from '../../components/EditAuthForm/EditAuthForm';
+import Edit2FAAuthForm from '../../components/Edit2FAAuthForm/Edit2FAAuthForm';
 import MobileHeader from '../../components/Header/MobileHeader/MobileHeader';
 import BirthdayUpdateCard from '../../components/BirthdayUpdateCard/BirthdayUpdateCard'
 import YoutubeConnectCard from '../../components/YoutubeConnect/YoutubeConnectCard'
@@ -43,10 +43,10 @@ const SettingsPage = () => (
           </NavLink>
           <NavLink
             className="sidebar-link"
-            to="/settings/auth"
+            to="/settings/auth-2fa"
             activeClassName="font-bold sidebar-link--active"
           >
-            <li className="sidebar-link__text">Auth (Social Sign In)</li>
+            <li className="sidebar-link__text">2FA Settings</li>
           </NavLink>
           <NavLink
             className="sidebar-link"
@@ -67,8 +67,8 @@ const SettingsPage = () => (
             <ProtectedRoute path="/settings/birthday">
               <BirthdayUpdateCard />
               </ProtectedRoute>
-            <ProtectedRoute path="/settings/auth">
-              <EditAuthForm />
+            <ProtectedRoute path="/settings/auth-2fa">
+              <Edit2FAAuthForm />
             </ProtectedRoute>
             <ProtectedRoute path="/settings/creators">
               <YoutubeConnectCard />
