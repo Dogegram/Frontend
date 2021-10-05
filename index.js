@@ -42,8 +42,14 @@ app.get('/:userId', async (req, res, next) => {
     if(!paths.includes(userId)){
         console.log('here?')
         let htmlData = indexfile;
-        const requsermeta = await fetch(`https://privateapi.dogegram.xyz/api/user/internal/meta/${userId}`);
+        try{
+        const requsermeta = await fetch(`https://muchapi.dogegram.xyz/api/user/internal/meta/${userId}`);
         const usermeta = await requsermeta.json();
+        } catch(err){
+            console.log(err)
+            return res.send(indexfile)
+
+        }
         if(usermeta.error === 'Could not find a user with that username.'){
             return res.send(indexfile)
         }
@@ -54,7 +60,7 @@ app.get('/:userId', async (req, res, next) => {
         const meta = generator
         .configure(settings)
         .setPageMeta({
-            title: `${usermeta.name}'s doge 😉 profile'`,
+            title: `${usermeta.name}'s doge 😉 profile.`,
             description: `${usermeta.bio}`,
             url: `https://app.dogegram.xyz/${userId}`,
             image: `${usermeta.image}`,
