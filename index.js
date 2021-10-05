@@ -2,7 +2,6 @@ const path = require('path');
 const fs = require('fs')
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 const express = require('express');
-const metas = require('metas');
 const app = express();
 const paths = ['login','signup','passwordreset','settings','activity','','explore','new','confirm'];
 const { MetadataGenerator } = require('metatags-generator');
