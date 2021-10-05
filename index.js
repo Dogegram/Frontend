@@ -42,32 +42,31 @@ app.get('/:userId', async (req, res, next) => {
     if(!paths.includes(userId)){
         console.log('here?')
         let htmlData = indexfile;
-        try{
+          
         const requsermeta = await fetch(`https://muchapi.dogegram.xyz/api/user/internal/meta/${userId}`);
         const usermeta = await requsermeta.json();
-        } catch(err){
-            console.log(err)
-            return res.send(indexfile)
-
-        }
+        console.log(usermeta)
         if(usermeta.error === 'Could not find a user with that username.'){
             return res.send(indexfile)
         }
         console.log(usermeta)
 
         const generator = new MetadataGenerator();
+        console.log('are you alive????')
 
         const meta = generator
         .configure(settings)
         .setPageMeta({
-            title: `${usermeta.name}'s doge 😉 profile.`,
+            title: `${usermeta.name}'s doge 😉 profile`,
             description: `${usermeta.bio}`,
             url: `https://app.dogegram.xyz/${userId}`,
-            image: `${usermeta.image}`,
+            image: usermeta.avatar,
             keywords: `site, website, profile, ${usermeta.name}`,
             locale: 'en_US'
         })
         .build();
+
+        console.log(meta)
        
 
         let metahtml = htmlData.replace('<meta name="description" content="The cool new social media platform!"/>', meta.head)
