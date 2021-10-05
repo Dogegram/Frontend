@@ -21,7 +21,7 @@
     "formik": "^2.1.4",
     "linkifyjs": "^2.1.9",
     "lodash": "^4.17.21",
-    "metas": "^1.0.1",
+    "metatags-generator": "^1.1.8",
     "node-fetch": "^3.0.0",
     "react": "^16.12.0",
     "react-confetti": "^6.0.1",

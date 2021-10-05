@@ -5,8 +5,20 @@ const express = require('express');
 const metas = require('metas');
 const app = express();
 const paths = ['login','signup','passwordreset','settings','activity','','explore','new','confirm'];
+const { MetadataGenerator } = require('metatags-generator');
 
 const indexPath  = path.resolve(__dirname, 'build', 'index.html');
+
+const settings = {
+    androidChromeIcons: true,
+    msTags: true,
+    safariTags: true,
+    appleTags: true,
+    openGraphTags: true,
+    twitterTags: true,
+    facebookTags: true
+  };    
+
 
 var indexfile;
 const load = () => {
@@ -25,10 +37,6 @@ app.use(express.static(
     { maxAge: '30d' },
 ));
 
-app.get('/', async (req, res, next) => {
-    res.send(indexfile)
-})
-
 app.get('/:userId', async (req, res, next) => {
     console.log('start')
     const userId = req.params.userId;
@@ -37,17 +45,28 @@ app.get('/:userId', async (req, res, next) => {
         let htmlData = indexfile;
         const requsermeta = await fetch(`https://privateapi.dogegram.xyz/api/user/internal/meta/${userId}`);
         const usermeta = await requsermeta.json();
+        if(usermeta.error === 'Could not find a user with that username.'){
+            return res.send(indexfile)
+        }
         console.log(usermeta)
-        const meta = metas({
-            title: `${usermeta.name}'s profile'`,
-            image: usermeta.image,
-            description: usermeta.bio,
-            url: `https://app.dogegram.xyz/${userId}`
-        })
-        console.log(meta)
 
-        let metahtml = htmlData.replace('<meta name="description" content="The cool new social media platform!"/>', meta)
-         metahtml = metahtml.replace(/(\r\n|\n|\r)/gm, "")
+        const generator = new MetadataGenerator();
+
+        const meta = generator
+        .configure(settings)
+        .setPageMeta({
+            title: `${usermeta.name}'s doge 😉 profile'`,
+            description: `${usermeta.bio}`,
+            url: `https://app.dogegram.xyz/${userId}`,
+            image: `${usermeta.image}`,
+            keywords: `site, website, profile, ${usermeta.name}`,
+            locale: 'en_US'
+        })
+        .build();
+       
+
+        let metahtml = htmlData.replace('<meta name="description" content="The cool new social media platform!"/>', meta.head)
+        metahtml = metahtml.replace(/(\r\n|\n|\r)/gm, "")
 
         console.log(metahtml)
 
@@ -56,6 +75,10 @@ app.get('/:userId', async (req, res, next) => {
  return res.send(indexfile)
 }
 });
+
+app.use(function (req, res, next) {
+    res.status(200).send(indexfile)
+  })
 
 app.listen(process.env.PORT || 3000, (error) => {
     if (error) {
