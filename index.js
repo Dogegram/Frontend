@@ -42,14 +42,11 @@ app.get('/post/:postId', async (req, res, next) => {
           
     const requsermeta = await fetch(`https://localhost:5000/api/post/internal/meta/${userId}`);
     const usermeta = await requsermeta.json();
-    console.log(usermeta)
     if(usermeta.error === 'Could not find a user with that username.'){
         return res.send(indexfile)
     }
-    console.log(usermeta)
 
     const generator = new MetadataGenerator();
-    console.log('are you alive????')
 
     const meta = generator
     .configure(settings)
@@ -63,13 +60,10 @@ app.get('/post/:postId', async (req, res, next) => {
     })
     .build();
 
-    console.log(meta)
    
 
     let metahtml = htmlData.replace('<meta name="description" content="The cool new social media platform!"/>', meta.head)
     metahtml = metahtml.replace(/(\r\n|\n|\r)/gm, "")
-
-    console.log(metahtml)
 
     return res.send(metahtml);
 
@@ -82,14 +76,11 @@ app.get('/:userId', async (req, res, next) => {
           
         const requsermeta = await fetch(`localhost:5000/api/user/internal/meta/${userId}`);
         const usermeta = await requsermeta.json();
-        console.log(usermeta)
         if(usermeta.error === 'Could not find a user with that username.'){
             return res.send(indexfile)
         }
-        console.log(usermeta)
 
         const generator = new MetadataGenerator();
-        console.log('are you alive????')
 
         const meta = generator
         .configure(settings)
@@ -103,13 +94,10 @@ app.get('/:userId', async (req, res, next) => {
         })
         .build();
 
-        console.log(meta)
        
 
         let metahtml = htmlData.replace('<meta name="description" content="The cool new social media platform!"/>', meta.head)
         metahtml = metahtml.replace(/(\r\n|\n|\r)/gm, "")
-
-        console.log(metahtml)
 
         return res.send(metahtml);
 } else {
