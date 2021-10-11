@@ -3,7 +3,7 @@ const fs = require('fs')
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 const express = require('express');
 const app = express();
-const paths = ['login','signup','passwordreset','settings','activity','','explore','new','confirm'];
+const paths = ['login','signup','passwordreset','settings','activity','posts','explore','new','confirm'];
 const { MetadataGenerator } = require('metatags-generator');
 
 const indexPath  = path.resolve(__dirname, 'build', 'index.html');
@@ -36,14 +36,51 @@ app.use(express.static(
     { maxAge: '30d' },
 ));
 
+app.get('/post/:postId', async (req, res, next) => {
+    const postId = req.params.postId;
+    let htmlData = indexfile;
+          
+    const requsermeta = await fetch(`https://localhost:5000/api/post/internal/meta/${userId}`);
+    const usermeta = await requsermeta.json();
+    console.log(usermeta)
+    if(usermeta.error === 'Could not find a user with that username.'){
+        return res.send(indexfile)
+    }
+    console.log(usermeta)
+
+    const generator = new MetadataGenerator();
+    console.log('are you alive????')
+
+    const meta = generator
+    .configure(settings)
+    .setPageMeta({
+        title: `${usermeta.name}'s doge post`,
+        description: `${usermeta.bio}`,
+        url: `https://app.dogegram.xyz/${userId}`,
+        image: usermeta.avatar,
+        keywords: `site, website, profile, ${usermeta.name}`,
+        locale: 'en_US'
+    })
+    .build();
+
+    console.log(meta)
+   
+
+    let metahtml = htmlData.replace('<meta name="description" content="The cool new social media platform!"/>', meta.head)
+    metahtml = metahtml.replace(/(\r\n|\n|\r)/gm, "")
+
+    console.log(metahtml)
+
+    return res.send(metahtml);
+
+})
+
 app.get('/:userId', async (req, res, next) => {
-    console.log('start')
     const userId = req.params.userId;
     if(!paths.includes(userId)){
-        console.log('here?')
         let htmlData = indexfile;
           
-        const requsermeta = await fetch(`https://muchapi.dogegram.xyz/api/user/internal/meta/${userId}`);
+        const requsermeta = await fetch(`localhost:5000/api/user/internal/meta/${userId}`);
         const usermeta = await requsermeta.json();
         console.log(usermeta)
         if(usermeta.error === 'Could not find a user with that username.'){

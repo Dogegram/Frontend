@@ -132,7 +132,7 @@ const EditProfileForm = ({
       </SettingsFormGroup>
       <SettingsFormGroup>
         <label className="heading-3 font-bold">Email</label>
-        <FormInput name="email" fieldProps={formik.getFieldProps('email')} />
+        <textarea name="email" className="form-group__textarea" value={currentUser.email} readonly />
       </SettingsFormGroup>
       <SettingsFormGroup>
         <label></label>
