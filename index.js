@@ -40,7 +40,7 @@ app.get('/post/:postId', async (req, res, next) => {
     const postId = req.params.postId;
     let htmlData = indexfile;
           
-    const requsermeta = await fetch(`https://localhost:5000/api/post/internal/meta/${userId}`);
+    const requsermeta = await fetch(`https://backend.dogegram.xyz/api/post/internal/meta/${userId}`);
     const usermeta = await requsermeta.json();
     if(usermeta.error === 'Could not find a user with that username.'){
         return res.send(indexfile)
@@ -74,7 +74,7 @@ app.get('/:userId', async (req, res, next) => {
     if(!paths.includes(userId)){
         let htmlData = indexfile;
           
-        const requsermeta = await fetch(`localhost:5000/api/user/internal/meta/${userId}`);
+        const requsermeta = await fetch(`https://backend.dogegram.xyz/api/user/internal/meta/${userId}`);
         const usermeta = await requsermeta.json();
         if(usermeta.error === 'Could not find a user with that username.'){
             return res.send(indexfile)
