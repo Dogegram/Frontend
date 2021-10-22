@@ -11,7 +11,6 @@ import {
   removeAvatar,
   updateProfile,
 } from '../../services/userService';
-import { Twemoji } from 'react-emoji-render';
 
 export const signOut = () => (dispatch) => {
   localStorage.removeItem('token');

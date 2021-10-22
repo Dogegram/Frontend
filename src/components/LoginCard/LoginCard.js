@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { Link } from 'react-router-dom';
-
 import { signInStart } from '../../redux/user/userActions';
 
 import {

@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
+import { useHistory } from 'react-router-dom';
 
 import { signUpStart } from '../../redux/user/userActions';
 import { selectError, selectFetching, selectDone } from '../../redux/user/userSelectors';
-import Confetti from 'react-confetti'
 //import useWindowSize from 'react-use/lib/useWindowSize'
 
 
@@ -28,7 +28,7 @@ import FormInput from '../FormInput/FormInput';
 const SignUpCard = ({ signUpStart, error, fetching, done }) => {
 
    // const { width, height } = useWindowSize()
-
+  const history = useHistory()
 
   const validate = (values) => {
     const errors = {};
@@ -76,9 +76,12 @@ const SignUpCard = ({ signUpStart, error, fetching, done }) => {
       
   });
 
+  if(done){
+    history.push('/signupdone')
+  }
+
   return (
     <Fragment>
-     { done ? <Confetti width={window.innerWidth} height={window.innerHeight}/> : null }
       <Card className="form-card">
         <h1 className="heading-logo text-center">Dogegram</h1>
         <h2
@@ -146,7 +149,7 @@ const SignUpCard = ({ signUpStart, error, fetching, done }) => {
               done ? true : (Object.keys(formik.touched).length === 0 ? true : !formik.isValid)
             }
           >
-            {done ? "Done ✔ (ProTip: scroll down and click login to let your browser save the password)" : "Sign Up" }
+            {done ? "Done ✔" : "Sign Up" }
           </Button>
           <p></p>
         </form>
