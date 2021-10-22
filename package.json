@@ -1,6 +1,6 @@
 {
   "name": "dogegram-frontend",
-  "version": "vBeta8.2.2",
+  "version": "8.2.2",
   "engines": {
     "node": "12.14.1",
     "npm": "6.13.7"
