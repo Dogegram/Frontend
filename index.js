@@ -5,6 +5,7 @@ const express = require('express');
 const app = express();
 const paths = ['login','signup','passwordreset','settings','activity','posts','explore','new','confirm'];
 const { MetadataGenerator } = require('metatags-generator');
+const { resolveMx } = require('dns');
 
 const indexPath  = path.resolve(__dirname, 'build', 'index.html');
 
@@ -37,12 +38,13 @@ app.use(express.static(
 ));
 
 app.get('/post/:postId', async (req, res, next) => {
+    try{
     const postId = req.params.postId;
     let htmlData = indexfile;
           
-    const requsermeta = await fetch(`https://backend.dogegram.xyz/api/post/internal/meta/${userId}`);
+    const requsermeta = await fetch(`${ process.env.REACT_BACKEND_URL || 'http://locahost:5000' }/api/post/internal/meta/${postId}`);
     const usermeta = await requsermeta.json();
-    if(usermeta.error === 'Could not find a user with that username.'){
+    if(usermeta.error){
         return res.send(indexfile)
     }
 
@@ -53,9 +55,9 @@ app.get('/post/:postId', async (req, res, next) => {
     .setPageMeta({
         title: `${usermeta.name}'s doge post`,
         description: `${usermeta.bio}`,
-        url: `https://app.dogegram.xyz/${userId}`,
-        image: usermeta.avatar,
-        keywords: `site, website, profile, ${usermeta.name}`,
+        url: `https://app.dogegram.xyz/post/${postId}`,
+        image: usermeta.image,
+        keywords: `site, website, profile`,
         locale: 'en_US'
     })
     .build();
@@ -66,6 +68,9 @@ app.get('/post/:postId', async (req, res, next) => {
     metahtml = metahtml.replace(/(\r\n|\n|\r)/gm, "")
 
     return res.send(metahtml);
+} catch(err){
+    return res.send(indexfile)
+}
 
 })
 
