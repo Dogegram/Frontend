@@ -114,9 +114,13 @@ app.use(function (req, res, next) {
     res.status(200).send(indexfile)
   })
 
-app.listen(process.env.PORT || 3000, (error) => {
+app.listen(process.env.PORT || 3000, async (error) => {
     if (error) {
         return console.log('Error during app startup', error);
     }
+    var gitdatareq = await fetch('https://api.github.com/repos/Dogegram/Frontend/commits/master')
+    var gitdata = await gitdatareq.json()
     console.log(`listening on ${process.env.PORT || 3000}...`);
+    console.log(`running git commit hash: ${gitdata.sha.slice(0, 7)}...`);
+    console.log(`git commit message: ${gitdata.commit.message}...`);
 });
