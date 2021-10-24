@@ -104,11 +104,11 @@ const PostDialogStats = ({
         onClick={()=>{
           console.log("something?")
           navigator.clipboard
-                        .writeText(`${document.URL}post/${post._id}`)
-                        .then(() => showAlert('Link copied to clipboard.'))
-                        .catch(() =>
-                          showAlert('Could not copy link to clipboard.')
-                        );
+          .writeText(`https://app.dogegram.xyz/post/${postId}`)
+          .then(() => showAlert('Link copied to clipboard.'))
+          .catch(() =>
+          showAlert('Could not copy link to clipboard.')
+          );
         }}/>
       </div>
       <p className="heading-4">

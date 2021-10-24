@@ -186,7 +186,7 @@ const PostDialog = ({
                     text: 'Copy link',
                     onClick: () => {
                       navigator.clipboard
-                        .writeText(`${document.URL}post/${postId}`)
+                        .writeText(`https://app.dogegram.xyz/post/${postId}`)
                         .then(() => showAlert('Link copied to clipboard.'))
                         .catch(() =>
                           showAlert('Could not copy link to clipboard.')
