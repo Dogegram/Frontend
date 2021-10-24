@@ -53,8 +53,8 @@ app.get('/post/:postId', async (req, res, next) => {
     const meta = generator
     .configure(settings)
     .setPageMeta({
-        title: `${usermeta.name}'s doge post`,
-        description: usermeta.caption,
+        title: `@${usermeta.userName}'s doge 😉 post`,
+        description: `${usermeta.caption}`,
         url: `https://app.dogegram.xyz/post/${postId}`,
         image: usermeta.image,
         keywords: `site, website, profile`,
