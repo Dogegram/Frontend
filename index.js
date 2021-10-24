@@ -42,7 +42,7 @@ app.get('/post/:postId', async (req, res, next) => {
     const postId = req.params.postId;
     let htmlData = indexfile;
           
-    const requsermeta = await fetch(`${ process.env.REACT_BACKEND_URL || 'http://locahost:5000' }/api/post/internal/meta/${postId}`);
+    const requsermeta = await fetch(`https://backend.dogegram.xyz/api/post/internal/meta/${postId}`);
     const usermeta = await requsermeta.json();
     if(usermeta.error){
         return res.send(indexfile)
@@ -54,7 +54,7 @@ app.get('/post/:postId', async (req, res, next) => {
     .configure(settings)
     .setPageMeta({
         title: `${usermeta.name}'s doge post`,
-        description: `${usermeta.bio}`,
+        description: usermeta.caption,
         url: `https://app.dogegram.xyz/post/${postId}`,
         image: usermeta.image,
         keywords: `site, website, profile`,
