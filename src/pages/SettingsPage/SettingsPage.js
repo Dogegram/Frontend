@@ -9,6 +9,7 @@ import Edit2FAAuthForm from '../../components/Edit2FAAuthForm/Edit2FAAuthForm';
 import MobileHeader from '../../components/Header/MobileHeader/MobileHeader';
 import BirthdayUpdateCard from '../../components/BirthdayUpdateCard/BirthdayUpdateCard'
 import YoutubeConnectCard from '../../components/YoutubeConnect/YoutubeConnectCard'
+import AdWallet from '../../components/Payments/AdWallet'
 import { YoutuberIcon } from '../../components/Icons/Icons';
 
 const SettingsPage = () => (
@@ -55,6 +56,13 @@ const SettingsPage = () => (
           >
             <li className="sidebar-link__text">Creator Connect <YoutuberIcon style={{paddingTop:"5px"}}/></li>
           </NavLink>
+          <NavLink
+            className="sidebar-link"
+            to="/settings/promote"
+            activeClassName="font-bold sidebar-link--active"
+          >
+            <li className="sidebar-link__text">Ad Wallet</li>
+          </NavLink>
         </ul>
         <article className="settings-page__content">
           <Switch>
@@ -72,6 +80,9 @@ const SettingsPage = () => (
             </ProtectedRoute>
             <ProtectedRoute path="/settings/creators">
               <YoutubeConnectCard />
+            </ProtectedRoute>
+            <ProtectedRoute path="/settings/promote">
+              <AdWallet />
             </ProtectedRoute>
           </Switch>
         </article>
