@@ -218,6 +218,12 @@ const PostDialog = ({
 
                               },
                             },
+                            {
+                              text: 'Promote this post!',
+                              onClick: ()=>{
+                                
+                              }
+                            }
                           ]
                         : options,
                   },
