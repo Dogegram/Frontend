@@ -47,7 +47,7 @@ const AdWallet = ({
     if(Number.isInteger(deposit)){
       return showAlert(`The current value is not an integer or has a decimal`)
     }
-    var response = axios(`http://localhost:5000/api/payment/createSession/${deposit}`, { headers:{ 'Authorization': token }}).then(function(responseJson) {
+    var response = axios(`https://${process.env.REACT_APP_BACKEND_URL}/api/payment/createSession/${deposit}`, { headers:{ 'Authorization': token }}).then(function(responseJson) {
       console.log(responseJson.data)
       var clientSecret = responseJson.data.client_secret;
       setCS(clientSecret)
