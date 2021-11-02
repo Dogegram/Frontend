@@ -44,7 +44,7 @@ const AdWallet = ({
     }
   }, []);
   const mkcs = async () => {
-    if(Number.isInteger(deposit)){
+    if(deposit % 1 != 0){
       return showAlert(`The current value is not an integer or has a decimal`)
     }
     var response = axios(`${process.env.REACT_APP_BACKEND_URL}/api/payment/createSession/${deposit}`, { headers:{ 'Authorization': token }}).then(function(responseJson) {
