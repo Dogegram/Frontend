@@ -68,7 +68,7 @@ function CheckoutForm(cs) {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "https://localhost:3000/settings/promote",
+        return_url: window.location.href,
       },
     });
 
