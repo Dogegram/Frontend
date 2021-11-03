@@ -30,10 +30,12 @@ const AdWallet = ({
   const [cs, setCS] = useState('')
   const [loading, setLoading] = useState(false)
   const [deposit, setDeposit] = useState(0)
+  const [currency, setCurrency] = useState('$')
   
     
   useEffect(() => {
     document.title = 'AdWallet • Dogegram';
+    getCurrency()
     if(new URLSearchParams(window.location.search).get(
       "payment_intent_client_secret"
     )){
@@ -43,16 +45,33 @@ const AdWallet = ({
       setLoading(true)
     }
   }, []);
+    const getCurrency = async () => {
+      if(!currentUser.baseAdWalletCurrency){
+    const axiosreq = axios(`${process.env.REACT_APP_BACKEND_URL}`).then((res)=>{
+      if(res.headers['x-req-country'] === 'IN'){
+        setCurrency('₹')
+      }
+    })
+  } else {
+    setCurrency(currentUser.baseAdWalletCurrency === 'usd' ? '$' : '₹')
+  }
+  }
   const mkcs = async () => {
     if(deposit % 1 != 0){
       return showAlert(`The current value is not an integer or has a decimal`)
     }
     var response = axios(`${process.env.REACT_APP_BACKEND_URL}/api/payment/createSession/${deposit}`, { headers:{ 'Authorization': token }}).then(function(responseJson) {
-      console.log(responseJson.data)
+      console.log(responseJson)
       var clientSecret = responseJson.data.client_secret;
       setCS(clientSecret)
       setLoading(true)
       // Call stripe.confirmCardPayment() with the client secret.
+    }).catch((err)=>{
+      if(err.response.status === 400){
+        return showAlert(`The current value was denied by the server.`)
+      } else if(err.response.status === 429){
+        return showAlert(`Too Many Requests. Our payment provider Stripe will be unhappy about that so please stop.`)
+      }
     });
 
   }
@@ -67,18 +86,19 @@ const AdWallet = ({
     appearance,
   };
 
+
   
 
   return (
     <Card className="form-card" style={{display: 'flex', alignItems: 'center', width: '100%', height: '100%', flexDirection: 'column', justifyContent: 'center'}}>
-    <h2>Current Ad wallet balance: ${currentUser.adwallet ? currentUser.adwallet : 0}</h2>
-    <h2>To promote a post contact adpartners@dogegram.xyz, and we will reach to you ASAP. Please fill the wallet to at least $5.</h2>
+    <h2>Current Ad wallet balance: {currentUser.baseAdWalletCurrency === 'usd' ? '$' : '₹'}{currentUser.adwallet ? currentUser.adwallet : 0}</h2>
+    <h2>To promote a post contact adpartners@dogegram.xyz, and we will reach to you ASAP. Please fill the wallet to at least {currency}5{currency === '₹' ? '0' : null}.</h2>
     {loading ? (
     <Elements options={options} stripe={stripePromise}>
         <Checkout cs={cs}/>
     </Elements>
     ) : (<form onSubmit={(e)=>{e.preventDefault(); mkcs()}}>
-    <FormInput placeholder="Deposit amount (in USD)" required onChange={(e)=>setDeposit(e.target.value)}/>
+    <FormInput placeholder={`Deposit (in ${ currency === '$' ? 'USD' : 'INR' })`} required onChange={(e)=>setDeposit(e.target.value)}/>
     <Button>Start Checkout</Button>
     </form>) }
     <h4>If AdWallet Ballence shows less that what you accepted then you should refresh the page and check again, 

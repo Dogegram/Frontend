@@ -15,8 +15,6 @@ function CheckoutForm(cs) {
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isDone, setIsDone] = useState(false);
-  
-
   useEffect(() => {
     if (!stripe) {
       return;
