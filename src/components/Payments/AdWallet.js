@@ -36,12 +36,11 @@ const AdWallet = ({
   useEffect(() => {
     document.title = 'AdWallet • Dogegram';
     getCurrency()
-    if(new URLSearchParams(window.location.search).get(
+    const payment_intent_client_secret = new URLSearchParams(window.location.search).get(
       "payment_intent_client_secret"
-    )){
-      setCS(new URLSearchParams(window.location.search).get(
-        "payment_intent_client_secret"
-      ))
+    )
+    if(payment_intent_client_secret){
+      setCS(payment_intent_client_secret)
       setLoading(true)
     }
   }, []);
