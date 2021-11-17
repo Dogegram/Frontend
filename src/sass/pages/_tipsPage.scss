@@ -1,0 +1,16 @@
+.tips-page {
+    display: flex;
+  }
+  
+  .payments-card {
+    margin-top: 150px;
+    width: fit-content;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+  }

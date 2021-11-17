@@ -30,6 +30,7 @@
     "react-emoji-render": "^1.2.4",
     "react-google-login": "^5.2.2",
     "react-google-recaptcha": "^2.1.0",
+    "react-hot-toast": "^2.1.1",
     "react-image-crop": "^8.6.2",
     "react-otp-input": "^2.4.0",
     "react-redux": "^7.1.3",

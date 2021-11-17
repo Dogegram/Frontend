@@ -10,7 +10,7 @@ import {
 } from '../../redux/user/userSelectors';
 import { updateProfileStart } from '../../redux/user/userActions';
 import { showAlert } from '../../redux/alert/alertActions';
-import Checkout from './Checkout'
+import Checkout from '../Checkout/Checkout'
 
 import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
@@ -19,7 +19,7 @@ import FormInput from '../FormInput/FormInput';
 import Button from '../Button/Button';
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
-const stripePromise = loadStripe('pk_live_51JAooySJ2Um64gtlmEZ6XzEL9plgBEyT9QdduTPL3dfVvKtI5gaxJVb0nDE91z3Zj1fIRut6YYAfKCUJ3kDxfNts00z57peEpv');
+const stripePromise = loadStripe('pk_test_51JAooySJ2Um64gtl7O9C2y8ghck2ClSnhdxWXsnlni1DjP3F642vaqrFPA98hr0KYrX979Gd3Mva7cYUP2yFU05R00XHt3B1DC');
 
 
 const AdWallet = ({
@@ -35,7 +35,6 @@ const AdWallet = ({
     
   useEffect(() => {
     document.title = 'AdWallet • Dogegram';
-    getCurrency()
     const payment_intent_client_secret = new URLSearchParams(window.location.search).get(
       "payment_intent_client_secret"
     )
@@ -44,17 +43,6 @@ const AdWallet = ({
       setLoading(true)
     }
   }, []);
-    const getCurrency = async () => {
-      if(!currentUser.baseAdWalletCurrency){
-    const axiosreq = axios(`${process.env.REACT_APP_BACKEND_URL}`).then((res)=>{
-      if(res.headers['x-req-country'] === 'IN'){
-        setCurrency('₹')
-      }
-    })
-  } else {
-    setCurrency(currentUser.baseAdWalletCurrency === 'usd' ? '$' : '₹')
-  }
-  }
   const mkcs = async () => {
     if(deposit % 1 != 0){
       return showAlert(`The current value is not an integer or has a decimal`)
@@ -90,14 +78,14 @@ const AdWallet = ({
 
   return (
     <Card className="form-card" style={{display: 'flex', alignItems: 'center', width: '100%', height: '100%', flexDirection: 'column', justifyContent: 'center'}}>
-    <h2>Current Ad wallet balance: {currentUser.baseAdWalletCurrency === 'usd' ? '$' : '₹'}{currentUser.adwallet ? currentUser.adwallet : 0}</h2>
-    <h2>To promote a post contact adpartners@dogegram.xyz, and we will reach to you ASAP. Please fill the wallet to at least {currency}5{currency === '₹' ? '0' : null}.</h2>
+    <h2>Current Ad wallet balance: ₹{currentUser.adwallet ? currentUser.adwallet : 0}</h2>
+    <h2>To promote a post contact adpartners@dogegram.xyz, and we will reach to you ASAP. Please fill the wallet to at least ₹50.</h2>
     {loading ? (
     <Elements options={options} stripe={stripePromise}>
         <Checkout cs={cs}/>
     </Elements>
     ) : (<form onSubmit={(e)=>{e.preventDefault(); mkcs()}}>
-    <FormInput placeholder={`Deposit (in ${ currency === '$' ? 'USD' : 'INR' })`} required onChange={(e)=>setDeposit(e.target.value)}/>
+    <FormInput placeholder={`Deposit (in INR)`} required onChange={(e)=>setDeposit(e.target.value)}/>
     <Button>Start Checkout</Button>
     </form>) }
     <h4>If AdWallet Ballence shows less that what you accepted then you should refresh the page and check again, 

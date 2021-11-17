@@ -8,6 +8,7 @@ import EditProfileForm from '../../components/EditProfileForm/EditProfileForm';
 import Edit2FAAuthForm from '../../components/Edit2FAAuthForm/Edit2FAAuthForm';
 import MobileHeader from '../../components/Header/MobileHeader/MobileHeader';
 import BirthdayUpdateCard from '../../components/BirthdayUpdateCard/BirthdayUpdateCard'
+import CreatorPayoutsCard from '../../components/CreatorPayoutsCard/CreatorPayoutsCard'
 import YoutubeConnectCard from '../../components/YoutubeConnect/YoutubeConnectCard'
 import AdWallet from '../../components/Payments/AdWallet'
 import { YoutuberIcon } from '../../components/Icons/Icons';
@@ -63,6 +64,14 @@ const SettingsPage = () => (
           >
             <li className="sidebar-link__text">Ad Wallet</li>
           </NavLink>
+          <NavLink
+            className="sidebar-link"
+            to="/settings/payouts"
+            activeClassName="font-bold sidebar-link--active"
+          >
+            <li className="sidebar-link__text">Creator Payouts</li>
+          </NavLink>
+          
         </ul>
         <article className="settings-page__content">
           <Switch>
@@ -83,6 +92,12 @@ const SettingsPage = () => (
             </ProtectedRoute>
             <ProtectedRoute path="/settings/promote">
               <AdWallet />
+            </ProtectedRoute>
+            <ProtectedRoute path="/settings/payouts">
+              <CreatorPayoutsCard />
+            </ProtectedRoute>
+            <ProtectedRoute path="/settings/payouts-dash">
+              <CreatorPayoutsCard />
             </ProtectedRoute>
           </Switch>
         </article>

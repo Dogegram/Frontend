@@ -7,6 +7,7 @@ import { selectCurrentUser } from '../../redux/user/userSelectors';
 import { signInStart } from '../../redux/user/userActions';
 import { connectSocket } from '../../redux/socket/socketActions';
 import { fetchNotificationsStart } from '../../redux/notification/notificationActions';
+import { Toaster } from 'react-hot-toast';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Header from '../Header/Header';
@@ -15,7 +16,10 @@ import Alert from '../../components/Alert/Alert';
 import Footer from '../../components/Footer/Footer';
 import MobileNav from '../../components/MobileNav/MobileNav';
 
+
 import LoadingPage from '../../pages/LoadingPage/LoadingPage';
+
+const TipsPage = lazy(()=>import('../../pages/PaymentsPage/TipsPage'));
 const ProfilePage = lazy(() => import('../../pages/ProfilePage/ProfilePage'));
 const PostPage = lazy(() => import('../../pages/PostPage/PostPage'));
 const ConfirmationPage = lazy(() =>
@@ -50,6 +54,8 @@ export function UnconnectedApp({
   const {
     location: { pathname },
   } = useHistory();
+
+  const loadToaster = ()=>{return ( <Toaster /> );}
 
   useEffect(() => {
     if (token) {
@@ -94,6 +100,7 @@ export function UnconnectedApp({
     }
     return (
       <Fragment>
+        {loadToaster()}
         {pathname !== '/login' && pathname !== '/signup' && pathname !== '/signupdone' && pathname !== '/confirm' && <Header />}
         {renderModals()}
         {transitions.map(
@@ -113,6 +120,7 @@ export function UnconnectedApp({
           <ProtectedRoute path="/settings" component={SettingsPage} />
           <ProtectedRoute path="/activity" component={ActivityPage} />
           <ProtectedRoute path="/new" component={NewPostPage} />
+          <ProtectedRoute path="/tips/payment" component={TipsPage} />
           <ProtectedRoute path="/explore" component={ExplorePage} />
           <Route exact path="/:username" component={ProfilePage} />
           <Route path="/post/:postId" component={PostPage} />
@@ -135,6 +143,7 @@ export function UnconnectedApp({
       <Suspense fallback={<LoadingPage />}>{renderApp()}</Suspense>
     </div>
   );
+  
 }
 
 const mapStateToProps = (state) => ({
