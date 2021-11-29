@@ -71,7 +71,7 @@ const UserCard = ({
             {subText}
             {date && (
               <span className="color-grey ml-sm">
-                {formatDateDistance(date)}
+                {formatDateDistance(date)} ago
               </span>
             )}
           </p>
@@ -87,3 +87,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(null, mapDispatchToProps)(UserCard);
+

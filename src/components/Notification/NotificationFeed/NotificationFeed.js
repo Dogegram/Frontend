@@ -107,6 +107,25 @@ const NotificationFeed = ({
               );
               break;
             }
+            case 'whisper': {
+              userCardProps.subText = `whispered to you "${notification.notificationData.message}"`;
+              userCardChild = (
+                  <img
+                    src={require('../../../assets/img/whisper-pic.png').default}
+                    style={{
+                      display: 'flex',
+                      width:'50px',
+                      height:'50px',
+                      filter: notification.notificationData.filter,
+                    }}
+                    onClick={() =>
+                      setShowNotifications && setShowNotifications(false)
+                    }
+                    alt="chat bubble"
+                  />
+              );
+              break;
+            }
             default: {
               userCardProps.subText = (
                 <Linkify options={linkifyOptions}>{`${
