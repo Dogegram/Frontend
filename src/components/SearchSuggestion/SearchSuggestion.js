@@ -28,6 +28,7 @@ const SearchSuggestion = ({ fetching, result, onClick, username }) => {
             result.length + additionalUsers.length
           );
           // Returned less than the max users meaning there are no more users to fetch
+          console.log(users.length);
           if (users.length !== offset) setShouldFetch(false);
           setAdditionalUsers((previous) => [...previous, ...users]);
           setFetchingAdditionalUsers(false);

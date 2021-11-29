@@ -16,6 +16,7 @@ const NotificationPopup = ({ style, notifications }) => {
           break;
         }
         case 'comment':
+        case 'whisper':
         case 'mention': {
           newComments += 1;
           break;

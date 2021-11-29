@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef , useState} from 'react';
 import { connect } from 'react-redux';
 import { useFormik } from 'formik';
 import { createStructuredSelector } from 'reselect';
@@ -10,6 +10,7 @@ import {
 } from '../../redux/user/userSelectors';
 import { updateProfileStart } from '../../redux/user/userActions';
 import { showAlert } from '../../redux/alert/alertActions';
+import Switch from "react-switch";
 
 import {
   validateEmail,
@@ -26,6 +27,7 @@ import Button from '../Button/Button';
 import SettingsForm from '../SettingsForm/SettingsForm';
 import SettingsFormGroup from '../SettingsForm/SettingsFormGroup/SettingsFormGroup';
 import ChangeAvatarButton from '../ChangeAvatarButton/ChangeAvatarButton';
+import { set } from 'lodash';
 
 const EditProfileForm = ({
   currentUser,
@@ -34,6 +36,7 @@ const EditProfileForm = ({
   updateProfileStart,
   updatingProfile,
 }) => {
+  const [whisperEmail, setWhisperEmail] = useState(currentUser.whisperEmail != undefined ? currentUser.whisperEmail : true); 
   const validate = (values) => {
     const errors = {};
     const emailError = validateEmail(values.email);
@@ -61,6 +64,7 @@ const EditProfileForm = ({
       username: currentUser.username,
       bio: currentUser.rawBio || '',
       website: currentUser.website || '',
+      whisperEmail: currentUser.whisperEmail != undefined ? currentUser.whisperEmail : true,
     },
     validate,
     onSubmit: async (values) => {
@@ -72,6 +76,9 @@ const EditProfileForm = ({
   useEffect(() => {
     document.title = 'Edit Profile • Dogegram';
   }, []);
+  useEffect(() => {
+    formik.setFieldValue('whisperEmail', whisperEmail);
+  }, [whisperEmail])
 
   return (
     <SettingsForm onSubmit={formik.handleSubmit}>
@@ -136,9 +143,28 @@ const EditProfileForm = ({
       </SettingsFormGroup>
       <SettingsFormGroup>
         <label></label>
+        <div>
+          <h3 className="heading-3 color-grey font-bold">
+            Notifications
+          </h3>
+          <p
+            style={{ fontSize: '1.3rem', lineHeight: '1.6rem' }}
+            className="color-grey"
+          >
+            Just make your notification settings right for you cause
+            we feel not to ping to every moment of your 16 hour day.
+            (especially if you're a dog [thats github copilot =_=])
+          </p>
+        </div>
+      </SettingsFormGroup>
+      <SettingsFormGroup>
+        <label className="heading-3 font-bold">Whisper Email</label>
+        <Switch onChange={(e)=>setWhisperEmail(e)} checked={whisperEmail} />
+      </SettingsFormGroup>
+      <SettingsFormGroup>
+        <label></label>
         <Button
           style={{ width: '10rem' }}
-          disabled={Object.keys(formik.touched).length === 0}
           loading={updatingProfile}
           onClick={() => {
             if (!formik.isValid) {
