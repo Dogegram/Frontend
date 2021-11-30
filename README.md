@@ -1,6 +1,12 @@
 # Dogegram Backend
 
-## Current Release - vBeta8.4
+## Current Release - vBeta8.4.1
+
+## Changelog 8.4.1
+ - Add a warning about the 7 whispers per day in the popup...
+
+## Changelog (all other versions)
+ - Everything until 8.4.1 will be here lol
 
 ## Local Development :-
 - `git clone https://github.com/DogeGram/Frontend.git`

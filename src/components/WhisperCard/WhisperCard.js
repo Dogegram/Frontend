@@ -50,10 +50,9 @@ const WhisperCard = (props) => {
     <h2 className="text-center h2 bold" style={{marginBottom: "10px"}}>Whisper to @{props.username}</h2>
     <textarea className="form-group__whisperinput" placeholder="Whisper Text" value={whisperText}  onChange={(event) =>{setText(event.target.value)}}  />
     <p className="text-center" style={{marginTop: "10px"}}>{whisperRemaining} characters remaining</p>
-    <h5>PLEASE NOTE THAT ONCE SENT CANNOT BE DELETED. This is not a encrypted 
+    <h5>PLEASE NOTE THAT ONCE SENT CANNOT BE DELETED. YOU CAN ONLY SEND 10 WHISPERS PER DAY. This is not a encrypted 
       chat but can be only accessed by @{props.username} (by design) tho it still shound't 
     be used to share nuclear codes. Please don't share personal information.</h5>
-    {/*console.log(whisperTextLength, 'l46')*/}
   </div>
   </Shake>
   );
