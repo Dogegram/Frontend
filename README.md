@@ -1,6 +1,9 @@
 # Dogegram Backend
 
-## Current Release - vBeta8.4.1
+## Current Release - vBeta8.4.2 (Patch)
+
+## Changelog 8.4.2
+ - Just to stay in sync with backend...
 
 ## Changelog 8.4.1
  - Add a warning about the 7 whispers per day in the popup...
