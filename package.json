@@ -37,10 +37,13 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "^4.0.3",
     "react-spring": "^8.0.27",
+    "react-switch": "^6.0.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
-    "socket.io-client": "^4.2.0"
+    "reshake": "^1.2.3",
+    "socket.io-client": "^4.2.0",
+    "styled-components": "^5.3.3"
   },
   "scripts": {
     "server": "node index.js",

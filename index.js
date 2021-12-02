@@ -5,7 +5,6 @@ const express = require('express');
 const app = express();
 const paths = ['login','signup','passwordreset','settings','activity','posts','explore','new','confirm'];
 const { MetadataGenerator } = require('metatags-generator');
-const { resolveMx } = require('dns');
 
 const indexPath  = path.resolve(__dirname, 'build', 'index.html');
 

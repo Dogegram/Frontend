@@ -27,6 +27,19 @@
     }
   }
 
+  &__whisperinput {
+    resize: none;
+    background-color: $color-white;
+    font-family: 'Lato', sans-serif, emoji;
+    font-size: 1.5rem;
+    padding: 2rem 1rem;
+    width: 100%;
+
+    &::placeholder {
+      color: $color-grey-1;
+    }
+  }
+
   &__textarea {
     @extend .form-group__input;
     resize: vertical;

@@ -15,6 +15,7 @@ import Modal from '../../components/Modal/Modal';
 import Alert from '../../components/Alert/Alert';
 import Footer from '../../components/Footer/Footer';
 import MobileNav from '../../components/MobileNav/MobileNav';
+import { Toaster } from 'react-hot-toast';
 
 
 import LoadingPage from '../../pages/LoadingPage/LoadingPage';
@@ -65,12 +66,16 @@ export function UnconnectedApp({
     }
   }, [signInStart, connectSocket, fetchNotificationsStart, token]);
 
+  const loadToaster = ()=>{return ( <Toaster /> );}
+
   const renderModals = () => {
     if (modal.modals.length > 0) {
       // Disable scrolling on the body while a modal is active
       document.querySelector('body').setAttribute('style', 'overflow: hidden;');
       return modal.modals.map((modal, idx) => (
-        <Modal key={idx} component={modal.component} {...modal.props} />
+        <Fragment>
+        <Toaster /><Modal key={idx} component={modal.component} {...modal.props} />
+        </Fragment>
       ));
     } else {
       document.querySelector('body').setAttribute('style', '');

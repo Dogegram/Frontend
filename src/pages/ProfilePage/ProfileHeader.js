@@ -8,6 +8,7 @@ import UnfollowPrompt from '../../components/UnfollowPrompt/UnfollowPrompt';
 import Button from '../../components/Button/Button';
 import SettingsButton from '../../components/SettingsButton/SettingsButton';
 import { VerifiedIcon, YoutuberIcon, WebIcon, BioIcon, NameIcon, PaymentTipsIcon } from '../../components/Icons/Icons';
+import WhisperButton from '../../components/WhisperButton/WhisperButton';
 import nFormatter from '../../components/NFormatter/Nformatter'
 import InfoPrompt from '../../components/InfoPrompt/InfoPrompt';
 const ProfileHeader = ({ 
@@ -138,7 +139,7 @@ const ProfileHeader = ({
             </h1>
           {renderButton()}
           {data.isFollowing ? (<Button onClick={()=>{showTipModal()}} style={{display: 'flex', alignItems: 'center'}} inverted><PaymentTipsIcon style={{marginRight: 1}} />Tip this guy</Button>) : (null)}
-          
+          { currentUser.username != data.user.username ? (<WhisperButton username={username} />) : (null)}
         </div>
 
         <div className="profile-stats">
