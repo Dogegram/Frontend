@@ -51,7 +51,7 @@ export const signInStart = (usernameOrEmail, password, authToken, twofactorCode)
       dispatch({ type: userTypes.SIGN_OUT });
 */
     }
-    if (authToken) dispatch(signOut());
+  // window.location.reload();
     dispatch(signInFailure(err.message));
   }
 };

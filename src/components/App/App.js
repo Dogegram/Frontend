@@ -15,7 +15,6 @@ import Modal from '../../components/Modal/Modal';
 import Alert from '../../components/Alert/Alert';
 import Footer from '../../components/Footer/Footer';
 import MobileNav from '../../components/MobileNav/MobileNav';
-import { Toaster } from 'react-hot-toast';
 
 
 import LoadingPage from '../../pages/LoadingPage/LoadingPage';
@@ -65,8 +64,6 @@ export function UnconnectedApp({
       fetchNotificationsStart(token);
     }
   }, [signInStart, connectSocket, fetchNotificationsStart, token]);
-
-  const loadToaster = ()=>{return ( <Toaster /> );}
 
   const renderModals = () => {
     if (modal.modals.length > 0) {
@@ -125,7 +122,7 @@ export function UnconnectedApp({
           <ProtectedRoute path="/settings" component={SettingsPage} />
           <ProtectedRoute path="/activity" component={ActivityPage} />
           <ProtectedRoute path="/new" component={NewPostPage} />
-          <ProtectedRoute path="/tips/payment" component={TipsPage} />
+          <ProtectedRoute path="/tips/payment/:username/:sAccID" component={TipsPage} />
           <ProtectedRoute path="/explore" component={ExplorePage} />
           <Route exact path="/:username" component={ProfilePage} />
           <Route path="/post/:postId" component={PostPage} />

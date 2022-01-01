@@ -44,6 +44,8 @@ const CreatorPayoutsCard = ({currentUser, showAlert, token}) => {
         
         if(res.status === 200){
           setAccountLink(res.data.url)
+        } else if(res.status === 208){
+          return true
         } else {
           setError({message: req.data.error || req.data.message, status: false})
           throw new Error(res.data.error || res.data.message)

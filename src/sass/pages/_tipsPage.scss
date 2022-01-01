@@ -5,7 +5,7 @@
   .payments-card {
     margin-top: 150px;
     width: fit-content;
-    height: 300px;
+    height: auto;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -13,4 +13,5 @@
     justify-content: center;
     align-items: center;
     align-self: center;
+    padding: 10px;
   }

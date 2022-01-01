@@ -121,7 +121,7 @@ const Edit2FAAuthForm = ({
 
   useEffect(() => {
     document.title = '2FA Auth Settings • Dogegram';
-    //TODO @me delete this before deploying AND I FORGOT 
+    setshowonboard(false)
 
   }, []);
 

@@ -8,14 +8,20 @@ import { showAlert } from '../../redux/alert/alertActions';
 
 import { connect } from 'react-redux';
 
-function CheckoutForm(cs) {
+function CheckoutForm(cs, doneMessage) {
   const stripe = useStripe();
   const elements = useElements();
 
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isDone, setIsDone] = useState(false);
+  const successMessage = doneMessage.doneMessage
   useEffect(() => {
+    setIsLoading(true)
+    setTimeout(()=>{
+      setIsLoading(false)
+    }, 2000)
+    console.log(successMessage)
     if (!stripe) {
       return;
     }
@@ -30,7 +36,7 @@ function CheckoutForm(cs) {
     stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
       switch (paymentIntent.status) {
         case "succeeded":
-          setMessage("Payment succeeded!");
+          setMessage(successMessage ? successMessage : "Payment succeeded!");
           
           setIsDone(true)
           break;

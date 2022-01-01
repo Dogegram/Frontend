@@ -11,18 +11,21 @@ import Button from '../Button/Button';
 import TextButton from '../Button/TextButton/TextButton';
 import Divider from '../Divider/Divider';
 import Card from '../Card/Card';
-import { truncate } from 'lodash';
+import Switch from "react-switch";
 
-const CreatorPayoutsCard = ({currentUser, showAlert, token}) => {
+
+const CreatorPayoutsDashCard = ({currentUser, showAlert, token}) => {
   const [accountLink, setAccountLink] = useState('');
   const [loading, setLoading] = useState(true);
   const [runOnlyOnes, setRunOnlyOnes] = useState(false);
   const [connected, setConnected] = useState(false);
   const [error, setError] = useState({message: 'Something went wrong?!?!?', status: true});
-  const [data, setData] = useState({});
+  const [balance, setBalance] = useState('Loading...');
+  const [pending, setPending] = useState('Loading...');
+  const [enabled, setEnabled] = useState(currentUser.payouts_enabled != undefined ? currentUser.payouts_enabled : true);
 
   useEffect(() => {
-    document.title = 'Creator Payouts • Dogegram';
+    document.title = 'Creator Payouts Dash • Dogegram';
     if (currentUser) {
       console.log('what the fack are you doing here man,', currentUser.fullName);
     }
@@ -30,22 +33,15 @@ const CreatorPayoutsCard = ({currentUser, showAlert, token}) => {
     const getAccountInfo = async () => {
 
       try {
-        const req = await axios(`${process.env.REACT_APP_BACKEND_URL}/api/payment/createConnectAccount`, { headers:{ 'Authorization': token }})
+        const req = await axios(`${process.env.REACT_APP_BACKEND_URL}/api/payout/fetchUserData/finData`, { headers:{ 'Authorization': token }})
         const res = req;
 
-        if(res.data.status === 'connected') {
-          setConnected(true);
-          toast.success('You have successfully connected your account!',            {
-            style: {
-              width: '500px',
-              fontSize: 20,
-            },
-          })
+        if(res.data.balance !== undefined && res.data.pending !== undefined) {
+          setBalance(res.data.balance)
+          setPending(res.data.pending)
         }
         
-        if(res.status === 200){
-          setAccountLink(res.data.url)
-        } else {
+        if(res.status != 200){
           setError({message: req.data.error || req.data.message, status: false})
           throw new Error(res.data.error || res.data.message)
         }
@@ -60,8 +56,8 @@ const CreatorPayoutsCard = ({currentUser, showAlert, token}) => {
         toast.promise(
           getAccountInfo(),
            {
-             loading: ()=>{return (<b>Genrating Account Link...</b>)},
-             success: ()=>{setLoading(false); return (<b>Request Completed!</b>)},
+             loading: ()=>{return (<b>Loading Info...</b>)},
+             success: ()=>{setLoading(false); return (<b>Got the data!</b>)},
              error: (a)=>{console.log(a.message);return (<b>{a.message || error.message}</b>)},
            },
            {
@@ -72,66 +68,79 @@ const CreatorPayoutsCard = ({currentUser, showAlert, token}) => {
           }
          );
 
-  } else if(currentUser.stripe_account_id){
-    setConnected(true)
- //   toast.success('You already have a connected account')
   }
   })
+  
 
   useEffect(() => {
-  } , [connected])
+    //call the api to make the chnage
+    const changePaymentStatus = async () => {
+      try {
+        const req = await axios(`${process.env.REACT_APP_BACKEND_URL}/api/payout/changePaymentStatus`, {
+          method: 'POST',
+          headers: {
+            'Authorization': token
+          },
+          data: {
+            enabled: enabled
+          }
+        })
+        const res = req.data;
+        if (res.status === 200) {
+          showAlert(res.message)
+          setEnabled(!enabled)
+        } else {
+          showAlert(res.message)
+        }
+      } catch (err) {
+        showAlert(err.message)
+      }
+    }
+    changePaymentStatus()
+  } , [enabled])
 
   return (
     <Fragment>
       <Card className="form-card" style={{display: 'flex', alignItems: 'center', width: '100%', height: '100%', flexDirection: 'column', justifyContent: 'center'}}>
       <h3 className="heading-3 color-grey font-bold">
-            Welcome {currentUser.fullName.split(' ')[0] || currentUser.name }, this is the Creator Payouts Dashboard. 
+            Welcome {currentUser.fullName.split(' ')[0] || currentUser.fullName }, this is the Creator Payouts Dashboard. 
           </h3>
           <p
             style={{ fontSize: '1.3rem', lineHeight: '1.6rem' }}
             className="color-grey"
           >
-            We hope you enjoy your stay here ;)
+            Heres your earning below.
            </p>
            <h3 className="heading-3 color-grey font-bold">
             Earnings 
           </h3>
+          <h3>
+            {balance}
+          </h3>
+          <h3 className="heading-3 color-grey font-bold">
+            Pending Balance
+          </h3>
+          <h3>
+            {pending}
+          </h3>
+          <h3 className="heading-3 color-grey font-bold">
+            Turn Payments On/Off
+          </h3>
+          <h3>
+            <Switch onChange={(e)=>setEnabled(e)} checked={enabled} />
+          </h3>
           <p>
-            So, we put a tips button on your profile page. 
-            When you click it, you will be able to see a form 
-            to put in your card details and the amount you want to tip.
-            Then Stripe (our payment provider) will take care of the rest. 
-            This was done to make receiving payments as easy as possible for you.
-            And thanks to the tips button, you can tip people from your profile page.
-            (also thanks to github copilot, who wrote this)
-          </p>
-          <p>
-            Ok lets start your registration. (You need to have more than 1000 followers to be able to join the creator payouts program)
+            this is just basic stuff, you can find much more info on the Stripe Dashboard. Login 
+            in it with the username and password you had set up when you were onboarding.
           </p>
           <Divider />
           <div className="form-container" style={{marginTop: '1rem'}}>
-          {
-           currentUser.creator_payout_enabled ?
-           (<Link to="/settings/payouts-dash" className="form-link">
-           <TextButton>
-            Go to Simple Dash (by Dogegram)
-           </TextButton>
-         </Link>) : loading ?
-          ( 
-            <p className="form-link">
-            <Button>
-              {error.status ? 'this will take a while, please wait... ' :  `Sadly you're not eligible for Creator Payouts 😥`}
-            </Button>
-          </p>
-          ) : (
-           <a href={accountLink} target="_blank" className="form-link">
+
+           <a href="https://dashboard.stripe.com/dashboard" target="_blank" className="form-link">
            <Button>
-            Lets start onboarding!
+            Go to Stripe Dashboard
            </Button>
          </a>
-          )
-         
-          } 
           </div>
           <p>
             If you have any questions, feel free to contact us at creator.payouts@dogegram.xyz 
@@ -154,4 +163,4 @@ const mapDispatchToProps = (dispatch) => ({
   showAlert: (text, onClick) => dispatch(showAlert(text, onClick)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreatorPayoutsCard);
+export default connect(mapStateToProps, mapDispatchToProps)(CreatorPayoutsDashCard);

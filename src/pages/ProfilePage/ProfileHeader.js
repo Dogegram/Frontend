@@ -95,7 +95,7 @@ const ProfileHeader = ({
   };
 
   const tip = () => {
-    history.push('/tips/payment')
+    history.push(`/tips/payment/${username}/${data.user.stripe_account_id}`);
   }
 
  const showTipModal = () => {
@@ -104,14 +104,14 @@ const ProfileHeader = ({
       options: [
         {
           warning: false,
-          text: 'Tip!',
+          text: `Let's make a tip!`,
           onClick: () => tip(),
         },
       ],
       children: (
         <InfoPrompt
           component={<h2>Lets tip @{data.user.username} and make their day awesome!</h2>}
-          text={`You can tip @${data.user.username} by clicking the tip button below :)`}
+          text={`You will be go to secure page for payment :)`}
         />
       ),
     },
@@ -138,8 +138,8 @@ const ProfileHeader = ({
             @{username}{data.user.verified ? (<VerifiedIcon/>) : (null)}{data.user.youtuber ? (<a style={{display: 'flex'}} target="_blank" ping="http://localhost:5000/api/user/track" rel="noreferrer" href={data.user.ytlink ? data.user.ytlink : null}><YoutuberIcon style={{marginLeft:"5px"}}/></a>) : (null)}
             </h1>
           {renderButton()}
-          {data.isFollowing ? (<Button onClick={()=>{showTipModal()}} style={{display: 'flex', alignItems: 'center'}} inverted><PaymentTipsIcon style={{marginRight: 1}} />Tip this guy</Button>) : (null)}
-          { currentUser.username != data.user.username ? (<WhisperButton username={username} />) : (null)}
+          { currentUser ? data.isFollowing ? data.user.creator_payout_enabled ? currentUser.payment_enabled ? currentUser.username != data.user.username ? (<Button onClick={()=>{showTipModal()}} style={{display: 'flex', alignItems: 'center'}} inverted><PaymentTipsIcon style={{marginRight: 1}} />Tip this guy</Button>) : (null) : (null) : (null) : (null) : (null)}
+          { currentUser ? currentUser.username != data.user.username ? (<WhisperButton username={username} />) : (null) : (null)}
         </div>
 
         <div className="profile-stats">

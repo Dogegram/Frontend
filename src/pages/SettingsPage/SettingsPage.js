@@ -11,6 +11,7 @@ import BirthdayUpdateCard from '../../components/BirthdayUpdateCard/BirthdayUpda
 import CreatorPayoutsCard from '../../components/CreatorPayoutsCard/CreatorPayoutsCard'
 import YoutubeConnectCard from '../../components/YoutubeConnect/YoutubeConnectCard'
 import AdWallet from '../../components/Payments/AdWallet'
+import CreatorPayoutsDashCard from '../../components/CreatorPayoutsDashCard/CreatorPayoutsDashCard'
 import { YoutuberIcon } from '../../components/Icons/Icons';
 
 const SettingsPage = () => (
@@ -97,7 +98,7 @@ const SettingsPage = () => (
               <CreatorPayoutsCard />
             </ProtectedRoute>
             <ProtectedRoute path="/settings/payouts-dash">
-              <CreatorPayoutsCard />
+              <CreatorPayoutsDashCard />
             </ProtectedRoute>
           </Switch>
         </article>
