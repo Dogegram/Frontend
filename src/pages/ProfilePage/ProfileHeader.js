@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import ChangeAvatarButton from '../../components/ChangeAvatarButton/ChangeAvatarButton';
 import Avatar from '../../components/Avatar/Avatar';
@@ -7,10 +7,10 @@ import UsersList from '../../components/UsersList/UsersList';
 import UnfollowPrompt from '../../components/UnfollowPrompt/UnfollowPrompt';
 import Button from '../../components/Button/Button';
 import SettingsButton from '../../components/SettingsButton/SettingsButton';
+import { VerifiedIcon, YoutuberIcon, WebIcon, BioIcon, NameIcon, PaymentTipsIcon } from '../../components/Icons/Icons';
 import WhisperButton from '../../components/WhisperButton/WhisperButton';
-import { VerifiedIcon, YoutuberIcon, WebIcon, BioIcon, NameIcon } from '../../components/Icons/Icons';
 import nFormatter from '../../components/NFormatter/Nformatter'
-
+import InfoPrompt from '../../components/InfoPrompt/InfoPrompt';
 const ProfileHeader = ({ 
   currentUser,
   data,
@@ -21,6 +21,7 @@ const ProfileHeader = ({
 }) => {
   const { avatar, username, bio, website, fullName } = data.user;
   const { following, followers, postCount } = data;
+  const history = useHistory();
 
 
   const showUsersModal = (followers, following) => {
@@ -93,7 +94,30 @@ const ProfileHeader = ({
     );
   };
 
+  const tip = () => {
+    history.push(`/tips/payment/${username}/${data.user.stripe_account_id}`);
+  }
 
+ const showTipModal = () => {
+  showModal(
+    {
+      options: [
+        {
+          warning: false,
+          text: `Let's make a tip!`,
+          onClick: () => tip(),
+        },
+      ],
+      children: (
+        <InfoPrompt
+          component={<h2>Lets tip @{data.user.username} and make their day awesome!</h2>}
+          text={`You will be go to secure page for payment :)`}
+        />
+      ),
+    },
+    'OptionsDialog/OptionsDialog'
+  )
+}
 
   return (
     <header className="profile-header">
@@ -114,7 +138,8 @@ const ProfileHeader = ({
             @{username}{data.user.verified ? (<VerifiedIcon/>) : (null)}{data.user.youtuber ? (<a style={{display: 'flex'}} target="_blank" ping="http://localhost:5000/api/user/track" rel="noreferrer" href={data.user.ytlink ? data.user.ytlink : null}><YoutuberIcon style={{marginLeft:"5px"}}/></a>) : (null)}
             </h1>
           {renderButton()}
-          { currentUser.username != data.user.username ? (<WhisperButton username={username} />) : (null)}
+          { currentUser ? data.isFollowing ? data.user.creator_payout_enabled ? currentUser.payment_enabled ? currentUser.username != data.user.username ? (<Button onClick={()=>{showTipModal()}} style={{display: 'flex', alignItems: 'center'}} inverted><PaymentTipsIcon style={{marginRight: 1}} />Tip this guy</Button>) : (null) : (null) : (null) : (null) : (null)}
+          { currentUser ? currentUser.username != data.user.username ? (<WhisperButton username={username} />) : (null) : (null)}
         </div>
 
         <div className="profile-stats">

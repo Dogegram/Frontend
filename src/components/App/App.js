@@ -7,6 +7,7 @@ import { selectCurrentUser } from '../../redux/user/userSelectors';
 import { signInStart } from '../../redux/user/userActions';
 import { connectSocket } from '../../redux/socket/socketActions';
 import { fetchNotificationsStart } from '../../redux/notification/notificationActions';
+import { Toaster } from 'react-hot-toast';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Header from '../Header/Header';
@@ -14,9 +15,11 @@ import Modal from '../../components/Modal/Modal';
 import Alert from '../../components/Alert/Alert';
 import Footer from '../../components/Footer/Footer';
 import MobileNav from '../../components/MobileNav/MobileNav';
-import { Toaster } from 'react-hot-toast';
+
 
 import LoadingPage from '../../pages/LoadingPage/LoadingPage';
+
+const TipsPage = lazy(()=>import('../../pages/PaymentsPage/TipsPage'));
 const ProfilePage = lazy(() => import('../../pages/ProfilePage/ProfilePage'));
 const PostPage = lazy(() => import('../../pages/PostPage/PostPage'));
 const ConfirmationPage = lazy(() =>
@@ -52,6 +55,8 @@ export function UnconnectedApp({
     location: { pathname },
   } = useHistory();
 
+  const loadToaster = ()=>{return ( <Toaster /> );}
+
   useEffect(() => {
     if (token) {
       signInStart(null, null, token);
@@ -59,8 +64,6 @@ export function UnconnectedApp({
       fetchNotificationsStart(token);
     }
   }, [signInStart, connectSocket, fetchNotificationsStart, token]);
-
-  const loadToaster = ()=>{return ( <Toaster /> );}
 
   const renderModals = () => {
     if (modal.modals.length > 0) {
@@ -119,6 +122,7 @@ export function UnconnectedApp({
           <ProtectedRoute path="/settings" component={SettingsPage} />
           <ProtectedRoute path="/activity" component={ActivityPage} />
           <ProtectedRoute path="/new" component={NewPostPage} />
+          <ProtectedRoute path="/tips/payment/:username/:sAccID" component={TipsPage} />
           <ProtectedRoute path="/explore" component={ExplorePage} />
           <Route exact path="/:username" component={ProfilePage} />
           <Route path="/post/:postId" component={PostPage} />
@@ -141,6 +145,7 @@ export function UnconnectedApp({
       <Suspense fallback={<LoadingPage />}>{renderApp()}</Suspense>
     </div>
   );
+  
 }
 
 const mapStateToProps = (state) => ({

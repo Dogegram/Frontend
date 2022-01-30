@@ -22,7 +22,7 @@ const feedReducer = (state = INITIAL_STATE, action) => {
         fetching: false,
         error: false,
         posts: [...state.posts, ...action.payload],
-        hasMore: action.payload.length === 7,
+        hasMore: action.payload.length > 3,
       };
     }
     case feedTypes.FETCH_POSTS_FAILURE: {
