@@ -19,7 +19,7 @@
     "linkifyjs": "^2.1.9",
     "lodash": "^4.17.21",
     "metatags-generator": "^1.1.8",
-    "node-fetch": "^3.0.0",
+    "node-fetch": "^3.1.1",
     "react": "^16.12.0",
     "react-confetti": "^6.0.1",
     "react-dom": "^16.12.0",
