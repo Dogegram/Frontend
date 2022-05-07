@@ -8,10 +8,10 @@ import EditProfileForm from '../../components/EditProfileForm/EditProfileForm';
 import Edit2FAAuthForm from '../../components/Edit2FAAuthForm/Edit2FAAuthForm';
 import MobileHeader from '../../components/Header/MobileHeader/MobileHeader';
 import BirthdayUpdateCard from '../../components/BirthdayUpdateCard/BirthdayUpdateCard'
-import CreatorPayoutsCard from '../../components/CreatorPayoutsCard/CreatorPayoutsCard'
+import PayemntsCard from '../../components/PaymentsCard/PaymentsCard'
 import YoutubeConnectCard from '../../components/YoutubeConnect/YoutubeConnectCard'
 import AdWallet from '../../components/Payments/AdWallet'
-import CreatorPayoutsDashCard from '../../components/CreatorPayoutsDashCard/CreatorPayoutsDashCard'
+import PaymentsDashCard from '../../components/PaymentsDashCard/PaymentsDashCard'
 import { YoutuberIcon } from '../../components/Icons/Icons';
 
 const SettingsPage = () => (
@@ -60,17 +60,17 @@ const SettingsPage = () => (
           </NavLink>
           <NavLink
             className="sidebar-link"
-            to="/settings/promote"
+            to="/settings/billing"
             activeClassName="font-bold sidebar-link--active"
           >
-            <li className="sidebar-link__text">Ad Wallet</li>
+            <li className="sidebar-link__text">Pricing Plan</li>
           </NavLink>
           <NavLink
             className="sidebar-link"
-            to="/settings/payouts"
+            to="/settings/payments"
             activeClassName="font-bold sidebar-link--active"
           >
-            <li className="sidebar-link__text">Creator Payouts</li>
+            <li className="sidebar-link__text">Payments</li>
           </NavLink>
           
         </ul>
@@ -91,14 +91,11 @@ const SettingsPage = () => (
             <ProtectedRoute path="/settings/creators">
               <YoutubeConnectCard />
             </ProtectedRoute>
-            <ProtectedRoute path="/settings/promote">
-              <AdWallet />
+            <ProtectedRoute path="/settings/payments">
+              <PayemntsCard />
             </ProtectedRoute>
-            <ProtectedRoute path="/settings/payouts">
-              <CreatorPayoutsCard />
-            </ProtectedRoute>
-            <ProtectedRoute path="/settings/payouts-dash">
-              <CreatorPayoutsDashCard />
+            <ProtectedRoute path="/settings/payments-dash">
+              <PaymentsDashCard />
             </ProtectedRoute>
           </Switch>
         </article>

@@ -9,7 +9,7 @@ import WhisperCard from '../WhisperCard/WhisperCard';
 import axios from 'axios';
 import toast from 'react-hot-toast'
 
-const WhisperButton = ({ showModal, username }) => {
+const WhisperButton = ({ showModal, username }, props) => {
   const history = useHistory();
   const token = localStorage.getItem('token');
   var whisperTextFinal = ''
@@ -26,6 +26,8 @@ const WhisperButton = ({ showModal, username }) => {
   
   return (
     <WhisperIcon
+      {...props}
+      classname="whisper"
       style={{ cursor: 'pointer' }}
       onClick={() => 
         showModal(

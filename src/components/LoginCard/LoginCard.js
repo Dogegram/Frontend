@@ -69,13 +69,12 @@ const LoginCard = ({
        <OtpInput
         value={otp}
         onChange={(code)=>{
-          console.log(otp)
           setOtp(code)
         }}
         numInputs={6}
         separator={<span>-</span>}
         placeholder="PLEASE"
-        containerStyle={{margin:'20px'}}
+        containerStyle={{marginTop:'20px', marginBottom:'20px'}}
         inputStyle={{
           width: '30px ',
           height: '30px',

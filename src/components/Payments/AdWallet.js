@@ -19,9 +19,9 @@ import FormInput from '../FormInput/FormInput';
 import Button from '../Button/Button';
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
-const stripePromise = loadStripe('pk_test_51JAooySJ2Um64gtl7O9C2y8ghck2ClSnhdxWXsnlni1DjP3F642vaqrFPA98hr0KYrX979Gd3Mva7cYUP2yFU05R00XHt3B1DC');
+const stripePromise = loadStripe('pk_live_51JAooySJ2Um64gtlmEZ6XzEL9plgBEyT9QdduTPL3dfVvKtI5gaxJVb0nDE91z3Zj1fIRut6YYAfKCUJ3kDxfNts00z57peEpv');
 
-
+//deprecated adwallet
 const AdWallet = ({
   currentUser,
   showAlert,

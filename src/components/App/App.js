@@ -19,7 +19,7 @@ import MobileNav from '../../components/MobileNav/MobileNav';
 
 import LoadingPage from '../../pages/LoadingPage/LoadingPage';
 
-const TipsPage = lazy(()=>import('../../pages/PaymentsPage/TipsPage'));
+const TipsPage = lazy(()=>import('../../pages/PaymentsPage/PayPage'));
 const ProfilePage = lazy(() => import('../../pages/ProfilePage/ProfilePage'));
 const PostPage = lazy(() => import('../../pages/PostPage/PostPage'));
 const ConfirmationPage = lazy(() =>

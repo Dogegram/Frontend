@@ -26,7 +26,7 @@ export const getPosts = async (username, offset = 0) => {
     const response = await axios.get(process.env.REACT_APP_BACKEND_URL + `/api/user/${username}/posts/${offset}`);
     return response.data;
   } catch (err) {
-    throw new Error(err.response.data.error);
+    return false
   }
 };
 
@@ -53,12 +53,12 @@ export const votePost = async (postId, authToken) => {
  * @param {string} authToken The user's auth token
  * @returns {object} The created post
  */
-export const createPost = async (formData, authToken) => {
+export const createPost = async (data, authToken) => {
   try {
-    const post = await axios.post(process.env.REACT_APP_BACKEND_URL + '/api/post', formData, {
+    const post = await axios.post(process.env.REACT_APP_BACKEND_URL + '/api/post', data, {
       headers: {
         authorization: authToken,
-        'Content-Type': 'multipart/form-data',
+        'Content-Type': 'application/json',
       },
     });
     return post.data;

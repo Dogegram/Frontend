@@ -70,6 +70,10 @@ const ProfilePage = ({ currentUser, token, showModal, hideModal }) => {
       try {
         dispatch({ type: 'FETCH_ADDITIONAL_POSTS_START' });
         const posts = await getPosts(username, state.data.posts.length);
+        if(!posts || posts.length === 0) {
+          dispatch({ type: 'FETCH_ADDITIONAL_POSTS_FAILURE' });
+          return;
+        }
         dispatch({ type: 'FETCH_ADDITIONAL_POSTS_SUCCESS' });
         dispatch({ type: 'ADD_POSTS', payload: posts });
       } catch (err) {

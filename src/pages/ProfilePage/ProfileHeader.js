@@ -53,7 +53,7 @@ const ProfileHeader = ({
             <Link to="/settings/edit">
               <Button inverted>Edit Profile</Button>
             </Link>
-            { window.innerWidth <= 760 ? (null) : (<SettingsButton />) }
+            { window.innerWidth >= 600 ? (<SettingsButton />) : (null) }
           </Fragment>
         );
       } else if (data.isFollowing) {
@@ -138,8 +138,8 @@ const ProfileHeader = ({
             @{username}{data.user.verified ? (<VerifiedIcon/>) : (null)}{data.user.youtuber ? (<a style={{display: 'flex'}} target="_blank" ping="http://localhost:5000/api/user/track" rel="noreferrer" href={data.user.ytlink ? data.user.ytlink : null}><YoutuberIcon style={{marginLeft:"5px"}}/></a>) : (null)}
             </h1>
           {renderButton()}
-          { currentUser ? data.isFollowing ? data.user.creator_payout_enabled ? data.user.payments_enabled ? currentUser.username != data.user.username ? (<Button onClick={()=>{showTipModal()}} style={{display: 'flex', alignItems: 'center'}} inverted><PaymentTipsIcon style={{marginRight: 1}} />Tip this guy</Button>) : (null) : (null) : (null) : (null) : (null)}
-          { currentUser ? currentUser.username != data.user.username ? (<WhisperButton username={username} />) : (null) : (null)}
+          { currentUser ? data.isFollowing ? data.user.user_payments_enabled ? data.user.payments_enabled ? currentUser.username != data.user.username ? (<Button onClick={()=>{showTipModal()}} style={{display: 'flex', alignItems: 'center'}} inverted><PaymentTipsIcon style={{marginRight: 1}} />Tip this guy</Button>) : (null) : (null) : (null) : (null) : (null)}
+          { currentUser ? currentUser.username != data.user.username ? (<WhisperButton username={username} classname="whisper"/>) : (null) : (null)}
         </div>
 
         <div className="profile-stats">

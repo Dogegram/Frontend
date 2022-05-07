@@ -4,14 +4,14 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import classNames from 'classnames';
 import { Link, useHistory } from 'react-router-dom';
-import {VerifiedIcon,CopyLinkIcon} from '../Icons/Icons';
+import {VerifiedIcon} from '../Icons/Icons';
 
 import { selectToken, selectCurrentUser } from '../../redux/user/userSelectors';
 
 import { showModal, hideModal } from '../../redux/modal/modalActions';
 import { showAlert } from '../../redux/alert/alertActions';
 
-import { getPost, deletePost, reportPost } from '../../services/postService';
+import { getPost, deletePost } from '../../services/postService';
 import { getComments } from '../../services/commentService';
 
 import Avatar from '../Avatar/Avatar';
@@ -123,8 +123,8 @@ const PostDialog = ({
             'post-dialog__image': true,
             'post-dialog__image--simple': simple,
           })}
-          style={{ filter: state.data.filter, backgroundImage: `url(${state.data.image})`, backgroundPosition: 'center',  backgroundSize: 'contain', backgroundRepeat:'no-repeat'}}
-        >
+          style={{ filter: state.data.filter, backgroundImage: `url(${state.data.image.includes('dogeis.me') || state.data.image.includes('data:') ? state.data.image : `https://bom1-storage.dogegram.xyz/${state.data.image}`})`, backgroundPosition: 'center',  backgroundSize: 'contain', backgroundRepeat:'no-repeat'}}
+        > 
           {fetching ? (
             <SkeletonLoader animated />
           ) : (null)

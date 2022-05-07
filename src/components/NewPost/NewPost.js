@@ -105,29 +105,7 @@ const NewPost = ({ file, hide }) => {
         </MobileHeader>
       )}
       {renderSections()}
-      {activeSection !== 'details' && (
-        <nav className="new-post__nav">
-          <ul>
-            <li
-              className={`new-post__nav-item ${
-                activeSection === 'filter' && 'new-post__nav-item--active'
-              }`}
-              onClick={() => setActiveSection('filter')}
-              style={{ width: '100%' }}
-            >
-              <h4 className="heading-4">Crop and add some filter</h4>
-            </li>
-            {/* <li
-              className={`new-post__nav-item ${
-                activeSection === 'edit' && 'new-post__nav-item--active'
-              }`}
-              onClick={() => setActiveSection('edit')}
-            >
-              <h4 className="heading-4">Edit</h4>
-            </li> */}
-          </ul>
-        </nav>
-      )}
+
     </section>
   );
 };

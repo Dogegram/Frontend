@@ -5,7 +5,7 @@ import Icon from '../Icon/Icon';
 
 const PreviewImage = ({ onClick, image, likes, comments, filter }) => (
   <figure onClick={onClick} key={image} className="preview-image">
-    <img src={image} alt="User post" style={{ filter }} />
+    <img src={image.includes('dogeis.me') ? image : `https://bom1-storage.dogegram.xyz/${image}`} alt="User post" style={{ filter }} />
     <div className="preview-image__overlay">
       <span className="preview-image__content">
         {likes > 0 && (

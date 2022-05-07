@@ -1,0 +1,6 @@
+.whisper-button {
+    display: -webkit-flex;
+    @include respond(phone) {
+        display: none;
+      }
+}

@@ -1,6 +1,15 @@
 # Dogegram Backend
 
-## Current Release - vBeta8.4.2 (Patch)
+## Current Release - vBeta8.6.9
+
+## Changelog 8.6.9
+ - New Email set-up for a few functions.
+ - Optimization for helper APIs.
+ - New model for NSFW detection.
+ - Optimization of Image upload.
+ - Optimization for less storage used in the database.
+ - Fix a few bugs, here and there.
+ - Add a few bugs, I don't know where
 
 ## Changelog 8.4.2
  - Just to stay in sync with backend...

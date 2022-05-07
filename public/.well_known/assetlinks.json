@@ -1,0 +1,10 @@
+[{
+        "relation": ["delegate_permission/common.handle_all_urls"],
+        "target" : { 
+              "namespace": "android_app",
+              "package_name": "xyz.dogegram.app",
+              "sha256_cert_fingerprints": [
+                           "B0:B6:44:C6:E2:66:26:F3:43:C2:DE:5C:79:DF:1D:9D:E8:13:2B:E4:C1:AB:BC:E8:C7:3D:6C:EC:FA:50:06:E5"
+              ] }
+      }
+]

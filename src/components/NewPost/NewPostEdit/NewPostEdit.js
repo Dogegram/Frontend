@@ -2,16 +2,18 @@ import React, { useState, Fragment, useRef } from 'react';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 import FilterSelector from '../../FilterSelector/FilterSelector';
+import FilerobotImageEditor, { TABS, TOOLS } from 'react-filerobot-image-editor';
 
 import Icon from '../../Icon/Icon';
 
 const NewPostEdit = ({ previewImage, setPreviewImage, file, filters }) => {
   const [imageState, setImageState] = useState({
-    crop: { unit: '%', aspect: 4 / 5 },
-    isCropping: false,
+    crop: {  },
+    isCropping: true,
   });
   const imageRef = useRef();
 
+console.log(previewImage, 'aaaaaaaaafile')
   const getCroppedImg = (image, crop) => {
     const canvas = document.createElement('canvas');
     const scaleX = image.naturalWidth / image.width;
@@ -46,6 +48,17 @@ const NewPostEdit = ({ previewImage, setPreviewImage, file, filters }) => {
     });
   };
 
+  const [isImgEditorShown, setIsImgEditorShown] = useState(false);
+
+
+  const openImgEditor = () => {
+    setIsImgEditorShown(true);
+  };
+
+  const closeImgEditor = () => {
+    setIsImgEditorShown(false);
+  };
+
   const makeClientCrop = async (crop) => {
     window.URL.revokeObjectURL(previewImage.src);
     if (imageState.imageRef && crop.width && crop.height) {
@@ -70,15 +83,18 @@ const NewPostEdit = ({ previewImage, setPreviewImage, file, filters }) => {
     setImageState((previous) => ({ ...previous, imageRef: image }));
   };
 
-  const onDragStart = () => {
-    setImageState((previous) => ({ ...previous, isCropping: true }));
-  };
+  const saveImage = (editedImageObject) => {
+    console.log(editedImageObject, 'editedImageObject');
+    setPreviewImage({ src: editedImageObject.imageBase64 })
+    };
 
+
+  const baseFileUrl = window.URL.createObjectURL(file);
   return (
     <Fragment>
       <div className="new-post__preview">
         <div className="new-post__preview-image-container">
-          <ReactCrop
+          {/*<ReactCrop
             src={previewImage.src}
             crop={imageState.crop}
             onChange={onCropChange}
@@ -93,22 +109,36 @@ const NewPostEdit = ({ previewImage, setPreviewImage, file, filters }) => {
               filter: previewImage.filter,
             }}
             ruleOfThirds
-          />
-          <Icon
-            icon="checkmark-outline"
-            className="new-post__crop-button"
-            style={imageState.isCropping ? { display: 'inline-block' } : {}}
-            onClick={() => makeClientCrop(imageState.crop)}
-          />
+          />*/}
+          <FilerobotImageEditor
+                      style={{ width: '100%', height: '100%', position: 'absolute'  }}
+                      onBeforeSave={()=>{return false}}
+	  source={previewImage.src ? previewImage.src :  baseFileUrl}
+	  onSave={(editedImageObject, designState) => saveImage(editedImageObject)}
+	  annotationsCommon={{
+	    fill: '#ff0000'
+	  }}
+	  Text={{ text: 'something...' }}
+    Crop={{
+      presetsItems: [
+        {
+          titleKey: 'classicPotrait',
+          descriptionKey: '4:3',
+          ratio: 4 / 3,
+        },
+        {
+          titleKey: 'classicLandscape',
+          descriptionKey: '21:9',
+          ratio: 21 / 9,
+        },
+      ],
+    }}
+	  tabsIds={[TABS.ADJUST, TABS.FINETUNE, TABS.FILTERS, TABS.RESIZE]} // or {['Adjust', 'Annotate', 'Watermark']}
+	  defaultTabId={TABS.ADJUST} // or 'Annotate'
+	  defaultToolId={TOOLS.CROP} // or 'Text'
+        />
         </div>
       </div>
-      <FilterSelector
-        setFilter={(filter, filterName) =>
-          setPreviewImage((previous) => ({ ...previous, filter, filterName }))
-        }
-        previewImage={previewImage.src}
-        filters={filters}
-      />
     </Fragment>
   );
 };

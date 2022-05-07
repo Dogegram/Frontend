@@ -39,15 +39,30 @@ const NewPostForm = ({
 
   const handleClick = async (event) => {
     event.preventDefault();
-    const formData = new FormData();
-    formData.append('image', file);
-    formData.set('caption', caption);
-    formData.set('postText', postText);
-    formData.set('crop', JSON.stringify(previewImage.crop));
-    previewImage.filterName && formData.set('filter', previewImage.filterName);
+    console.log(file)
+    const fileToBase64 = async (file) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = () => resolve(reader.result)
+    reader.onerror = (e) => reject(e)
+  })
+
+    const postData = JSON.stringify({
+      image: await fileToBase64(file),
+      caption: caption,
+      postText: postText,
+      crop: JSON.stringify(previewImage.crop),
+      filter: previewImage.filterName ? previewImage.filterName : undefined
+    })
+
+
     try {
       setLoading(true);
-      const post = await createPost(formData, token);
+      if(file.size > 3*1e+6) {
+        throw new Error('Image should be under 3MB else buy Falcon subscription plan for an increase')
+      }
+      const post = await createPost(postData, token);
       setLoading(false);
       hide();
       if (history.location.pathname === '/') {
@@ -89,7 +104,7 @@ const NewPostForm = ({
           style={{ fontSize: '1.5rem' }}
           onClick={(event) => handleClick(event)}
         >
-          Share
+          Publish Post
         </TextButton>
       </MobileHeader>
       <form
@@ -162,6 +177,7 @@ const NewPostForm = ({
         />
         </Fragment>
         <div className="post-form__legalnotice">
+        <h4>(if posing this takes a few secs, please have patience)</h4>
         <h5 style={{ fontSize: '1rem' }}>By Posting content to our platform, you agree to abide by our community rules, terms of service and privacy policy.</h5>
         </div>
       </form>

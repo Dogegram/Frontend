@@ -111,7 +111,7 @@ const NotificationFeed = ({
               userCardProps.subText = `whispered to you "${notification.notificationData.message}"`;
               userCardChild = (
                   <img
-                    src={require('../../../assets/img/whisper-pic.png').default}
+                    src={require('../../../assets/img/whisper-pic.png')}
                     style={{
                       display: 'flex',
                       width:'50px',

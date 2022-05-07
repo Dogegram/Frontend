@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 const Avatar = ({
-  imageSrc = require('../../assets/img/default-avatar.png').default,
+  imageSrc,
   className,
   onClick,
   style,
@@ -24,7 +24,7 @@ const Avatar = ({
       className={avatarClasses}
       onClick={onClick}
       style={style}
-      src={imageSrc}
+      src={imageSrc != undefined ? (imageSrc.includes('dogeis.me') ? imageSrc : `https://bom1-storage.dogegram.xyz/${imageSrc}`) : (require('../../assets/img/default-avatar.png'))}
       alt="Avatar"
     />
   );
