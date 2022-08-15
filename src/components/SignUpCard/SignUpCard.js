@@ -15,7 +15,6 @@ import {
   validateFullName,
   validateUsername,
   validatePassword,
-  validatePronoun,
   validateBirthday
 } from '../../utils/validation';
 
@@ -38,8 +37,6 @@ const SignUpCard = ({ signUpStart, error, fetching, done }) => {
     const fullNameError = validateFullName(values.fullName);
     if (fullNameError) errors.fullName = fullNameError;
 
-    const proNounError = validatePronoun(values.pronoun);
-    if (proNounError) errors.pronoun = proNounError;
 
     const birthdayError = validateBirthday(values.birthday);
     if (birthdayError) errors.birthday = birthdayError;
@@ -56,7 +53,6 @@ const SignUpCard = ({ signUpStart, error, fetching, done }) => {
     initialValues: {
       email: '',
       fullName: '',
-      pronoun:'',
       username: '',
       birthday: '',
       password: '',
@@ -66,7 +62,6 @@ const SignUpCard = ({ signUpStart, error, fetching, done }) => {
       let userdata = {
         email: values.email,
         fullName: values.fullName,
-        pronoun: values.pronoun,
         birthday: values.birthday,
         username: values.username,
         password: values.password,
@@ -82,7 +77,7 @@ const SignUpCard = ({ signUpStart, error, fetching, done }) => {
 
   return (
     <Fragment>
-      <Card className="form-card">
+      <Card style={{width: '100%'}} className="form-card">
         <h1 className="heading-logo text-center">Dogegram</h1>
         <h2
           style={{ fontSize: '1.7rem' }}
@@ -103,7 +98,7 @@ const SignUpCard = ({ signUpStart, error, fetching, done }) => {
             );
           }
         })}
-        <form className="form-card__form" onSubmit={formik.handleSubmit}>
+        <form style={{width: '100%'}} className="form-card__form" onSubmit={formik.handleSubmit}>
           <FormInput
             name="email"
             fieldProps={formik.getFieldProps('email')}
@@ -115,12 +110,6 @@ const SignUpCard = ({ signUpStart, error, fetching, done }) => {
             fieldProps={formik.getFieldProps('fullName')}
             valid={formik.touched.fullName && !formik.errors.fullName}
             placeholder="Full Name"
-          />
-          <FormInput
-            name="pronoun"
-            fieldProps={formik.getFieldProps('pronoun')}
-            valid={formik.touched.pronoun && !formik.errors.pronoun}
-            placeholder="Pronoun (What you would like people to call you)"
           />
           <FormInput 
           type="date" 
@@ -165,7 +154,7 @@ const SignUpCard = ({ signUpStart, error, fetching, done }) => {
             : formik.submitCount > 0 && Object.values(formik.errors)[0]}
         </p>
         <p className="heading-5 color-grey">
-          By signing up, you agree to our <a herf="https://dogegram.xyz/terms"> Terms & conditions </a> and Privacy Policy which are pretty simple anyway you just need to make a look there.
+          By signing up, you agree to our <a className="heading-5 color-grey" href="https://dogegram.notion.site/Policies-Dogegram-851922d5f286498d86ff8a4c19e3cae2"> Terms of Service and Privacy Policy</a>.
         </p>
         <p className="color-grey" style={{fontSize:'1rem'}}>
         Problems? hit up for support at signup@dogegram.xyz

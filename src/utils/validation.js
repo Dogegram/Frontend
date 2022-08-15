@@ -1,12 +1,3 @@
-export const validatePronoun = (pronoun) => {
-  
-  if (pronoun.length < 3 || pronoun.length > 10){
-    return 'The pronoun should be under 10 Charecters and over 3 Charecters';
-  } else {
-    return false
-  } 
-};
-
 export const validateEmail = (email) => {
   if (
     !email ||

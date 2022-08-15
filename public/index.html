@@ -33,5 +33,15 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <div id="modal-root"></div>
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./firebase-messaging-sw.js').then(function(registration) {
+          console.log('Firebase Worker Registered');
+    
+        }).catch(function(err) {
+          console.log('Service Worker registration failed: ', err);
+        });
+      }
+      </script>
   </body>
 </html>

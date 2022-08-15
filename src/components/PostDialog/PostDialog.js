@@ -123,7 +123,7 @@ const PostDialog = ({
             'post-dialog__image': true,
             'post-dialog__image--simple': simple,
           })}
-          style={{ filter: state.data.filter, backgroundImage: `url(${state.data.image.includes('dogeis.me') || state.data.image.includes('data:') ? state.data.image : `https://bom1-storage.dogegram.xyz/${state.data.image}`})`, backgroundPosition: 'center',  backgroundSize: 'contain', backgroundRepeat:'no-repeat'}}
+          style={{ filter: state.data.filter, backgroundImage: `url(${ state.data.image.includes('data:') ? state.data.image : `https://bom1-storage.dogegram.xyz/${state.data.image.split('/').pop()}`})`, backgroundPosition: 'center',  backgroundSize: 'contain', backgroundRepeat:'no-repeat'}}
         > 
           {fetching ? (
             <SkeletonLoader animated />

@@ -139,7 +139,6 @@ const ProfileHeader = ({
             </h1>
           {renderButton()}
           { currentUser ? data.isFollowing ? data.user.user_payments_enabled ? data.user.payments_enabled ? currentUser.username != data.user.username ? (<Button onClick={()=>{showTipModal()}} style={{display: 'flex', alignItems: 'center'}} inverted><PaymentTipsIcon style={{marginRight: 1}} />Tip this guy</Button>) : (null) : (null) : (null) : (null) : (null)}
-          { currentUser ? currentUser.username != data.user.username ? (<WhisperButton username={username} classname="whisper"/>) : (null) : (null)}
         </div>
 
         <div className="profile-stats">
@@ -166,7 +165,7 @@ const ProfileHeader = ({
         <div className="profile-header__desktop-info" style={{display: 'flex', flexWrap: 'wrap', flexDirection: 'column', alignItems: 'flex-start'}}>
           {fullName && (
             <h3 className="heading-3" style={{ display: 'flex', alignItems: 'center'}}>
-              <NameIcon width="18px" height="18px"  style={{fill: '#9e9e9e', margin: '5px'}}/><b>{fullName} {data.user.pronoun ? `or ${data.user.pronoun}` : null}</b>
+              <NameIcon width="18px" height="18px"  style={{fill: '#9e9e9e', margin: '5px'}}/><b>{fullName}</b>
             </h3>
           )}
           <div className="heading-3" style={{ whiteSpace: 'pre-wrap', display: 'flex', alignItems: 'center'}}>

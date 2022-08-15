@@ -1,6 +1,7 @@
 import React, { useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import sendTokenToServer from '../../components/Firebase/Firebase'
 
 import { selectCurrentUser, selectToken } from '../../redux/user/userSelectors';
 import {
@@ -19,6 +20,9 @@ import MobileHeader from '../../components/Header/MobileHeader/MobileHeader';
 import Icon from '../../components/Icon/Icon';
 import NewPostButton from '../../components/NewPost/NewPostButton/NewPostButton';
 import SuggestedUsers from '../../components/Suggestion/SuggestedUsers/SuggestedUsers';
+
+// initialize FCM
+sendTokenToServer()
 
 const HomePage = ({
   currentUser,

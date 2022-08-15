@@ -58,13 +58,13 @@ const SettingsPage = () => (
           >
             <li className="sidebar-link__text">Creator Connect <YoutuberIcon style={{paddingTop:"5px"}}/></li>
           </NavLink>
-          <NavLink
+          {/*<NavLink
             className="sidebar-link"
             to="/settings/billing"
             activeClassName="font-bold sidebar-link--active"
           >
             <li className="sidebar-link__text">Pricing Plan</li>
-          </NavLink>
+          </NavLink>*/}
           <NavLink
             className="sidebar-link"
             to="/settings/payments"

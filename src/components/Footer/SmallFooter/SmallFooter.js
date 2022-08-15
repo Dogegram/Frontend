@@ -35,6 +35,12 @@ const SmallFooter = () => {
         />{' '}
         In India
       </h5>
+      <h5
+        className="heading-5 color-grey-2 footer--small__copyright mt-lg font-bold"
+        style={{ textTransform: 'uppercase ' }}
+      >
+        Version Sierra Juliet 6-1-2
+        </h5>
     </footer>
   );
 };

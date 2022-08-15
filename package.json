@@ -2,8 +2,8 @@
   "name": "dogegram-frontend",
   "version": "8.2.2",
   "dependencies": {
-    "@sentry/react": "^6.8.0",
-    "@sentry/tracing": "^6.8.0",
+    "@sentry/react": "^6.19.7",
+    "@sentry/tracing": "^6.19.7",
     "@stripe/react-stripe-js": "^1.6.0",
     "@stripe/stripe-js": "^1.20.3",
     "@testing-library/jest-dom": "^5.16.1",
@@ -15,6 +15,7 @@
     "emoji-mart": "^3.0.1",
     "emoji-picker-react": "^3.4.8",
     "express": "^4.17.1",
+    "firebase": "^9.8.2",
     "formik": "^2.2.9",
     "linkifyjs": "^2.1.9",
     "lodash": "^4.17.21",

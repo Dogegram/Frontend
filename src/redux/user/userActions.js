@@ -60,11 +60,11 @@ export const signInStart = (usernameOrEmail, password, authToken, twofactorCode)
 export const signUpStart = (userdata) => async (
   dispatch
 ) => {
- const {email, fullName, pronoun, birthday, username, password} = userdata;
+ const {email, fullName, birthday, username, password} = userdata;
   try {
     console.log(password);
     dispatch({ type: userTypes.SIGN_UP_START });
-    const response = await registerUser(email, fullName,pronoun, birthday, username, password);
+    const response = await registerUser(email, fullName, birthday, username, password);
     dispatch({ type: userTypes.SIGN_UP_SUCCESS, payload:response });
   } catch (err) {
     dispatch({ type: userTypes.SIGN_UP_FAILURE, payload: err.message });

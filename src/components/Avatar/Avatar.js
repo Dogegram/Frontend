@@ -24,7 +24,7 @@ const Avatar = ({
       className={avatarClasses}
       onClick={onClick}
       style={style}
-      src={imageSrc != undefined ? (imageSrc.includes('dogeis.me') ? imageSrc : `https://bom1-storage.dogegram.xyz/${imageSrc}`) : (require('../../assets/img/default-avatar.png'))}
+      src={imageSrc != undefined ? `https://bom1-storage.dogegram.xyz/${imageSrc.split('/').pop()}` : (require('../../assets/img/default-avatar.png'))}
       alt="Avatar"
     />
   );
