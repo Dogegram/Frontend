@@ -91,7 +91,7 @@ const NotificationFeed = ({
               userCardChild = (
                 <Link to={`/post/${notification.notificationData.postId}`}>
                   <img
-                    src={`https://bom1-storage.dogegram.xyz/${notification.notificationData.split('/').pop()}`}
+                    src={`https://bom1-storage.dogegram.xyz/${notification.notificationData.image.split('/').pop()}`}
                     style={{
                       display: 'flex',
                       width:'50px',
@@ -137,7 +137,7 @@ const NotificationFeed = ({
               userCardChild = (
                 <Link to={`/post/${notification.notificationData.postId}`}>
                   <img
-                    src={`https://bom1-storage.dogegram.xyz/${notification.notificationData.split('/').pop()}`}
+                    src={`https://bom1-storage.dogegram.xyz/${notification.notificationData.image.split('/').pop()}`}
                     style={{
                       display: 'flex',
                       width:'50px',
