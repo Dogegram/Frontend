@@ -7,6 +7,7 @@ const paths = ['login','signup','passwordreset','settings','activity','posts','e
 const { MetadataGenerator } = require('metatags-generator');
 
 const indexPath  = path.resolve(__dirname, 'build', 'index.html');
+const backendURL = process.env.REACT_APP_BACKEND_URL || `https://backpanel.dogegram.xyz`;
 
 const settings = {
     androidChromeIcons: true,
@@ -41,9 +42,12 @@ app.get('/post/:postId', async (req, res, next) => {
     const postId = req.params.postId;
     let htmlData = indexfile;
           
-    const requsermeta = await fetch(`https://backend.dogegram.xyz/api/post/internal/meta/${postId}`);
+    const requsermeta = await fetch(`${backendURL}/api/post/internal/meta/${postId}`);
     const usermeta = await requsermeta.json();
     if(usermeta.error){
+        //cache the index file for 2 mins but revalidate it
+        res.set('Cache-Control', 'public, max-age=120, s-maxage=120, stale-while-revalidate=60');
+
         return res.send(indexfile)
     }
 
@@ -52,17 +56,16 @@ app.get('/post/:postId', async (req, res, next) => {
     const meta = generator
     .configure(settings)
     .setPageMeta({
-        title: `@${usermeta.userName}'s doge 😉 post`,
+        title: `@${usermeta.userName}'s Dogegram post`,
         description: `${usermeta.caption}`,
         url: `https://app.dogegram.xyz/post/${postId}`,
-        image: usermeta.image,
+        image: `https://bom1-storage.dogegram.xyz/${usermeta.image.split('/').pop()}`,
         keywords: `site, website, profile`,
         locale: 'en_US'
     })
     .build();
-
    
-
+    //kinda hacky but it works
     let metahtml = htmlData.replace('<meta name="description" content="The cool new social media platform!"/>', meta.head)
     metahtml = metahtml.replace(/(\r\n|\n|\r)/gm, "")
 
@@ -78,9 +81,12 @@ app.get('/:userId', async (req, res, next) => {
     if(!paths.includes(userId)){
         let htmlData = indexfile;
           
-        const requsermeta = await fetch(`https://backend.dogegram.xyz/api/user/internal/meta/${userId}`);
+        const requsermeta = await fetch(`${backendURL}/api/user/internal/meta/${userId}`);
         const usermeta = await requsermeta.json();
         if(usermeta.error === 'Could not find a user with that username.'){
+            //cache the index file for 2 mins but revalidate it
+            res.set('Cache-Control', 'public, max-age=120, s-maxage=120, stale-while-revalidate=60');
+           
             return res.send(indexfile)
         }
 
@@ -89,10 +95,10 @@ app.get('/:userId', async (req, res, next) => {
         const meta = generator
         .configure(settings)
         .setPageMeta({
-            title: `${usermeta.name}'s doge 😉 profile`,
+            title: `${usermeta.name}'s dogegram profile`,
             description: `${usermeta.bio}`,
             url: `https://app.dogegram.xyz/${userId}`,
-            image: usermeta.avatar,
+            image: `https://bom1-storage.dogegram.xyz/${usermeta.avatar.split('/').pop()}`,
             keywords: `site, website, profile, ${usermeta.name}`,
             locale: 'en_US'
         })
@@ -102,7 +108,7 @@ app.get('/:userId', async (req, res, next) => {
 
         let metahtml = htmlData.replace('<meta name="description" content="The cool new social media platform!"/>', meta.head)
         metahtml = metahtml.replace(/(\r\n|\n|\r)/gm, "")
-
+        res.setHeader('Cache-Control', 'public, max-age=300');
         return res.send(metahtml);
 } else {
  return res.send(indexfile)
